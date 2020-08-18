@@ -15,5 +15,5 @@ public interface UsuarioService {
 
     public ResponseDTO save(UsuarioEntity usuario);
 
-    public UsuarioEntity authenticate(String user, String password);
+    public Optional<UsuarioEntity>  authenticate(String user, String password);
 }

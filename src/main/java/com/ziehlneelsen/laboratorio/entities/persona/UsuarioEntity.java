@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "cat_usuario")
 @DynamicUpdate
-public class UsuarioEntity implements Serializable {
+public class UsuarioEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,7 +39,7 @@ public class UsuarioEntity implements Serializable {
     String password;
 
     @Column(name = "ESTADO", columnDefinition = "boolean default true")
-    String estado;
+    Boolean estado;
 
     public Integer getUsuarioId() {
         return usuarioId;
@@ -97,11 +97,11 @@ public class UsuarioEntity implements Serializable {
         this.password = password;
     }
 
-    public String getEstado() {
+    public Boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Boolean estado) {
         this.estado = estado;
     }
 }
