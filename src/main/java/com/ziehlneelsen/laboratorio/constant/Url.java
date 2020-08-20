@@ -1,5 +1,7 @@
 package com.ziehlneelsen.laboratorio.constant;
 
+import java.awt.*;
+
 public class Url {
 
     //constante para application/json
@@ -26,6 +28,8 @@ public class Url {
     //Persona
     public static final String USUARIO = "/usuario";
     public static final String AUTH = "/authenticate/{user}/{password}";
+    public static final String PACIENTE = "/paciente";
+    public static final String MEDICO = "/medico";
 
     //Rol
     public static final String ROL = "/rol";

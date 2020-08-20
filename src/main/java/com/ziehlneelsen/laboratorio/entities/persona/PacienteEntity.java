@@ -5,16 +5,17 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
-@Table(name = "cat_usuario")
+@Table(name = "cat_paciente")
 @DynamicUpdate
-public class UsuarioEntity implements Serializable {
+public class PacienteEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "USUARIO_ID")
-    Integer usuarioId;
+    @Column(name = "PACIENTE_ID")
+    Integer pacienteId;
 
     @NotBlank(message = "El nombre no puede estar vacio")
     @Column(name = "NOMBRE")
@@ -27,26 +28,28 @@ public class UsuarioEntity implements Serializable {
     @Column(name = "APELLIDO_MATERNO")
     String apellidoMaterno;
 
-    @NotBlank(message = "El nombre de usuario no puede estar vacio")
-    @Column(name = "NOMBRE_USUARIO")
-    String nombreUsuario;
+    @NotBlank(message = "Fecha de nacimiento no puede estar vacio")
+    @Column(name = "FECHA_NACIMIENTO")
+    String fechaNacimiento;
 
-    @Column(name = "CEDULA")
-    String cedula;
+    @Column(name = "SEXO", columnDefinition = "boolean default false")
+    Boolean sexo;
 
-    @NotBlank(message = "La contrasena no puede estar vacio")
-    @Column(name = "PASSWORD")
-    String password;
+    @Column(name = "EMAIL")
+    String email;
 
     @Column(name = "ESTADO", columnDefinition = "boolean default true")
-    String estado;
+    Boolean estado;
 
-    public Integer getUsuarioId() {
-        return usuarioId;
+    @Column(name = "TELEFONO")
+    String telefono;
+
+    public Integer getPacienteId() {
+        return pacienteId;
     }
 
-    public void setUsuarioId(Integer usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setPacienteId(Integer pacienteId) {
+        this.pacienteId = pacienteId;
     }
 
     public String getNombre() {
@@ -73,35 +76,43 @@ public class UsuarioEntity implements Serializable {
         this.apellidoMaterno = apellidoMaterno;
     }
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
+    public String getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
-    public String getCedula() {
-        return cedula;
+    public Boolean getSexo() {
+        return sexo;
     }
 
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
+    public void setSexo(Boolean sexo) {
+        this.sexo = sexo;
     }
 
-    public String getPassword() {
-        return password;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getEstado() {
+    public Boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Boolean estado) {
         this.estado = estado;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 }

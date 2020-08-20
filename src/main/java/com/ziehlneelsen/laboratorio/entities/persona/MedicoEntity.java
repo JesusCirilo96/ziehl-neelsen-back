@@ -7,14 +7,14 @@ import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "cat_usuario")
+@Table(name = "cat_medico")
 @DynamicUpdate
-public class UsuarioEntity implements Serializable {
+public class MedicoEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "USUARIO_ID")
-    Integer usuarioId;
+    @Column(name = "MEDICO_ID")
+    Integer medicoId;
 
     @NotBlank(message = "El nombre no puede estar vacio")
     @Column(name = "NOMBRE")
@@ -27,26 +27,15 @@ public class UsuarioEntity implements Serializable {
     @Column(name = "APELLIDO_MATERNO")
     String apellidoMaterno;
 
-    @NotBlank(message = "El nombre de usuario no puede estar vacio")
-    @Column(name = "NOMBRE_USUARIO")
-    String nombreUsuario;
-
-    @Column(name = "CEDULA")
-    String cedula;
-
-    @NotBlank(message = "La contrasena no puede estar vacio")
-    @Column(name = "PASSWORD")
-    String password;
-
     @Column(name = "ESTADO", columnDefinition = "boolean default true")
-    String estado;
+    Boolean estado;
 
-    public Integer getUsuarioId() {
-        return usuarioId;
+    public Integer getMedicoId() {
+        return medicoId;
     }
 
-    public void setUsuarioId(Integer usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setMedicoId(Integer medicoId) {
+        this.medicoId = medicoId;
     }
 
     public String getNombre() {
@@ -73,35 +62,11 @@ public class UsuarioEntity implements Serializable {
         this.apellidoMaterno = apellidoMaterno;
     }
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
-    }
-
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
-    }
-
-    public String getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEstado() {
+    public Boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Boolean estado) {
         this.estado = estado;
     }
 }
