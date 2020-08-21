@@ -15,8 +15,13 @@ public class Url {
     //Descuento
     public static final String DESCUENTO = "/descuento";
 
+    //Examen
+    public static final String EXAMEN = "/examen";
+    public static final String EXAMEN_GENERAL = "/examen/general";
+
     //Estudio
     public static final String ESTUDIO = "/estudio";
+    public static final String CLASIFICACION_PACIENTE = "/estudio/clasificacion/paciente";
 
     //Menu
     public static final String MENU = "/menu";
