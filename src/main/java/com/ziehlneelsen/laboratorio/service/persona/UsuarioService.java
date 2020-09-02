@@ -1,7 +1,7 @@
 package com.ziehlneelsen.laboratorio.service.persona;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
-import com.ziehlneelsen.laboratorio.beans.UserAuthDTO;
+import com.ziehlneelsen.laboratorio.beans.persona.UserAuthDTO;
 import com.ziehlneelsen.laboratorio.entities.persona.UsuarioEntity;
 
 import java.util.List;
@@ -15,5 +15,5 @@ public interface UsuarioService {
 
     public ResponseDTO save(UsuarioEntity usuario);
 
-    public Optional<UsuarioEntity>  authenticate(String user, String password);
+    public UserAuthDTO  authenticate(String user, String password);
 }

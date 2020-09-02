@@ -7,13 +7,13 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @DynamicUpdate
-@Table(name = "examen")
-public class ExamenEntity {
+@Table(name = "examen_sencillo")
+public class ExamenSencilloEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "EXAMEN_ID")
-    Integer examenId;
+    @Column(name = "EXAMEN_SENCILLO_ID")
+    Integer examenSencilloId;
 
     @NotBlank
     @Column(name = "NOMBRE")
@@ -26,14 +26,14 @@ public class ExamenEntity {
     Boolean estado;
 
     @Column(name = "PRECIO")
-    Double precio;
+    Float precio;
 
-    public Integer getExamenId() {
-        return examenId;
+    public Integer getExamenSencilloId() {
+        return examenSencilloId;
     }
 
-    public void setExamenId(Integer examenId) {
-        this.examenId = examenId;
+    public void setExamenSencilloId(Integer examenSencilloId) {
+        this.examenSencilloId = examenSencilloId;
     }
 
     public String getNombre() {
@@ -60,11 +60,11 @@ public class ExamenEntity {
         this.estado = estado;
     }
 
-    public Double getPrecio() {
+    public Float getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Double precio) {
+    public void setPrecio(Float precio) {
         this.precio = precio;
     }
 }

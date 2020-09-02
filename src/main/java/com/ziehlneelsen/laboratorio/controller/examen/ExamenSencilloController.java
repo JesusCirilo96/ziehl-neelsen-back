@@ -1,10 +1,9 @@
-package com.ziehlneelsen.laboratorio.controller.persona;
+package com.ziehlneelsen.laboratorio.controller.examen;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
-import com.ziehlneelsen.laboratorio.beans.persona.UserAuthDTO;
 import com.ziehlneelsen.laboratorio.constant.Url;
-import com.ziehlneelsen.laboratorio.entities.persona.UsuarioEntity;
-import com.ziehlneelsen.laboratorio.service.persona.UsuarioService;
+import com.ziehlneelsen.laboratorio.entities.examen.ExamenSencilloEntity;
+import com.ziehlneelsen.laboratorio.service.examen.ExamenSencilloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,37 +15,30 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = Url.USUARIO)
+@RequestMapping(value = Url.EXAMEN_SENCILLO)
 @CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET})
-public class UsuarioController {
-
+public class ExamenSencilloController {
     @Autowired
-    UsuarioService usuarioService;
+    ExamenSencilloService examenService;
 
     @RequestMapping(value = Url.GET_ALL, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
-    public List<UsuarioEntity> findAllUsuario(){
-        return usuarioService.findAll();
+    public List<ExamenSencilloEntity> findAllExamen(){
+        return examenService.findAll();
     }
 
     @RequestMapping(value = Url.FIND_BY_ID, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
-    public Optional<UsuarioEntity> findUsuario(@PathVariable Integer id){
-        return usuarioService.findById(id);
+    public Optional<ExamenSencilloEntity> findExamen(@PathVariable Integer id){
+        return examenService.findById(id);
     }
 
     @RequestMapping(value = Url.SAVE, method = RequestMethod.POST, produces = Url.APLICATION_JSON)
-    public ResponseEntity saveUsuario(@Valid @RequestBody UsuarioEntity usuario, BindingResult bindingResult) {
+    public ResponseEntity saveExamen(@Valid @RequestBody ExamenSencilloEntity examen, BindingResult bindingResult) {
 
         ResponseDTO response;
         if(bindingResult.hasErrors()) {
             return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.OK);
         }
-        response = usuarioService.save(usuario);
+        response = examenService.save(examen);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
-    @RequestMapping(value = Url.AUTH, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
-    public UserAuthDTO  authenticate(@PathVariable String user, @PathVariable String password){
-        return usuarioService.authenticate(user,password);
-    }
-
 }

@@ -1,7 +1,9 @@
 package com.ziehlneelsen.laboratorio.serviceImpl.persona;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.persona.UserAuthDTO;
 import com.ziehlneelsen.laboratorio.constant.Messages;
+import com.ziehlneelsen.laboratorio.dao.persona.UsuarioLoginDAO;
 import com.ziehlneelsen.laboratorio.entities.persona.UsuarioEntity;
 import com.ziehlneelsen.laboratorio.repository.persona.UsuarioRepository;
 import com.ziehlneelsen.laboratorio.service.persona.UsuarioService;
@@ -17,6 +19,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
     UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private UsuarioLoginDAO usuarioLoginDAO;
+
+    public UsuarioServiceImpl(UsuarioLoginDAO usuarioLoginDAO) {
+        this.usuarioLoginDAO = usuarioLoginDAO;
+    }
 
     @Override
     public List<UsuarioEntity> findAll() {
@@ -49,7 +58,17 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Optional<UsuarioEntity> authenticate(String user, String password) {
-        return usuarioRepository.userLogin(user,password);
+    public UserAuthDTO authenticate(String user, String password) {
+        return login(user,password);
+    }
+
+    private UserAuthDTO login(String usuario, String password){
+          UserAuthDTO usuarioLogeado = new UserAuthDTO();
+          try {
+              usuarioLogeado = usuarioLoginDAO.login(usuario, password);
+          }catch (Exception e){
+              e.printStackTrace();
+          }
+          return usuarioLogeado;
     }
 }

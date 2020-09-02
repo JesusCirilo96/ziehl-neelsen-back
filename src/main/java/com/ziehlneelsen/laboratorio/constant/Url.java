@@ -16,12 +16,19 @@ public class Url {
     public static final String DESCUENTO = "/descuento";
 
     //Examen
-    public static final String EXAMEN = "/examen";
     public static final String EXAMEN_GENERAL = "/examen/general";
+    public static final String EXAMEN_SENCILLO = "/examen/sencillo";
 
     //Estudio
     public static final String ESTUDIO = "/estudio";
-    public static final String CLASIFICACION_PACIENTE = "/estudio/clasificacion/paciente";
+
+    //Clasificacion paciente
+    public static final String CLASIFICACION_PACIENTE = "/clasificacion/paciente";
+
+    //Referencia
+    public static final String ESTUDIO_REFERENCIA = "/referencia";
+    public static final String FIND_BY_ESTUDIO = "/get/estudio/{id}";
+    public static final String FIND_BY_CLASIFICACION = "/get/clasificacion/{id}";
 
     //Menu
     public static final String MENU = "/menu";

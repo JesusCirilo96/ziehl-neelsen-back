@@ -1,4 +1,4 @@
-package com.ziehlneelsen.laboratorio.beans;
+package com.ziehlneelsen.laboratorio.beans.persona;
 
 public class UserAuthDTO {
 
@@ -65,5 +65,16 @@ public class UserAuthDTO {
 
     public void setCedula(String cedula) {
         this.cedula = cedula;
+    }
+
+    @Override
+    public String toString() {
+        return "UserAuthDTO{" +
+                "usuarioId=" + usuarioId +
+                ", nombre='" + nombre + '\'' +
+                ", apellidoPaterno='" + apellidoPaterno + '\'' +
+                ", apellidoMaterno='" + apellidoMaterno + '\'' +
+                ", cedula='" + cedula + '\'' +
+                '}';
     }
 }

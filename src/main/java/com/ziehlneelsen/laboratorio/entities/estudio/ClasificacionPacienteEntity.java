@@ -4,6 +4,8 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @DynamicUpdate
@@ -26,6 +28,9 @@ public class ClasificacionPacienteEntity {
     @NotBlank
     @Column(name = "EDAD_MAXIMA")
     String edadMaxima;
+
+    @OneToMany(mappedBy = "clasificacionPaciente")
+    Set<ReferenciaEntity> refencia = new HashSet<>();
 
     public Integer getClasificacionPacienteId() {
         return clasificacionPacienteId;

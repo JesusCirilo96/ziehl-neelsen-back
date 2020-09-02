@@ -2,9 +2,9 @@ package com.ziehlneelsen.laboratorio.serviceImpl.examen;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.constant.Messages;
-import com.ziehlneelsen.laboratorio.entities.examen.ExamenEntity;
-import com.ziehlneelsen.laboratorio.repository.examen.ExamenRepository;
-import com.ziehlneelsen.laboratorio.service.examen.ExamenService;
+import com.ziehlneelsen.laboratorio.entities.examen.ExamenSencilloEntity;
+import com.ziehlneelsen.laboratorio.repository.examen.ExamenSencilloRepository;
+import com.ziehlneelsen.laboratorio.service.examen.ExamenSencilloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -13,31 +13,31 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ExamenServiceImpl implements ExamenService {
+public class ExamenSencilloSencilloServiceImpl implements ExamenSencilloService {
 
     @Autowired
-    ExamenRepository examenRepository;
+    ExamenSencilloRepository examenSencilloRepository;
 
     @Override
-    public List<ExamenEntity> findAll() {
-        return examenRepository.findAll();
+    public List<ExamenSencilloEntity> findAll() {
+        return examenSencilloRepository.findAll();
     }
 
     @Override
-    public Optional<ExamenEntity> findById(Integer id) {
-        return examenRepository.findById(id);
+    public Optional<ExamenSencilloEntity> findById(Integer id) {
+        return examenSencilloRepository.findById(id);
     }
 
     @Override
-    public ResponseDTO save(ExamenEntity examen) {
+    public ResponseDTO save(ExamenSencilloEntity examen) {
         ResponseDTO response = new ResponseDTO();
-        if(null != examen.getExamenId() && examenRepository.findById(examen.getExamenId()).isPresent()){
-            examenRepository.save(examen);
+        if(null != examen.getExamenSencilloId() && examenSencilloRepository.findById(examen.getExamenSencilloId()).isPresent()){
+            examenSencilloRepository.save(examen);
             response.setErrorCode(Messages.OK);
             response.setErrorInfo(Messages.UPDATE_OK);
         } else if(null != examen){
             try{
-                examenRepository.save(examen);
+                examenSencilloRepository.save(examen);
                 response.setErrorCode(Messages.OK);
                 response.setErrorInfo(Messages.REGISTER_OK);
             }catch(DataAccessException ex) {

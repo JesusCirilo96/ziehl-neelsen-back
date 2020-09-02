@@ -4,6 +4,8 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @DynamicUpdate
@@ -22,11 +24,11 @@ public class EstudioEntity {
     @Column(name = "ESTADO", columnDefinition = "boolean default true")
     Boolean estado;
 
-    @Column(name = "PRECIO")
-    Double precio;
 
-    @Column(name = "ORDEN")
-    Integer orden;
+    @OneToMany(mappedBy = "estudio")
+    Set<ReferenciaEntity> refencia = new HashSet<>();
+
+    public EstudioEntity(){}
 
     public Integer getEstudioId() {
         return estudioId;
@@ -52,19 +54,4 @@ public class EstudioEntity {
         this.estado = estado;
     }
 
-    public Double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
-
-    public Integer getOrden() {
-        return orden;
-    }
-
-    public void setOrden(Integer orden) {
-        this.orden = orden;
-    }
 }
