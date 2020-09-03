@@ -12,6 +12,11 @@ public class Url {
     public static final String FIND_BY_ID = "/get/id/{id}";
     public static final String SAVE = "/save";
 
+    //Cotizacion
+    public static final String COTIZACION = "/cotizacion";
+    public static final String COTIZACION_EXAMEN_SENCILLO = "/examen/sencillo/{id}";
+    public static final String COTIZACION_EXAMEN_GENERAL = "/examen/general/{id}";
+
     //Descuento
     public static final String DESCUENTO = "/descuento";
 

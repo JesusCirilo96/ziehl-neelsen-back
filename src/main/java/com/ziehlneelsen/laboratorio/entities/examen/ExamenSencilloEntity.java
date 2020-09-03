@@ -1,9 +1,12 @@
 package com.ziehlneelsen.laboratorio.entities.examen;
 
+import com.ziehlneelsen.laboratorio.entities.cotizacion.CotizacionExamenSencillo;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @DynamicUpdate
@@ -27,6 +30,9 @@ public class ExamenSencilloEntity {
 
     @Column(name = "PRECIO")
     Float precio;
+
+    @OneToMany(mappedBy = "examenSencillo")
+    Set<CotizacionExamenSencillo> cotizacionExamenSencillo = new HashSet<>();
 
     public Integer getExamenSencilloId() {
         return examenSencilloId;

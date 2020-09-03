@@ -1,11 +1,15 @@
 package com.ziehlneelsen.laboratorio.entities.persona;
 
+import com.ziehlneelsen.laboratorio.entities.cotizacion.CotizacionEntity;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "cat_paciente")
@@ -43,6 +47,7 @@ public class PacienteEntity implements Serializable {
 
     @Column(name = "TELEFONO")
     String telefono;
+
 
     public Integer getPacienteId() {
         return pacienteId;
