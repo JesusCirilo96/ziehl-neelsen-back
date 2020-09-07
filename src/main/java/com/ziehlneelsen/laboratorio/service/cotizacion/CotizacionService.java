@@ -14,6 +14,8 @@ public interface CotizacionService {
 
     public ResponseDTO save(CotizacionEntity cotizacion);
 
-    public CotizacionExamenesDTO getExamenSencillo(String cotizacionId);
+    public CotizacionExamenesDTO getExamenCotizacion(String cotizacionId);
+
+    public List<CotizacionEntity> findByFecha(String fecha);
 
 }

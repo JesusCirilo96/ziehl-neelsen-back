@@ -14,8 +14,8 @@ public class Url {
 
     //Cotizacion
     public static final String COTIZACION = "/cotizacion";
-    public static final String COTIZACION_EXAMEN_SENCILLO = "/examen/sencillo/{id}";
-    public static final String COTIZACION_EXAMEN_GENERAL = "/examen/general/{id}";
+    public static final String COTIZACION_EXAMENES = "/examen/{id}";
+    public static final String COTIZACION_BY_FECHA = "/fecha/{fecha}";
 
     //Descuento
     public static final String DESCUENTO = "/descuento";

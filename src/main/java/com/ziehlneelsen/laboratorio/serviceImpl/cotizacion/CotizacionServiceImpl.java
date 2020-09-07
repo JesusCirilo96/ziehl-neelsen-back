@@ -54,7 +54,12 @@ public class CotizacionServiceImpl implements CotizacionService {
     }
 
     @Override
-    public CotizacionExamenesDTO getExamenSencillo(String cotizacionId) {
-        return cotizacionDAO.getExamenSencillo(cotizacionId);
+    public CotizacionExamenesDTO getExamenCotizacion(String cotizacionId) {
+        return cotizacionDAO.getExamenCotizacion(cotizacionId);
+    }
+
+    @Override
+    public List<CotizacionEntity> findByFecha(String fecha) {
+        return cotizacionDAO.getCotizacionByFecha(fecha) ;
     }
 }

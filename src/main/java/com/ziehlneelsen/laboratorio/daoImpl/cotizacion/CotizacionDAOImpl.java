@@ -23,7 +23,7 @@ public class CotizacionDAOImpl implements CotizacionDAO {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("laboratorio");
 
     @Override
-    public CotizacionExamenesDTO getExamenSencillo(String cotizacionId) {
+    public CotizacionExamenesDTO getExamenCotizacion(String cotizacionId) {
 
         List<CotizacionExamenSencillo> listCotizacion;
         CotizacionExamenesDTO cotizacionExamen = new CotizacionExamenesDTO();
@@ -38,6 +38,7 @@ public class CotizacionDAOImpl implements CotizacionDAO {
             Fetch<CotizacionExamenSencillo, CotizacionEntity> p = c.fetch("cotizacion");
 
             Predicate idCotizacion = cb.equal(c.get("cotizacion").get("cotizacionId"),cotizacionId);
+
             query.select(c).where(idCotizacion);
 
             listCotizacion = em.createQuery(query).getResultList();
@@ -61,7 +62,34 @@ public class CotizacionDAOImpl implements CotizacionDAO {
         return cotizacionExamen;
     }
 
-    public List<ExamenGeneralEntity> getExamenGeneral(String cotizacionId) {
+    @Override
+    public List<CotizacionEntity> getCotizacionByFecha(String fecha) {
+
+        EntityManager em = emf.createEntityManager();
+        List<CotizacionEntity> listCotizacion = new ArrayList<>();
+        try{
+
+            CriteriaBuilder cb = emf.getCriteriaBuilder();
+            CriteriaQuery<CotizacionEntity> query = cb.createQuery(CotizacionEntity.class);
+
+            Root<CotizacionEntity> cotizacionR = query.from(CotizacionEntity.class);
+
+            Predicate fechaP = cb.equal(cotizacionR.get("fechaCotizacion"), fecha);
+
+            query.select(cotizacionR).where(fechaP);
+
+            listCotizacion = em.createQuery(query).getResultList();
+
+        }catch (DataAccessException e){
+            e.printStackTrace();
+        }finally {
+            em.close();
+        }
+
+        return listCotizacion;
+    }
+
+    private List<ExamenGeneralEntity> getExamenGeneral(String cotizacionId) {
         EntityManager em = emf.createEntityManager();
         List<CotizacionExamenGeneral> listCotizacion;
         List<ExamenGeneralEntity> examenes = new ArrayList<>();

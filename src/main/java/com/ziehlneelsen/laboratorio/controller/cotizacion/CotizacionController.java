@@ -45,10 +45,14 @@ public class CotizacionController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @RequestMapping(value = Url.COTIZACION_EXAMEN_SENCILLO, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
-    public CotizacionExamenesDTO findExamenSencillo(@PathVariable String id){
-        return cotizacionService.getExamenSencillo(id);
+    @RequestMapping(value = Url.COTIZACION_EXAMENES, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
+    public CotizacionExamenesDTO findExamenCotizacion(@PathVariable String id){
+        return cotizacionService.getExamenCotizacion(id);
     }
 
+    @RequestMapping(value = Url.COTIZACION_BY_FECHA, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
+    public List<CotizacionEntity> findByFecha(@PathVariable String fecha){
+        return cotizacionService.findByFecha(fecha);
+    }
 
 }
