@@ -2,6 +2,7 @@ package com.ziehlneelsen.laboratorio.serviceImpl.examen;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.constant.Messages;
+import com.ziehlneelsen.laboratorio.dao.examen.ExamenGeneralDAO;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
 import com.ziehlneelsen.laboratorio.repository.examen.ExamenGeneralRepository;
 import com.ziehlneelsen.laboratorio.service.examen.ExamenGeneralService;
@@ -18,6 +19,9 @@ public class ExamenGeneralServiceImpl implements ExamenGeneralService {
     @Autowired
     ExamenGeneralRepository examenGeneralRepository;
 
+    @Autowired
+    ExamenGeneralDAO examenGeneralDAO;
+
     @Override
     public List<ExamenGeneralEntity> findAll() {
         return examenGeneralRepository.findAll();
@@ -26,6 +30,11 @@ public class ExamenGeneralServiceImpl implements ExamenGeneralService {
     @Override
     public Optional<ExamenGeneralEntity> findById(Integer id) {
         return examenGeneralRepository.findById(id);
+    }
+
+    @Override
+    public ExamenGeneralEntity findByName(String nombre) {
+        return examenGeneralDAO.findByName(nombre);
     }
 
     @Override

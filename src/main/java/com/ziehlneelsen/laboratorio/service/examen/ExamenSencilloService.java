@@ -12,5 +12,7 @@ public interface ExamenSencilloService {
 
     public Optional<ExamenSencilloEntity> findById(Integer id);
 
+    public ExamenSencilloEntity findByName(String nombre);
+
     public ResponseDTO save(ExamenSencilloEntity examen);
 }

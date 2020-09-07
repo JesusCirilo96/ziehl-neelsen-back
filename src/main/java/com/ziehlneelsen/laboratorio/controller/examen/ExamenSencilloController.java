@@ -31,6 +31,11 @@ public class ExamenSencilloController {
         return examenService.findById(id);
     }
 
+    @RequestMapping(value = Url.FIND_BY_NAME, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
+    public ExamenSencilloEntity findExamenByName(@PathVariable String name){
+        return examenService.findByName(name);
+    }
+
     @RequestMapping(value = Url.SAVE, method = RequestMethod.POST, produces = Url.APLICATION_JSON)
     public ResponseEntity saveExamen(@Valid @RequestBody ExamenSencilloEntity examen, BindingResult bindingResult) {
 

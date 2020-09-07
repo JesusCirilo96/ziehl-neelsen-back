@@ -11,5 +11,7 @@ public interface ExamenGeneralService {
 
     public Optional<ExamenGeneralEntity> findById(Integer id);
 
+    public ExamenGeneralEntity findByName(String nombre);
+
     public ResponseDTO save(ExamenGeneralEntity examenGeneral);
 }

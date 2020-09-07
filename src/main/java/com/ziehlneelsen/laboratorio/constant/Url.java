@@ -10,6 +10,7 @@ public class Url {
     //Urls comunes
     public static final String GET_ALL = "/get/all";
     public static final String FIND_BY_ID = "/get/id/{id}";
+    public static final String FIND_BY_NAME = "/get/name/{name}";
     public static final String SAVE = "/save";
 
     //Cotizacion

@@ -2,6 +2,7 @@ package com.ziehlneelsen.laboratorio.serviceImpl.examen;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.constant.Messages;
+import com.ziehlneelsen.laboratorio.dao.examen.ExamenSencilloDAO;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenSencilloEntity;
 import com.ziehlneelsen.laboratorio.repository.examen.ExamenSencilloRepository;
 import com.ziehlneelsen.laboratorio.service.examen.ExamenSencilloService;
@@ -18,6 +19,9 @@ public class ExamenSencilloSencilloServiceImpl implements ExamenSencilloService 
     @Autowired
     ExamenSencilloRepository examenSencilloRepository;
 
+    @Autowired
+    ExamenSencilloDAO examenSencilloDAO;
+
     @Override
     public List<ExamenSencilloEntity> findAll() {
         return examenSencilloRepository.findAll();
@@ -26,6 +30,11 @@ public class ExamenSencilloSencilloServiceImpl implements ExamenSencilloService 
     @Override
     public Optional<ExamenSencilloEntity> findById(Integer id) {
         return examenSencilloRepository.findById(id);
+    }
+
+    @Override
+    public ExamenSencilloEntity findByName(String nombre) {
+        return examenSencilloDAO.findByName(nombre);
     }
 
     @Override

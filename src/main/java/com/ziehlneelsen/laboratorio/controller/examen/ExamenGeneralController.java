@@ -32,6 +32,11 @@ public class ExamenGeneralController {
         return examenGeneralService.findById(id);
     }
 
+    @RequestMapping(value = Url.FIND_BY_NAME, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
+    public ExamenGeneralEntity findExamenGeneralByName(@PathVariable String name){
+        return examenGeneralService.findByName(name);
+    }
+
     @RequestMapping(value = Url.SAVE, method = RequestMethod.POST, produces = Url.APLICATION_JSON)
     public ResponseEntity saveExamenGeneral(@Valid @RequestBody ExamenGeneralEntity examenGeneral, BindingResult bindingResult) {
 
