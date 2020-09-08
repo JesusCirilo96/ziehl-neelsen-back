@@ -25,11 +25,17 @@ public class ExamenGeneralEntity {
     @Column(name = "ALIAS")
     String alias;
 
+    @Column(name = "TITULO")
+    String titulo;
+
     @Column(name = "ESTADO", columnDefinition = "boolean default true")
     Boolean estado;
 
     @Column(name = "PRECIO")
     Float precio;
+
+    @Column(name = "CLAVE")
+    String clave;
 
     @OneToMany(mappedBy = "examenGeneral")
     Set<CotizacionExamenGeneral> cotizacionExamenGeneral = new HashSet<>();
