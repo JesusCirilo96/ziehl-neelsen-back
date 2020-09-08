@@ -27,9 +27,6 @@ public class CotizacionEntity implements Serializable {
     String horaCotizacion;
 
     @OneToMany(mappedBy = "cotizacion")
-    Set<CotizacionExamenSencillo> cotizacionExamenSencillo = new HashSet<>();
-
-    @OneToMany(mappedBy = "cotizacion")
     Set<CotizacionExamenGeneral> cotizacionExamenGeneral = new HashSet<>();
 
     public String getCotizacionId() {

@@ -4,9 +4,7 @@ import com.ziehlneelsen.laboratorio.beans.cotizacion.CotizacionExamenesDTO;
 import com.ziehlneelsen.laboratorio.dao.cotizacion.CotizacionDAO;
 import com.ziehlneelsen.laboratorio.entities.cotizacion.CotizacionEntity;
 import com.ziehlneelsen.laboratorio.entities.cotizacion.CotizacionExamenGeneral;
-import com.ziehlneelsen.laboratorio.entities.cotizacion.CotizacionExamenSencillo;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
-import com.ziehlneelsen.laboratorio.entities.examen.ExamenSencilloEntity;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -25,33 +23,30 @@ public class CotizacionDAOImpl implements CotizacionDAO {
     @Override
     public CotizacionExamenesDTO getExamenCotizacion(String cotizacionId) {
 
-        List<CotizacionExamenSencillo> listCotizacion;
-        CotizacionExamenesDTO cotizacionExamen = new CotizacionExamenesDTO();
-
         EntityManager em = emf.createEntityManager();
+        List<CotizacionExamenGeneral> listCotizacion;
+        List<ExamenGeneralEntity> examenes = new ArrayList<>();
+
+        CotizacionExamenesDTO cotizacionExamen = new CotizacionExamenesDTO();
 
         try{
             CriteriaBuilder cb = emf.getCriteriaBuilder();
-            CriteriaQuery<CotizacionExamenSencillo> query = cb.createQuery(CotizacionExamenSencillo.class);
+            CriteriaQuery<CotizacionExamenGeneral> query = cb.createQuery(CotizacionExamenGeneral.class);
 
-            Root<CotizacionExamenSencillo> c = query.from(CotizacionExamenSencillo.class);
-            Fetch<CotizacionExamenSencillo, CotizacionEntity> p = c.fetch("cotizacion");
+            Root<CotizacionExamenGeneral> c = query.from(CotizacionExamenGeneral.class);
+            Fetch<CotizacionExamenGeneral, CotizacionEntity> p = c.fetch("cotizacion");
 
-            Predicate idCotizacion = cb.equal(c.get("cotizacion").get("cotizacionId"),cotizacionId);
-
+            Predicate idCotizacion = cb.equal(c.get("cotizacion").get("cotizacionId"), cotizacionId);
             query.select(c).where(idCotizacion);
 
             listCotizacion = em.createQuery(query).getResultList();
 
-            List<ExamenSencilloEntity> examenes = new ArrayList<>();
-
             listCotizacion.forEach((cotizacion) -> {
-                examenes.add(cotizacion.getExamenSencillo());
+                examenes.add(cotizacion.getExamenGeneral());
             });
 
-            cotizacionExamen.setExamenGeneral(getExamenGeneral(cotizacionId));
+            cotizacionExamen.setExamenGeneral(examenes);
             cotizacionExamen.setCotizacion(listCotizacion.get(0).getCotizacion());
-            cotizacionExamen.setExamenSencillo(examenes);
 
         }catch (DataAccessException e){
             e.printStackTrace();
@@ -87,37 +82,5 @@ public class CotizacionDAOImpl implements CotizacionDAO {
         }
 
         return listCotizacion;
-    }
-
-    private List<ExamenGeneralEntity> getExamenGeneral(String cotizacionId) {
-        EntityManager em = emf.createEntityManager();
-        List<CotizacionExamenGeneral> listCotizacion;
-        List<ExamenGeneralEntity> examenes = new ArrayList<>();
-
-        try {
-
-            CriteriaBuilder cb = emf.getCriteriaBuilder();
-            CriteriaQuery<CotizacionExamenGeneral> query = cb.createQuery(CotizacionExamenGeneral.class);
-
-            Root<CotizacionExamenGeneral> c = query.from(CotizacionExamenGeneral.class);
-            Fetch<CotizacionExamenGeneral, CotizacionEntity> p = c.fetch("cotizacion");
-
-            Predicate idCotizacion = cb.equal(c.get("cotizacion").get("cotizacionId"), cotizacionId);
-            query.select(c).where(idCotizacion);
-
-            listCotizacion = em.createQuery(query).getResultList();
-
-            listCotizacion.forEach((cotizacion) -> {
-                examenes.add(cotizacion.getExamenGeneral());
-            });
-
-        }catch (DataAccessException e){
-            e.printStackTrace();
-        }finally {
-            em.close();
-        }
-
-
-        return examenes;
     }
 }

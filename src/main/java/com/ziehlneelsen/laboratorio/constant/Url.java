@@ -23,7 +23,6 @@ public class Url {
 
     //Examen
     public static final String EXAMEN_GENERAL = "/examen/general";
-    public static final String EXAMEN_SENCILLO = "/examen/sencillo";
 
     //Estudio
     public static final String ESTUDIO = "/estudio";

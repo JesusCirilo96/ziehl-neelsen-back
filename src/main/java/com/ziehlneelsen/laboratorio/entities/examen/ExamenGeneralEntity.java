@@ -25,7 +25,7 @@ public class ExamenGeneralEntity {
     @Column(name = "ALIAS")
     String alias;
 
-    @Column(name = "TITULO")
+    @Column(name = "TITULO_EXAMEN")
     String titulo;
 
     @Column(name = "ESTADO", columnDefinition = "boolean default true")
@@ -78,5 +78,21 @@ public class ExamenGeneralEntity {
 
     public void setPrecio(Float precio) {
         this.precio = precio;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
     }
 }
