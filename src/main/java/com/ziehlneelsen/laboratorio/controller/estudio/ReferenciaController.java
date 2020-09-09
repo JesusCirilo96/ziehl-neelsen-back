@@ -31,7 +31,6 @@ public class ReferenciaController {
         return referenciaService.findByEstudio(id);
     }
 
-
     @RequestMapping(value = Url.SAVE, method = RequestMethod.POST, produces = Url.APLICATION_JSON)
     public ResponseEntity saveReferencia(@Valid @RequestBody ReferenciaEntity referencia, BindingResult bindingResult) {
 

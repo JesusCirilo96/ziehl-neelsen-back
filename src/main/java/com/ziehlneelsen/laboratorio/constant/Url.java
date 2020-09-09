@@ -20,6 +20,7 @@ public class Url {
 
     //Descuento
     public static final String DESCUENTO = "/descuento";
+    public static final String DIA_DESCUENTO = "get/dia/{id}";
 
     //Examen
     public static final String EXAMEN_GENERAL = "/examen/general";
