@@ -2,8 +2,7 @@ package com.ziehlneelsen.laboratorio.controller.descuento;
 
 import com.ziehlneelsen.laboratorio.constant.Url;
 import com.ziehlneelsen.laboratorio.entities.descuento.DescuentoEntity;
-import com.ziehlneelsen.laboratorio.entities.descuento.DiaDescuentoEntity;
-import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
+import com.ziehlneelsen.laboratorio.entities.descuento.DiaDescuento;
 import com.ziehlneelsen.laboratorio.service.descuento.DescuentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +31,7 @@ public class DescuentoController {
 
 
     @RequestMapping(value = Url.DIA_DESCUENTO, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
-    public List<DiaDescuentoEntity> findDiaDescuento(@PathVariable Integer id) throws ParseException {
+    public List<DiaDescuento> findDiaDescuento(@PathVariable Integer id) throws ParseException {
         return descuentoService.findByDescuento(id);
     }
 

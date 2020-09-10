@@ -3,7 +3,7 @@ package com.ziehlneelsen.laboratorio.serviceImpl.descuento;
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.dao.descuento.DiaDescuentoDAO;
 import com.ziehlneelsen.laboratorio.entities.descuento.DescuentoEntity;
-import com.ziehlneelsen.laboratorio.entities.descuento.DiaDescuentoEntity;
+import com.ziehlneelsen.laboratorio.entities.descuento.DiaDescuento;
 import com.ziehlneelsen.laboratorio.repository.descuento.DescuentoRepository;
 import com.ziehlneelsen.laboratorio.service.descuento.DescuentoService;
 import com.ziehlneelsen.laboratorio.util.Utileria;
@@ -36,14 +36,14 @@ public class DescuentoServiceImpl implements DescuentoService {
     }
 
     @Override
-    public List<DiaDescuentoEntity> findByDescuento(Integer descuentoId) throws ParseException {
-        List<DiaDescuentoEntity> diaDescuento = diaDescuentoDAO.getByDescuento(descuentoId);
+    public List<DiaDescuento> findByDescuento(Integer descuentoId) throws ParseException {
+        List<DiaDescuento> diaDescuento = diaDescuentoDAO.getByDescuento(descuentoId);
 
-        List<DiaDescuentoEntity> descuentos = new ArrayList<>();
+        List<DiaDescuento> descuentos = new ArrayList<>();
 
         Date fechaActual = Utileria.convertirFecha(Utileria.fechaHoraActual());
 
-        for(DiaDescuentoEntity dia : diaDescuento){
+        for(DiaDescuento dia : diaDescuento){
             Date fechaInicio = Utileria.convertirFecha(dia.getInicio());
             Date fechaFin = Utileria.convertirFecha(dia.getFin());
 
@@ -59,6 +59,30 @@ public class DescuentoServiceImpl implements DescuentoService {
 
 
         return descuentos;
+    }
+
+    @Override
+    public Boolean aplicaDescuento(Integer descuentoId) throws ParseException {
+        List<DiaDescuento> diaDescuento = diaDescuentoDAO.getByDescuento(descuentoId);
+
+        Date fechaActual = Utileria.convertirFecha(Utileria.fechaHoraActual());
+
+        for(DiaDescuento dia : diaDescuento){
+            Date fechaInicio = Utileria.convertirFecha(dia.getInicio());
+            Date fechaFin = Utileria.convertirFecha(dia.getFin());
+
+            if(fechaInicio.compareTo(fechaActual) * fechaActual.compareTo(fechaFin) > 0){
+                System.out.println("La fecha actual esta entre el rango");
+                System.out.println("El dia de hoy BD: " + dia.getDia().getNumeroDia());
+                if(Utileria.hoy().equals(dia.getDia().getNumeroDia())){
+                    System.out.println("El descuento aplica hoy");
+                    return true;
+                }
+            }
+        }
+
+
+        return false;
     }
 
     @Override

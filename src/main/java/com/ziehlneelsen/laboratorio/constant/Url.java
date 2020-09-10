@@ -9,7 +9,7 @@ public class Url {
 
     //Urls comunes
     public static final String GET_ALL = "/get/all";
-    public static final String FIND_BY_ID = "/get/id/{id}";
+    public static final String FIND_BY_ID = "/get/{id}";
     public static final String FIND_BY_NAME = "/get/name/{name}";
     public static final String SAVE = "/save";
 
@@ -20,10 +20,11 @@ public class Url {
 
     //Descuento
     public static final String DESCUENTO = "/descuento";
-    public static final String DIA_DESCUENTO = "get/dia/{id}";
+    public static final String DIA_DESCUENTO = "/dia/{id}";
 
     //Examen
-    public static final String EXAMEN_GENERAL = "/examen/general";
+    public static final String EXAMEN_GENERAL = "/examen";
+    public static final String EXAMEN_DESCUENTO = "/descuento/{id}";
 
     //Estudio
     public static final String ESTUDIO = "/estudio";
@@ -33,8 +34,8 @@ public class Url {
 
     //Referencia
     public static final String ESTUDIO_REFERENCIA = "/referencia";
-    public static final String FIND_BY_ESTUDIO = "/get/estudio/{id}";
-    public static final String FIND_BY_CLASIFICACION = "/get/clasificacion/{id}";
+    public static final String FIND_BY_ESTUDIO = "/estudio/{id}";
+    public static final String FIND_BY_CLASIFICACION = "/clasificacion/{id}";
 
     //Menu
     public static final String MENU = "/menu";

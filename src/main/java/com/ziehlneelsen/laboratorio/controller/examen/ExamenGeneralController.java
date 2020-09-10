@@ -1,5 +1,6 @@
 package com.ziehlneelsen.laboratorio.controller.examen;
 
+import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.constant.Url;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
@@ -11,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +37,11 @@ public class ExamenGeneralController {
     @RequestMapping(value = Url.FIND_BY_NAME, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
     public ExamenGeneralEntity findExamenGeneralByName(@PathVariable String name){
         return examenGeneralService.findByName(name);
+    }
+
+    @RequestMapping(value = Url.EXAMEN_DESCUENTO, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
+    public ExamenDescuentoDTO findDescuentoByExamen(@PathVariable Integer id) {
+        return examenGeneralService.findDescuentoByExamen(id);
     }
 
     @RequestMapping(value = Url.SAVE, method = RequestMethod.POST, produces = Url.APLICATION_JSON)

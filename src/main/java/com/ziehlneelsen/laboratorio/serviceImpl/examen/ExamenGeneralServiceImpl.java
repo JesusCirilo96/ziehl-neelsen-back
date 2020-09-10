@@ -1,5 +1,6 @@
 package com.ziehlneelsen.laboratorio.serviceImpl.examen;
 
+import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.constant.Messages;
 import com.ziehlneelsen.laboratorio.dao.examen.ExamenGeneralDAO;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,4 +59,8 @@ public class ExamenGeneralServiceImpl implements ExamenGeneralService {
         return response;
     }
 
+    @Override
+    public ExamenDescuentoDTO findDescuentoByExamen(Integer examenId) {
+        return examenGeneralDAO.findDescuentoByExamen(examenId);
+    }
 }

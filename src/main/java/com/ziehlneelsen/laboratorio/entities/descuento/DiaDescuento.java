@@ -6,9 +6,9 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@IdClass(DiaDescuentoEntity.class)
+@IdClass(DiaDescuento.class)
 @Table(name = "dia_descuento")
-public class DiaDescuentoEntity implements Serializable {
+public class DiaDescuento implements Serializable {
 
     @Id
     @ManyToOne
@@ -61,8 +61,8 @@ public class DiaDescuentoEntity implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof DiaDescuentoEntity)) return false;
-        DiaDescuentoEntity that = (DiaDescuentoEntity) o;
+        if (!(o instanceof DiaDescuento)) return false;
+        DiaDescuento that = (DiaDescuento) o;
         return Objects.equals(getDia(), that.getDia()) &&
                 Objects.equals(getDescuento(), that.getDescuento()) &&
                 Objects.equals(getInicio(), that.getInicio()) &&
