@@ -17,8 +17,12 @@ public class DescuentoEntity implements Serializable {
     Integer descuentoId;
 
     @NotBlank(message = "El nombre del descuento es obligatorio")
-    @Column(name = "nombre")
+    @Column(name = "NOMBRE")
     String nombre;
+
+    @NotBlank(message = "El porcentaje del descuento es obligatorio")
+    @Column(name = "PORCENTAJE_DESCUENTO")
+    Integer porcentajeDescuento;
 
     @NotBlank(message = "La cantidad de descuento es obligatorio")
     @Column(name = "DESCUENTO")
@@ -41,6 +45,14 @@ public class DescuentoEntity implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Integer getPorcentajeDescuento() {
+        return porcentajeDescuento;
+    }
+
+    public void setPorcentajeDescuento(Integer porcentajeDescuento) {
+        this.porcentajeDescuento = porcentajeDescuento;
     }
 
     public Float getDescuento() {

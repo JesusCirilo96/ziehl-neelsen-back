@@ -22,6 +22,10 @@ public class Url {
     public static final String DESCUENTO = "/descuento";
     public static final String DIA_DESCUENTO = "/dia/{id}";
 
+    public static final String PAQUETE_DESCUENTO = "/paquete/descuento";
+    public static final String FIND_BY_PAQUETE = "/examen/{id}";
+    public static final String FIND_ALL_PAQUETE = "/all";
+
     //Examen
     public static final String EXAMEN_GENERAL = "/examen";
     public static final String EXAMEN_DESCUENTO = "/descuento/{id}";

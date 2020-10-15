@@ -37,6 +37,9 @@ public class ExamenGeneralEntity {
     @Column(name = "CLAVE")
     String clave;
 
+    @Column(name = "CATEGORIA_ID")
+    String categoriaId;
+
     @OneToMany(mappedBy = "examenGeneral")
     Set<CotizacionExamenGeneral> cotizacionExamenGeneral = new HashSet<>();
 
@@ -94,5 +97,13 @@ public class ExamenGeneralEntity {
 
     public void setClave(String clave) {
         this.clave = clave;
+    }
+
+    public String getCategoriaId() {
+        return categoriaId;
+    }
+
+    public void setCategoriaId(String categoriaId) {
+        this.categoriaId = categoriaId;
     }
 }

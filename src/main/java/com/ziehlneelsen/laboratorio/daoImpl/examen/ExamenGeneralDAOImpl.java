@@ -81,8 +81,11 @@ public class ExamenGeneralDAOImpl implements ExamenGeneralDAO {
                 }
             });
 
-            examenDescuento.setExamen(listDescuento.get(0).getExamen());
-            examenDescuento.setDescuento(descuentos);
+            if(!listDescuento.isEmpty()){
+                examenDescuento.setExamen(listDescuento.get(0).getExamen());
+                examenDescuento.setDescuento(descuentos);
+            }
+
 
         }catch (DataAccessException e){
             e.printStackTrace();
@@ -92,5 +95,5 @@ public class ExamenGeneralDAOImpl implements ExamenGeneralDAO {
 
         return examenDescuento;
     }
-
+// nesCiriloEst@
 }

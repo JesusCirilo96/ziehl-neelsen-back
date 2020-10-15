@@ -1,6 +1,7 @@
 package com.ziehlneelsen.laboratorio.serviceImpl.descuento;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.constant.Messages;
 import com.ziehlneelsen.laboratorio.dao.descuento.DiaDescuentoDAO;
 import com.ziehlneelsen.laboratorio.entities.descuento.DescuentoEntity;
 import com.ziehlneelsen.laboratorio.entities.descuento.DiaDescuento;
@@ -8,6 +9,7 @@ import com.ziehlneelsen.laboratorio.repository.descuento.DescuentoRepository;
 import com.ziehlneelsen.laboratorio.service.descuento.DescuentoService;
 import com.ziehlneelsen.laboratorio.util.Utileria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -87,6 +89,22 @@ public class DescuentoServiceImpl implements DescuentoService {
 
     @Override
     public ResponseDTO save(DescuentoEntity descuento) {
-        return null;
+        ResponseDTO response = new ResponseDTO();
+        if(null != descuento.getDescuentoId() && descuentoRepository.findById(descuento.getDescuentoId()).isPresent()){
+            descuentoRepository.save(descuento);
+            response.setErrorCode(Messages.OK);
+            response.setErrorInfo(Messages.UPDATE_OK);
+        } else if(null != descuento){
+            try{
+                descuentoRepository.save(descuento);
+                response.setErrorCode(Messages.OK);
+                response.setErrorInfo(Messages.REGISTER_OK);
+            }catch(DataAccessException ex) {
+                response.setErrorCode(Messages.ERROR);
+                response.setErrorInfo(ex.getMostSpecificCause().toString());
+            }
+        }
+        return response;
+
     }
 }
