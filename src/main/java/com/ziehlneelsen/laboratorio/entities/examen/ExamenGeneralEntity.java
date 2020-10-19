@@ -18,7 +18,7 @@ public class ExamenGeneralEntity {
     @Column(name = "EXAMEN_ID")
     Integer examenGeneralId;
 
-    @NotBlank
+    @NotBlank(message = "En nombre es obligatorio")
     @Column(name = "NOMBRE")
     String nombre;
 
@@ -39,6 +39,14 @@ public class ExamenGeneralEntity {
 
     @Column(name = "CATEGORIA_ID")
     String categoriaId;
+
+    @Column(name = "FECHA_CREACION")
+    String fechaCreacion;
+
+    @Column(name = "FECHA_ACTUALIZACION")
+    String fechaActualizacion;
+
+
 
     @OneToMany(mappedBy = "examenGeneral")
     Set<CotizacionExamenGeneral> cotizacionExamenGeneral = new HashSet<>();
@@ -105,5 +113,21 @@ public class ExamenGeneralEntity {
 
     public void setCategoriaId(String categoriaId) {
         this.categoriaId = categoriaId;
+    }
+
+    public String getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(String fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public String getFechaActualizacion() {
+        return fechaActualizacion;
+    }
+
+    public void setFechaActualizacion(String fechaActualizacion) {
+        this.fechaActualizacion = fechaActualizacion;
     }
 }

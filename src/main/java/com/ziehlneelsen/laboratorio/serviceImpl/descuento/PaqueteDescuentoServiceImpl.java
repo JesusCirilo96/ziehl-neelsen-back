@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PaqueteDesceuntoServiceImpl implements PaqueteDescuentoService {
+public class PaqueteDescuentoServiceImpl implements PaqueteDescuentoService {
 
     @Autowired
     PaqueteDescuentoRepository paqueteDescuentoRepository;
