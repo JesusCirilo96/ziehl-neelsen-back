@@ -2,8 +2,10 @@ package com.ziehlneelsen.laboratorio.controller.persona;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.beans.persona.UserAuthDTO;
+import com.ziehlneelsen.laboratorio.beans.persona.UsuarioRolDTO;
 import com.ziehlneelsen.laboratorio.constant.Url;
 import com.ziehlneelsen.laboratorio.entities.persona.UsuarioEntity;
+import com.ziehlneelsen.laboratorio.entities.rol.RolEntity;
 import com.ziehlneelsen.laboratorio.service.persona.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,6 +33,11 @@ public class UsuarioController {
     @RequestMapping(value = Url.FIND_BY_ID, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
     public Optional<UsuarioEntity> findUsuario(@PathVariable Integer id){
         return usuarioService.findById(id);
+    }
+
+    @RequestMapping(value = Url.FIND_ROL, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
+    public UsuarioRolDTO findRolByUsuario(@PathVariable Integer id){
+        return usuarioService.findRolByUsuario(id);
     }
 
     @RequestMapping(value = Url.SAVE, method = RequestMethod.POST, produces = Url.APLICATION_JSON)

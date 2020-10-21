@@ -54,6 +54,7 @@ public class Url {
     //Persona
     public static final String USUARIO = "/usuario";
     public static final String AUTH = "/authenticate/{user}/{password}";
+    public static final String FIND_ROL = "/get/rol/{id}";
     public static final String PACIENTE = "/paciente";
     public static final String MEDICO = "/medico";
 

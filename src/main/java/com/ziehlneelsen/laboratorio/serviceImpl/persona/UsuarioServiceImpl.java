@@ -2,9 +2,12 @@ package com.ziehlneelsen.laboratorio.serviceImpl.persona;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.beans.persona.UserAuthDTO;
+import com.ziehlneelsen.laboratorio.beans.persona.UsuarioRolDTO;
 import com.ziehlneelsen.laboratorio.constant.Messages;
 import com.ziehlneelsen.laboratorio.dao.persona.UsuarioLoginDAO;
+import com.ziehlneelsen.laboratorio.dao.persona.UsuarioRolDAO;
 import com.ziehlneelsen.laboratorio.entities.persona.UsuarioEntity;
+import com.ziehlneelsen.laboratorio.entities.rol.RolEntity;
 import com.ziehlneelsen.laboratorio.repository.persona.UsuarioRepository;
 import com.ziehlneelsen.laboratorio.service.persona.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,9 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private UsuarioLoginDAO usuarioLoginDAO;
 
+    @Autowired
+    private UsuarioRolDAO usuarioRolDAO;
+
     public UsuarioServiceImpl(UsuarioLoginDAO usuarioLoginDAO) {
         this.usuarioLoginDAO = usuarioLoginDAO;
     }
@@ -35,6 +41,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public Optional<UsuarioEntity> findById(Integer id) {
         return usuarioRepository.findById(id);
+    }
+
+    @Override
+    public UsuarioRolDTO findRolByUsuario(Integer usuarioId) {
+        return usuarioRolDAO.findRolByUsuario(usuarioId);
     }
 
     @Override
