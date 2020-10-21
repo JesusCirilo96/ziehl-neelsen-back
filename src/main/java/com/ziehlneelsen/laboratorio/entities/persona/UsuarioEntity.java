@@ -39,7 +39,13 @@ public class UsuarioEntity implements Serializable {
     String password;
 
     @Column(name = "ESTADO", columnDefinition = "boolean default true")
-    String estado;
+    Boolean estado;
+
+    @Column(name = "FECHA_CREACION")
+    String fechaCreacion;
+
+    @Column(name = "FECHA_ACTUALIZACION")
+    String fechaActualizacion;
 
     public Integer getUsuarioId() {
         return usuarioId;
@@ -97,11 +103,28 @@ public class UsuarioEntity implements Serializable {
         this.password = password;
     }
 
-    public String getEstado() {
+
+    public Boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Boolean estado) {
         this.estado = estado;
+    }
+
+    public String getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(String fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public String getFechaActualizacion() {
+        return fechaActualizacion;
+    }
+
+    public void setFechaActualizacion(String fechaActualizacion) {
+        this.fechaActualizacion = fechaActualizacion;
     }
 }

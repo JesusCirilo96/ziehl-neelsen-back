@@ -7,6 +7,7 @@ import com.ziehlneelsen.laboratorio.dao.persona.UsuarioLoginDAO;
 import com.ziehlneelsen.laboratorio.entities.persona.UsuarioEntity;
 import com.ziehlneelsen.laboratorio.repository.persona.UsuarioRepository;
 import com.ziehlneelsen.laboratorio.service.persona.UsuarioService;
+import com.ziehlneelsen.laboratorio.util.Utileria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -41,11 +42,14 @@ public class UsuarioServiceImpl implements UsuarioService {
     public ResponseDTO save(UsuarioEntity usuario) {
         ResponseDTO response = new ResponseDTO();
         if(null != usuario.getUsuarioId() && usuarioRepository.findById(usuario.getUsuarioId()).isPresent()){
+            usuario.setFechaActualizacion(Utileria.fechaHoraActual());
             usuarioRepository.save(usuario);
             response.setErrorCode(Messages.OK);
             response.setErrorInfo(Messages.UPDATE_OK);
         } else if(null != usuario){
             try{
+                usuario.setFechaCreacion(Utileria.fechaHoraActual());
+                usuario.setFechaActualizacion(Utileria.fechaHoraActual());
                 usuarioRepository.save(usuario);
                 response.setErrorCode(Messages.OK);
                 response.setErrorInfo(Messages.REGISTER_OK);
