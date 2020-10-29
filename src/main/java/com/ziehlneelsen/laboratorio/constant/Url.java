@@ -60,6 +60,7 @@ public class Url {
 
     //Rol
     public static final String ROL = "/rol";
+    public static final String ROL_MENU = "/menu/{id}";
 
     //Seccion
     public static final String SECCION = "/seccion";

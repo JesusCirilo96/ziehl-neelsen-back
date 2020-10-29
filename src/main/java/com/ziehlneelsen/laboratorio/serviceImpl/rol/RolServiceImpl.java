@@ -1,7 +1,9 @@
 package com.ziehlneelsen.laboratorio.serviceImpl.rol;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.rol.RolMenuDTO;
 import com.ziehlneelsen.laboratorio.constant.Messages;
+import com.ziehlneelsen.laboratorio.dao.rol.RolDAO;
 import com.ziehlneelsen.laboratorio.entities.rol.RolEntity;
 import com.ziehlneelsen.laboratorio.repository.rol.RolRepository;
 import com.ziehlneelsen.laboratorio.service.rol.RolService;
@@ -18,6 +20,9 @@ public class RolServiceImpl implements RolService {
     @Autowired
     RolRepository rolRepository;
 
+    @Autowired
+    RolDAO rolDAO;
+
     @Override
     public List<RolEntity> findAll() {
         return rolRepository.findAll();
@@ -26,6 +31,11 @@ public class RolServiceImpl implements RolService {
     @Override
     public Optional<RolEntity> findById(Integer id) {
         return rolRepository.findById(id);
+    }
+
+    @Override
+    public RolMenuDTO findMenuByRol(Integer rolId){
+        return rolDAO.findMenuByRol(rolId);
     }
 
     @Override

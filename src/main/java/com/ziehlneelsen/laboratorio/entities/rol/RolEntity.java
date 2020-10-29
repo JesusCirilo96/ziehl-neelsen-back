@@ -19,6 +19,9 @@ public class RolEntity {
     @Column(name = "NOMBRE")
     String rolName;
 
+    @Column(name = "ESTADO", columnDefinition = "boolean default true")
+    Boolean estado;
+
     public Integer getRolId() {
         return rolId;
     }
@@ -33,5 +36,13 @@ public class RolEntity {
 
     public void setRolName(String rolName) {
         this.rolName = rolName;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
     }
 }

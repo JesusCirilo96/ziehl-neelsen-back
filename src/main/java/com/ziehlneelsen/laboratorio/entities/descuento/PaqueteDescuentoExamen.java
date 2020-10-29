@@ -1,7 +1,5 @@
 package com.ziehlneelsen.laboratorio.entities.descuento;
 
-import com.ziehlneelsen.laboratorio.entities.cotizacion.CotizacionEntity;
-import com.ziehlneelsen.laboratorio.entities.cotizacion.CotizacionExamenGeneral;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
 
 import javax.persistence.*;
