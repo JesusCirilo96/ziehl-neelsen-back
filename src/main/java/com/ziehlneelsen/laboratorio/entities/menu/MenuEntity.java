@@ -4,11 +4,13 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @DynamicUpdate
 @Table(name = "menu")
-public class MenuEntity {
+public class MenuEntity implements Serializable {
 
     /**
      * Id del menu
@@ -31,6 +33,23 @@ public class MenuEntity {
     @NotBlank
     @Column(name = "RUTA")
     String ruta;
+
+    /**
+     * Identificamos si va a ser un menu desplegable
+     */
+    @NotBlank
+    @Column(name = "DROPDOWN")
+    Boolean dropdown;
+
+    /**
+     * Icono a mostrar en el menu
+     */
+    @Column(name = "ICONO")
+    String icono;
+
+    @Column(name = "ESTADO", columnDefinition = "boolean default true")
+    Boolean estado;
+
 
     public Integer getMenuId() {
         return menuId;
@@ -55,4 +74,23 @@ public class MenuEntity {
     public void setRuta(String ruta) {
         this.ruta = ruta;
     }
+
+    public Boolean getDropdown() {
+        return dropdown;
+    }
+
+    public void setDropdown(Boolean dropdown) {
+        this.dropdown = dropdown;
+    }
+
+    public String getIcono() {
+        return icono;
+    }
+
+    public void setIcono(String icono) {
+        this.icono = icono;
+    }
+
+
+
 }

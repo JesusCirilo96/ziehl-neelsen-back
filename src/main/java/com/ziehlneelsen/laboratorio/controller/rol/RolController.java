@@ -2,6 +2,7 @@ package com.ziehlneelsen.laboratorio.controller.rol;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.beans.rol.RolMenuDTO;
+import com.ziehlneelsen.laboratorio.beans.rol.RolMenuSubmenuDTO;
 import com.ziehlneelsen.laboratorio.constant.Url;
 import com.ziehlneelsen.laboratorio.entities.rol.RolEntity;
 import com.ziehlneelsen.laboratorio.service.rol.RolService;
@@ -34,7 +35,7 @@ public class RolController {
     }
 
     @RequestMapping(value = Url.ROL_MENU, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
-    public RolMenuDTO findMenuByRol(@PathVariable Integer id){
+    public RolMenuSubmenuDTO findMenuByRol(@PathVariable Integer id){
         return rolService.findMenuByRol(id);
     }
 

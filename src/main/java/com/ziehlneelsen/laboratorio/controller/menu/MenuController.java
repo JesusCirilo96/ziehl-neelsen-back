@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = Url.MENU)
+@CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET})
 public class MenuController {
     @Autowired
     MenuService menuService;
