@@ -44,4 +44,5 @@ public class Utileria implements Serializable {
         // El dia de la semana inicia en el 1 mientras que el array empieza en el 0
         return strDays[hoy.get(Calendar.DAY_OF_WEEK) - 1];
     }
+
 }

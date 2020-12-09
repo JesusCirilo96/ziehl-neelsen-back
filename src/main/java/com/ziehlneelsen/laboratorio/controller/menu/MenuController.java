@@ -1,6 +1,8 @@
 package com.ziehlneelsen.laboratorio.controller.menu;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.menu.MenuDTO;
+import com.ziehlneelsen.laboratorio.beans.menu.MenuSubmenuDTO;
 import com.ziehlneelsen.laboratorio.constant.Url;
 import com.ziehlneelsen.laboratorio.entities.menu.MenuEntity;
 import com.ziehlneelsen.laboratorio.service.menu.MenuService;
@@ -29,6 +31,16 @@ public class MenuController {
     @RequestMapping(value = Url.FIND_BY_ID, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
     public Optional<MenuEntity> findMenu(@PathVariable Integer id){
         return menuService.findById(id);
+    }
+
+    @RequestMapping(value = Url.SUB_MENU_BY_MENU, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
+    public MenuSubmenuDTO findSubmenuByMenu(@PathVariable Integer id){
+        return menuService.findSubmenuByMenu(id);
+    }
+
+    @RequestMapping(value = Url.MENU_SUB_MENU, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
+    public List<MenuDTO> getAllMenuSubmenu(){
+        return menuService.findAllMenuSubmenu();
     }
 
     @RequestMapping(value = Url.SAVE, method = RequestMethod.POST, produces = Url.APLICATION_JSON)

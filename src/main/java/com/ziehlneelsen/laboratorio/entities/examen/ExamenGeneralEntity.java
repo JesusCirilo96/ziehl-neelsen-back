@@ -38,7 +38,7 @@ public class ExamenGeneralEntity {
     String clave;
 
     @Column(name = "CATEGORIA_ID")
-    String categoriaId;
+    Integer categoriaId;
 
     @Column(name = "FECHA_CREACION")
     String fechaCreacion;
@@ -107,12 +107,20 @@ public class ExamenGeneralEntity {
         this.clave = clave;
     }
 
-    public String getCategoriaId() {
+    public Integer getCategoriaId() {
         return categoriaId;
     }
 
-    public void setCategoriaId(String categoriaId) {
+    public void setCategoriaId(Integer categoriaId) {
         this.categoriaId = categoriaId;
+    }
+
+    public Set<CotizacionExamenGeneral> getCotizacionExamenGeneral() {
+        return cotizacionExamenGeneral;
+    }
+
+    public void setCotizacionExamenGeneral(Set<CotizacionExamenGeneral> cotizacionExamenGeneral) {
+        this.cotizacionExamenGeneral = cotizacionExamenGeneral;
     }
 
     public String getFechaCreacion() {

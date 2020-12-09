@@ -7,6 +7,7 @@ import com.ziehlneelsen.laboratorio.entities.rol.RolEntity;
 import com.ziehlneelsen.laboratorio.repository.metodo.MetodoRepository;
 import com.ziehlneelsen.laboratorio.repository.rol.RolRepository;
 import com.ziehlneelsen.laboratorio.service.metodo.MetodoService;
+import com.ziehlneelsen.laboratorio.util.Utileria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -35,11 +36,14 @@ public class MetodoServiceImpl implements MetodoService {
         ResponseDTO response = new ResponseDTO();
 
         if(null != metodo.getMetodoId() && metodoRepository.findById(metodo.getMetodoId()).isPresent()){
+            metodo.setFechaActualizacion(Utileria.fechaHoraActual());
             metodoRepository.save(metodo);
             response.setErrorCode(Messages.OK);
             response.setErrorInfo(Messages.UPDATE_OK);
         } else if(null != metodo){
             try{
+                metodo.setFechaCreacion(Utileria.fechaHoraActual());
+                metodo.setFechaActualizacion(Utileria.fechaHoraActual());
                 metodoRepository.save(metodo);
                 response.setErrorCode(Messages.OK);
                 response.setErrorInfo(Messages.REGISTER_OK);

@@ -5,6 +5,7 @@ import com.ziehlneelsen.laboratorio.constant.Messages;
 import com.ziehlneelsen.laboratorio.entities.persona.MedicoEntity;
 import com.ziehlneelsen.laboratorio.repository.persona.MedicoRepository;
 import com.ziehlneelsen.laboratorio.service.persona.MedicoService;
+import com.ziehlneelsen.laboratorio.util.Utileria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -31,11 +32,14 @@ public class MedicoServiceImpl implements MedicoService {
     public ResponseDTO save(MedicoEntity medico) {
         ResponseDTO response = new ResponseDTO();
         if(null != medico.getMedicoId() && medicoRepository.findById(medico.getMedicoId()).isPresent()){
+            medico.setFechaActualizacion(Utileria.fechaHoraActual());
             medicoRepository.save(medico);
             response.setErrorCode(Messages.OK);
             response.setErrorInfo(Messages.UPDATE_OK);
         } else if(null != medico){
             try{
+                medico.setFechaCreacion(Utileria.fechaHoraActual());
+                medico.setFechaActualizacion(Utileria.fechaHoraActual());
                 medicoRepository.save(medico);
                 response.setErrorCode(Messages.OK);
                 response.setErrorInfo(Messages.REGISTER_OK);

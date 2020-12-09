@@ -47,6 +47,8 @@ public class Url {
     //Menu
     public static final String MENU = "/menu";
     public static final String SUB_MENU = "/menu/submenu";
+    public static final String SUB_MENU_BY_MENU = "/submenu/{id}";
+    public static final String MENU_SUB_MENU = "/all/menu/submenu";
 
     //Metodo
     public static final String METODO = "/metodo";

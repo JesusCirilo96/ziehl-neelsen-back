@@ -48,6 +48,11 @@ public class PacienteEntity implements Serializable {
     @Column(name = "TELEFONO")
     String telefono;
 
+    @Column(name = "FECHA_CREACION")
+    String fechaCreacion;
+
+    @Column(name = "FECHA_ACTUALIZACION")
+    String fechaActualizacion;
 
     public Integer getPacienteId() {
         return pacienteId;
@@ -119,5 +124,21 @@ public class PacienteEntity implements Serializable {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public String getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(String fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public String getFechaActualizacion() {
+        return fechaActualizacion;
+    }
+
+    public void setFechaActualizacion(String fechaActualizacion) {
+        this.fechaActualizacion = fechaActualizacion;
     }
 }
