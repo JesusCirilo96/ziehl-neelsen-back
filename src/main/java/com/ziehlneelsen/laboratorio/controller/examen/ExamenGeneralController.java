@@ -2,6 +2,7 @@ package com.ziehlneelsen.laboratorio.controller.examen;
 
 import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.examen.ExamenSeccionDTO;
 import com.ziehlneelsen.laboratorio.constant.Url;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
 import com.ziehlneelsen.laboratorio.service.examen.ExamenGeneralService;
@@ -38,9 +39,9 @@ public class ExamenGeneralController {
         return examenGeneralService.findByName(name);
     }
 
-    @RequestMapping(value = Url.EXAMEN_DESCUENTO, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
-    public ExamenDescuentoDTO findDescuentoByExamen(@PathVariable Integer id) {
-        return examenGeneralService.findDescuentoByExamen(id);
+    @RequestMapping(value = Url.EXAMEN_SECCION, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
+    public ExamenSeccionDTO findSeccionByExamen(@PathVariable Integer id) {
+        return examenGeneralService.findSeccionByExamen(id);
     }
 
     @RequestMapping(value = Url.SAVE, method = RequestMethod.POST, produces = Url.APLICATION_JSON)

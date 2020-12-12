@@ -1,6 +1,7 @@
 package com.ziehlneelsen.laboratorio.service.seccion;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.seccion.SeccionEstudioDTO;
 import com.ziehlneelsen.laboratorio.entities.persona.UsuarioEntity;
 import com.ziehlneelsen.laboratorio.entities.seccion.SeccionEntity;
 
@@ -9,10 +10,17 @@ import java.util.Optional;
 
 public interface SeccionService {
 
-    public List<SeccionEntity> findAll();
+    List<SeccionEntity> findAll();
 
-    public Optional<SeccionEntity> findById(Integer id);
+    Optional<SeccionEntity> findById(Integer id);
 
-    public ResponseDTO save(SeccionEntity seccion);
+    ResponseDTO save(SeccionEntity seccion);
+
+    /**
+     * Obtenemos los estudios dado una seccion
+     * @param seccionId El id de la seccion
+     * @return Lista con los estudios de la seccion
+     */
+    SeccionEstudioDTO getEstudioSeccion(Integer seccionId);
 
 }

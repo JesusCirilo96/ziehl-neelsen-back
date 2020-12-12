@@ -48,9 +48,9 @@ public class ExamenGeneralEntity {
 
 
 
-    @OneToMany(mappedBy = "examenGeneral")
+    /*@OneToMany(mappedBy = "examenGeneral")
     Set<CotizacionExamenGeneral> cotizacionExamenGeneral = new HashSet<>();
-
+*/
     public Integer getExamenGeneralId() {
         return examenGeneralId;
     }
@@ -115,13 +115,13 @@ public class ExamenGeneralEntity {
         this.categoriaId = categoriaId;
     }
 
-    public Set<CotizacionExamenGeneral> getCotizacionExamenGeneral() {
+    /*public Set<CotizacionExamenGeneral> getCotizacionExamenGeneral() {
         return cotizacionExamenGeneral;
     }
 
     public void setCotizacionExamenGeneral(Set<CotizacionExamenGeneral> cotizacionExamenGeneral) {
         this.cotizacionExamenGeneral = cotizacionExamenGeneral;
-    }
+    }*/
 
     public String getFechaCreacion() {
         return fechaCreacion;

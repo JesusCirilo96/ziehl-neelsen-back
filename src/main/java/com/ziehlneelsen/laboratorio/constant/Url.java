@@ -32,6 +32,7 @@ public class Url {
     //Examen
     public static final String EXAMEN_GENERAL = "/examen";
     public static final String EXAMEN_DESCUENTO = "/descuento/{id}";
+    public static final String EXAMEN_SECCION = "/seccion/{id}";
 
     //Estudio
     public static final String ESTUDIO = "/estudio";
@@ -66,6 +67,7 @@ public class Url {
 
     //Seccion
     public static final String SECCION = "/seccion";
+    public static final String SECCION_ESTUDIO = "/estudio/{id}";
 
 
     /**

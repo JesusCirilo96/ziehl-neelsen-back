@@ -10,5 +10,5 @@ public interface ReferenciaDAO {
      * @param estudio id del estudio a buscar
      * @return una lista de referencias dependiendo del estudio
      */
-    public List<ReferenciaEntity> getByEstudio(Integer estudio);
+    List<ReferenciaEntity> getByEstudio(Integer estudio);
 }

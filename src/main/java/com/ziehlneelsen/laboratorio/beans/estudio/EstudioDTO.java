@@ -1,40 +1,21 @@
-package com.ziehlneelsen.laboratorio.entities.estudio;
+package com.ziehlneelsen.laboratorio.beans.estudio;
 
-import org.hibernate.annotations.DynamicUpdate;
-
-import javax.persistence.*;
+import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
-import java.util.HashSet;
-import java.util.Set;
 
-@Entity
-@DynamicUpdate
-@Table(name = "cat_estudio")
-public class EstudioEntity {
+public class EstudioDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ESTUDIO_ID")
-    Integer estudioId;
+    private Integer estudioId;
 
-    @NotBlank
-    @Column(name = "NOMBRE")
-    String nombre;
+    private String nombre;
 
-    @Column(name = "ESTADO", columnDefinition = "boolean default true")
-    Boolean estado;
+    private Boolean estado;
 
-    @Column(name = "FECHA_CREACION")
-    String fechaCreacion;
+    private String fechaCreacion;
 
-    @Column(name = "FECHA_ACTUALIZACION")
-    String fechaActualizacion;
+    private String fechaActualizacion;
 
-
-    @OneToMany(mappedBy = "estudio")
-    Set<ReferenciaEntity> refencia = new HashSet<>();
-
-    public EstudioEntity(){}
+    private Integer orden;
 
     public Integer getEstudioId() {
         return estudioId;
@@ -74,5 +55,13 @@ public class EstudioEntity {
 
     public void setFechaActualizacion(String fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
+    }
+
+    public Integer getOrden() {
+        return orden;
+    }
+
+    public void setOrden(Integer orden) {
+        this.orden = orden;
     }
 }

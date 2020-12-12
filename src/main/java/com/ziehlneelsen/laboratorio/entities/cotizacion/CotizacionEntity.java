@@ -25,10 +25,10 @@ public class CotizacionEntity implements Serializable {
     @NotBlank(message = "La hora de la cotizacion es obligatorio")
     @Column(name = "HORA_COTIZACION")
     String horaCotizacion;
-
+/*
     @OneToMany(mappedBy = "cotizacion")
     Set<CotizacionExamenGeneral> cotizacionExamenGeneral = new HashSet<>();
-
+*/
     public String getCotizacionId() {
         return cotizacionId;
     }

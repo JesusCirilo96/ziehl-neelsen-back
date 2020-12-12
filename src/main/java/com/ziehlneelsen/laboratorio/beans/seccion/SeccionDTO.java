@@ -1,35 +1,23 @@
-package com.ziehlneelsen.laboratorio.entities.seccion;
+package com.ziehlneelsen.laboratorio.beans.seccion;
 
-import org.hibernate.annotations.DynamicUpdate;
-
-import javax.persistence.*;
+import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 
-@Entity
-@DynamicUpdate
-@Table(name = "cat_seccion")
-public class SeccionEntity {
+public class SeccionDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "SECCION_ID")
-    Integer seccionId;
+    private Integer seccionId;
 
-    @NotBlank
-    @Column(name = "NOMBRE")
-    String nombre;
+    private String nombre;
 
-    @Column(name = "TITULO")
-    String titulo;
+    private String titulo;
 
-    @Column(name = "ESTADO", columnDefinition = "boolean default true")
-    Boolean estado;
+    private Boolean estado;
 
-    @Column(name = "FECHA_CREACION")
-    String fechaCreacion;
+    private String fechaCreacion;
 
-    @Column(name = "FECHA_ACTUALIZACION")
-    String fechaActualizacion;
+    private String fechaActualizacion;
+
+    private Integer orden;
 
     public Integer getSeccionId() {
         return seccionId;
@@ -47,20 +35,20 @@ public class SeccionEntity {
         this.nombre = nombre;
     }
 
-    public Boolean getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Boolean estado) {
-        this.estado = estado;
-    }
-
     public String getTitulo() {
         return titulo;
     }
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
     }
 
     public String getFechaCreacion() {
@@ -77,5 +65,13 @@ public class SeccionEntity {
 
     public void setFechaActualizacion(String fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
+    }
+
+    public Integer getOrden() {
+        return orden;
+    }
+
+    public void setOrden(Integer orden) {
+        this.orden = orden;
     }
 }

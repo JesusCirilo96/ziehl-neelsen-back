@@ -1,6 +1,7 @@
 package com.ziehlneelsen.laboratorio.controller.seccion;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.seccion.SeccionEstudioDTO;
 import com.ziehlneelsen.laboratorio.constant.Url;
 import com.ziehlneelsen.laboratorio.entities.seccion.SeccionEntity;
 import com.ziehlneelsen.laboratorio.service.seccion.SeccionService;
@@ -29,6 +30,11 @@ public class SeccionController {
     @RequestMapping(value = Url.FIND_BY_ID, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
     public Optional<SeccionEntity> findSeccion(@PathVariable Integer id){
         return seccionService.findById(id);
+    }
+
+    @RequestMapping(value = Url.SECCION_ESTUDIO, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
+    public SeccionEstudioDTO findSeccionEstudio(@PathVariable Integer id){
+        return seccionService.getEstudioSeccion(id);
     }
 
     @RequestMapping(value = Url.SAVE, method = RequestMethod.POST, produces = Url.APLICATION_JSON)

@@ -1,7 +1,9 @@
 package com.ziehlneelsen.laboratorio.serviceImpl.seccion;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.seccion.SeccionEstudioDTO;
 import com.ziehlneelsen.laboratorio.constant.Messages;
+import com.ziehlneelsen.laboratorio.dao.seccion.SeccionEstudioDAO;
 import com.ziehlneelsen.laboratorio.entities.persona.UsuarioEntity;
 import com.ziehlneelsen.laboratorio.entities.seccion.SeccionEntity;
 import com.ziehlneelsen.laboratorio.repository.persona.UsuarioRepository;
@@ -19,6 +21,9 @@ public class SeccionServiceImpl implements SeccionService {
 
     @Autowired
     SeccionRepository seccionRepository;
+
+    @Autowired
+    SeccionEstudioDAO seccionEstudioDAO;
 
     @Override
     public List<SeccionEntity> findAll() {
@@ -48,5 +53,10 @@ public class SeccionServiceImpl implements SeccionService {
             }
         }
         return response;
+    }
+
+    @Override
+    public SeccionEstudioDTO getEstudioSeccion(Integer seccionId) {
+        return seccionEstudioDAO.getEstudioSeccion(seccionId);
     }
 }

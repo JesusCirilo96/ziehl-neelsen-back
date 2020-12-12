@@ -2,7 +2,6 @@ package com.ziehlneelsen.laboratorio.daoImpl.examen;
 
 import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
 import com.ziehlneelsen.laboratorio.dao.examen.ExamenGeneralDAO;
-import com.ziehlneelsen.laboratorio.entities.cotizacion.CotizacionEntity;
 import com.ziehlneelsen.laboratorio.entities.descuento.DescuentoEntity;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralDescuento;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
@@ -95,5 +94,4 @@ public class ExamenGeneralDAOImpl implements ExamenGeneralDAO {
 
         return examenDescuento;
     }
-// nesCiriloEst@
 }
