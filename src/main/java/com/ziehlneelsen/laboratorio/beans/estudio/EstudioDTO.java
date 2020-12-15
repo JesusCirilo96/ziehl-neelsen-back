@@ -1,7 +1,11 @@
 package com.ziehlneelsen.laboratorio.beans.estudio;
 
+import com.ziehlneelsen.laboratorio.beans.examen.ReferenciaDTO;
+import com.ziehlneelsen.laboratorio.entities.estudio.ReferenciaEntity;
+
 import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 public class EstudioDTO {
 
@@ -16,6 +20,8 @@ public class EstudioDTO {
     private String fechaActualizacion;
 
     private Integer orden;
+
+    private List<ReferenciaDTO> referencia;
 
     public Integer getEstudioId() {
         return estudioId;
@@ -63,5 +69,13 @@ public class EstudioDTO {
 
     public void setOrden(Integer orden) {
         this.orden = orden;
+    }
+
+    public List<ReferenciaDTO> getReferencia() {
+        return referencia;
+    }
+
+    public void setReferencia(List<ReferenciaDTO> referencia) {
+        this.referencia = referencia;
     }
 }

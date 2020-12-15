@@ -1,6 +1,7 @@
 package com.ziehlneelsen.laboratorio.controller.estudio;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.examen.ReferenciaDTO;
 import com.ziehlneelsen.laboratorio.constant.Url;
 import com.ziehlneelsen.laboratorio.entities.estudio.ReferenciaEntity;
 import com.ziehlneelsen.laboratorio.service.estudio.ReferenciaService;
@@ -27,7 +28,7 @@ public class ReferenciaController {
     }
 
     @RequestMapping(value = Url.FIND_BY_ESTUDIO, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
-    public List<ReferenciaEntity> findByEstudio(@PathVariable Integer id){
+    public List<ReferenciaDTO> findByEstudio(@PathVariable Integer id){
         return referenciaService.findByEstudio(id);
     }
 

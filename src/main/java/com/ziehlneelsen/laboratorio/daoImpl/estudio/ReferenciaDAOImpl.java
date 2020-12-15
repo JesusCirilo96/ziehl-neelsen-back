@@ -1,5 +1,7 @@
 package com.ziehlneelsen.laboratorio.daoImpl.estudio;
 
+import com.ziehlneelsen.laboratorio.beans.estudio.EstudioDTO;
+import com.ziehlneelsen.laboratorio.beans.examen.ReferenciaDTO;
 import com.ziehlneelsen.laboratorio.dao.estudio.ReferenciaDAO;
 import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.estudio.ReferenciaEntity;
@@ -17,8 +19,10 @@ import java.util.List;
 public class ReferenciaDAOImpl implements ReferenciaDAO {
 
     @Override
-    public List<ReferenciaEntity> getByEstudio(Integer idEstudio) {
+    public List<ReferenciaDTO> getByEstudio(Integer idEstudio) {
         List<ReferenciaEntity> listReferencia = new ArrayList<>();
+
+        List<ReferenciaDTO> referencias = new ArrayList<>();
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("laboratorio");
         EntityManager em = emf.createEntityManager();
@@ -33,6 +37,16 @@ public class ReferenciaDAOImpl implements ReferenciaDAO {
             Predicate predicateEstudioId = cb.equal(c.get("estudio"),idEstudio);
             q.select(c).where(predicateEstudioId);
             listReferencia = em.createQuery(q).getResultList();
+            listReferencia.forEach((referencia) -> {
+
+                ReferenciaDTO referenciaDTO = new ReferenciaDTO();
+
+                referenciaDTO.setClasificacion(referencia.getClasificacionPaciente());
+                referenciaDTO.setReferenciaFemenino(referencia.getFemenino());
+                referenciaDTO.setReferenciaMasculino(referencia.getMasculino());
+                referenciaDTO.setReferenciaGeneral(referencia.getGeneral());
+                referencias.add(referenciaDTO);
+            });
 
         }catch (DataAccessException e){
             e.printStackTrace();
@@ -40,6 +54,6 @@ public class ReferenciaDAOImpl implements ReferenciaDAO {
             em.close();
         }
 
-        return listReferencia;
+        return referencias;
     }
 }

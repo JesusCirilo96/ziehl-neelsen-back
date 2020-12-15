@@ -1,7 +1,6 @@
 package com.ziehlneelsen.laboratorio.beans.seccion;
 
 import com.ziehlneelsen.laboratorio.beans.estudio.EstudioDTO;
-import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.seccion.SeccionEntity;
 
 import java.util.List;

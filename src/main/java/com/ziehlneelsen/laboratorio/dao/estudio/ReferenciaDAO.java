@@ -1,6 +1,6 @@
 package com.ziehlneelsen.laboratorio.dao.estudio;
 
-import com.ziehlneelsen.laboratorio.entities.estudio.ReferenciaEntity;
+import com.ziehlneelsen.laboratorio.beans.examen.ReferenciaDTO;
 
 import java.util.List;
 
@@ -10,5 +10,5 @@ public interface ReferenciaDAO {
      * @param estudio id del estudio a buscar
      * @return una lista de referencias dependiendo del estudio
      */
-    List<ReferenciaEntity> getByEstudio(Integer estudio);
+    List<ReferenciaDTO> getByEstudio(Integer estudio);
 }

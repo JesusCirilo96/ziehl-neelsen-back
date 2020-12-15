@@ -4,11 +4,13 @@ import com.ziehlneelsen.laboratorio.beans.estudio.EstudioDTO;
 import com.ziehlneelsen.laboratorio.beans.persona.UsuarioRolDTO;
 import com.ziehlneelsen.laboratorio.beans.seccion.SeccionDTO;
 import com.ziehlneelsen.laboratorio.beans.seccion.SeccionEstudioDTO;
+import com.ziehlneelsen.laboratorio.dao.estudio.ReferenciaDAO;
 import com.ziehlneelsen.laboratorio.dao.seccion.SeccionEstudioDAO;
 import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.persona.UsuarioRol;
 import com.ziehlneelsen.laboratorio.entities.rol.RolEntity;
 import com.ziehlneelsen.laboratorio.entities.seccion.SeccionEstudio;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,9 @@ import java.util.List;
 
 @Service
 public class SeccionEstudioDAOImpl implements SeccionEstudioDAO {
+
+    @Autowired
+    ReferenciaDAO referenciaDAO;
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("laboratorio");
 
@@ -52,7 +57,7 @@ public class SeccionEstudioDAOImpl implements SeccionEstudioDAO {
                 estudioDTO.setOrden(estudio.getOrden());
                 estudioDTO.setFechaCreacion(estudio.getEstudio().getFechaCreacion());
                 estudioDTO.setFechaActualizacion(estudio.getEstudio().getFechaActualizacion());
-
+                estudioDTO.setReferencia(referenciaDAO.getByEstudio(estudio.getEstudio().getEstudioId()));
                 listEstudio.add(estudioDTO);
             });
 

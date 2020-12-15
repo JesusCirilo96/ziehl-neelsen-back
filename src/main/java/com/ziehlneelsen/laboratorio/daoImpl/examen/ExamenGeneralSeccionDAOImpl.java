@@ -1,21 +1,11 @@
 package com.ziehlneelsen.laboratorio.daoImpl.examen;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.ziehlneelsen.laboratorio.beans.estudio.EstudioDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenSeccionDTO;
-import com.ziehlneelsen.laboratorio.beans.seccion.SeccionDTO;
 import com.ziehlneelsen.laboratorio.beans.seccion.SeccionEstudioDTO;
-import com.ziehlneelsen.laboratorio.beans.persona.UsuarioRolDTO;
 import com.ziehlneelsen.laboratorio.dao.examen.ExamenGeneralSeccionDAO;
 import com.ziehlneelsen.laboratorio.dao.seccion.SeccionEstudioDAO;
-import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralSeccion;
-import com.ziehlneelsen.laboratorio.entities.persona.UsuarioRol;
-import com.ziehlneelsen.laboratorio.entities.rol.RolEntity;
 import com.ziehlneelsen.laboratorio.entities.seccion.SeccionEntity;
-import com.ziehlneelsen.laboratorio.entities.seccion.SeccionEstudio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -24,6 +14,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.criteria.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ExamenGeneralSeccionDAOImpl implements ExamenGeneralSeccionDAO {

@@ -1,6 +1,7 @@
 package com.ziehlneelsen.laboratorio.serviceImpl.estudio;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.examen.ReferenciaDTO;
 import com.ziehlneelsen.laboratorio.constant.Messages;
 import com.ziehlneelsen.laboratorio.dao.estudio.ReferenciaDAO;
 import com.ziehlneelsen.laboratorio.entities.estudio.ReferenciaEntity;
@@ -25,9 +26,9 @@ public class ReferenciaServiceImpl implements ReferenciaService {
     }
 
     @Override
-    public List<ReferenciaEntity> findByEstudio(Integer idEstudio) {
+    public List<ReferenciaDTO> findByEstudio(Integer idEstudio) {
 
-        List<ReferenciaEntity> referencia = referenciaDAO.getByEstudio(idEstudio);
+        List<ReferenciaDTO> referencia = referenciaDAO.getByEstudio(idEstudio);
 
         System.out.println(referencia.toString());
 
