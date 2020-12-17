@@ -51,14 +51,15 @@ public class ExamenGeneralSeccionDAOImpl implements ExamenGeneralSeccionDAO {
                 listSeccionEstudio.add(seccionEstudio);
             });
 
-            examenSeccion.setExamen(listExamenSeccion.get(0).getExamen());
-            examenSeccion.setSeccion(listSeccionEstudio);
 
         }catch (DataAccessException e){
             e.printStackTrace();
         }finally {
             em.close();
         }
+
+        examenSeccion.setExamen(listExamenSeccion.get(0).getExamen());
+        examenSeccion.setSeccion(listSeccionEstudio);
 
         return examenSeccion;
     }

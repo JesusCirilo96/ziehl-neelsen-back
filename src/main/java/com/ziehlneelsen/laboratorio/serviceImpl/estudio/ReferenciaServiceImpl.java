@@ -7,7 +7,9 @@ import com.ziehlneelsen.laboratorio.dao.estudio.ReferenciaDAO;
 import com.ziehlneelsen.laboratorio.entities.estudio.ReferenciaEntity;
 import com.ziehlneelsen.laboratorio.repository.estudio.ReferenciaRepository;
 import com.ziehlneelsen.laboratorio.service.estudio.ReferenciaService;
+import com.ziehlneelsen.laboratorio.util.Utileria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,11 +40,17 @@ public class ReferenciaServiceImpl implements ReferenciaService {
     @Override
     public ResponseDTO save(ReferenciaEntity referencia) {
         ResponseDTO response = new ResponseDTO();
-        response.setErrorCode(Messages.OK);
-        response.setErrorInfo(Messages.REGISTER_OK);
 
-        System.out.println(referencia.toString());
-
+        try{
+            referencia.setFechaCreacion(Utileria.fechaHoraActual());
+            referencia.setFechaActualizacion(Utileria.fechaHoraActual());
+            referenciaRepository.save(referencia);
+            response.setErrorCode(Messages.OK);
+            response.setErrorInfo(Messages.REGISTER_OK);
+        }catch(DataAccessException ex) {
+            response.setErrorCode(Messages.ERROR);
+            response.setErrorInfo(ex.getMostSpecificCause().toString());
+        }
         return response;
     }
 }

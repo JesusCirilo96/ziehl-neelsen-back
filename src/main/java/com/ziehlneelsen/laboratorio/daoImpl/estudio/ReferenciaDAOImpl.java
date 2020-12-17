@@ -1,10 +1,9 @@
 package com.ziehlneelsen.laboratorio.daoImpl.estudio;
 
-import com.ziehlneelsen.laboratorio.beans.estudio.EstudioDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ReferenciaDTO;
 import com.ziehlneelsen.laboratorio.dao.estudio.ReferenciaDAO;
 import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
-import com.ziehlneelsen.laboratorio.entities.estudio.ReferenciaEntity;
+import com.ziehlneelsen.laboratorio.entities.estudio.Referencia;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +19,7 @@ public class ReferenciaDAOImpl implements ReferenciaDAO {
 
     @Override
     public List<ReferenciaDTO> getByEstudio(Integer idEstudio) {
-        List<ReferenciaEntity> listReferencia = new ArrayList<>();
+        List<Referencia> listReferencia = new ArrayList<>();
 
         List<ReferenciaDTO> referencias = new ArrayList<>();
 
@@ -29,10 +28,10 @@ public class ReferenciaDAOImpl implements ReferenciaDAO {
 
         try{
             CriteriaBuilder cb = emf.getCriteriaBuilder();
-            CriteriaQuery<ReferenciaEntity> q = cb.createQuery(ReferenciaEntity.class);
+            CriteriaQuery<Referencia> q = cb.createQuery(Referencia.class);
 
-            Root<ReferenciaEntity> c = q.from(ReferenciaEntity.class);
-            Fetch<ReferenciaEntity,EstudioEntity> p = c.fetch("estudio");
+            Root<Referencia> c = q.from(Referencia.class);
+            Fetch<Referencia,EstudioEntity> p = c.fetch("estudio");
 
             Predicate predicateEstudioId = cb.equal(c.get("estudio"),idEstudio);
             q.select(c).where(predicateEstudioId);

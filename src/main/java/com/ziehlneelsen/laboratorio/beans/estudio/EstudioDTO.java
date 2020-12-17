@@ -1,10 +1,7 @@
 package com.ziehlneelsen.laboratorio.beans.estudio;
 
 import com.ziehlneelsen.laboratorio.beans.examen.ReferenciaDTO;
-import com.ziehlneelsen.laboratorio.entities.estudio.ReferenciaEntity;
 
-import javax.persistence.Column;
-import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 public class EstudioDTO {

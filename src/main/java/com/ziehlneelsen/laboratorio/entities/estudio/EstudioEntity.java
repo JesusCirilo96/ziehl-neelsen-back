@@ -32,7 +32,7 @@ public class EstudioEntity {
 
 
     @OneToMany(mappedBy = "estudio")
-    Set<ReferenciaEntity> refencia = new HashSet<>();
+    Set<Referencia> refencia = new HashSet<>();
 
     public EstudioEntity(){}
 

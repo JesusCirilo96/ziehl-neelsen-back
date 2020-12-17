@@ -53,6 +53,7 @@ public class Url {
 
     //Metodo
     public static final String METODO = "/metodo";
+    public static final String METODO_BY_SECCION = "/seccion/{id}";
 
     //Persona
     public static final String USUARIO = "/usuario";

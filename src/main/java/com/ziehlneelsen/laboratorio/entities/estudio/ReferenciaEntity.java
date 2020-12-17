@@ -1,23 +1,21 @@
 package com.ziehlneelsen.laboratorio.entities.estudio;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
-@IdClass(ReferenciaEntity.class)
+@DynamicUpdate
 @Table(name = "referencia")
 public class ReferenciaEntity implements Serializable {
 
     @Id
-    @ManyToOne
-    @JoinColumn(name = "ESTUDIO_ID")
-    EstudioEntity estudio;
+    @Column(name = "CLASIFICACION_ID")
+    String clasificacionId;
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "CLASIFICACION_ID")
-    ClasificacionPacienteEntity clasificacionPaciente;
+    @Column(name = "ESTUDIO_ID")
+    String estudioId;
 
     @Column(name = "MASCULINO")
     String masculino;
@@ -28,20 +26,26 @@ public class ReferenciaEntity implements Serializable {
     @Column(name = "GENERAL")
     String general;
 
-    public EstudioEntity getEstudio() {
-        return estudio;
+    @Column(name = "FECHA_CREACION")
+    String fechaCreacion;
+
+    @Column(name = "FECHA_ACTUALIZACION")
+    String fechaActualizacion;
+
+    public String getClasificacionId() {
+        return clasificacionId;
     }
 
-    public void setEstudio(EstudioEntity estudio) {
-        this.estudio = estudio;
+    public void setClasificacionId(String clasificacionId) {
+        this.clasificacionId = clasificacionId;
     }
 
-    public ClasificacionPacienteEntity getClasificacionPaciente() {
-        return clasificacionPaciente;
+    public String getEstudioId() {
+        return estudioId;
     }
 
-    public void setClasificacionPaciente(ClasificacionPacienteEntity clasificacionPaciente) {
-        this.clasificacionPaciente = clasificacionPaciente;
+    public void setEstudioId(String estudioId) {
+        this.estudioId = estudioId;
     }
 
     public String getMasculino() {
@@ -68,20 +72,19 @@ public class ReferenciaEntity implements Serializable {
         this.general = general;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ReferenciaEntity)) return false;
-        ReferenciaEntity that = (ReferenciaEntity) o;
-        return Objects.equals(getEstudio(), that.getEstudio()) &&
-                Objects.equals(getClasificacionPaciente(), that.getClasificacionPaciente()) &&
-                Objects.equals(getMasculino(), that.getMasculino()) &&
-                Objects.equals(getFemenino(), that.getFemenino()) &&
-                Objects.equals(getGeneral(), that.getGeneral());
+    public String getFechaCreacion() {
+        return fechaCreacion;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getEstudio(), getClasificacionPaciente(), getMasculino(), getFemenino(), getGeneral());
+    public void setFechaCreacion(String fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public String getFechaActualizacion() {
+        return fechaActualizacion;
+    }
+
+    public void setFechaActualizacion(String fechaActualizacion) {
+        this.fechaActualizacion = fechaActualizacion;
     }
 }

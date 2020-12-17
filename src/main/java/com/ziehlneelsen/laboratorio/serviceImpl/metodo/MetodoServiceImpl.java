@@ -1,7 +1,9 @@
 package com.ziehlneelsen.laboratorio.serviceImpl.metodo;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.metodo.MetodoDTO;
 import com.ziehlneelsen.laboratorio.constant.Messages;
+import com.ziehlneelsen.laboratorio.dao.metodo.SeccionMetodoDAO;
 import com.ziehlneelsen.laboratorio.entities.metodo.MetodoEntity;
 import com.ziehlneelsen.laboratorio.entities.rol.RolEntity;
 import com.ziehlneelsen.laboratorio.repository.metodo.MetodoRepository;
@@ -21,6 +23,9 @@ public class MetodoServiceImpl implements MetodoService {
     @Autowired
     MetodoRepository metodoRepository;
 
+    @Autowired
+    SeccionMetodoDAO seccionMetodoDAO;
+
     @Override
     public List<MetodoEntity> findAll() {
         return metodoRepository.findAll();
@@ -29,6 +34,11 @@ public class MetodoServiceImpl implements MetodoService {
     @Override
     public Optional<MetodoEntity> findById(Integer id) {
         return metodoRepository.findById(id);
+    }
+
+    @Override
+    public List<MetodoDTO> getMetodoBySeccion(Integer seccionId) {
+        return seccionMetodoDAO.getMetodoBySeccion(seccionId);
     }
 
     @Override

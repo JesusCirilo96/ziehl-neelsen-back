@@ -7,6 +7,7 @@ import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
 import com.ziehlneelsen.laboratorio.repository.estudio.ClasificacionPacienteRepository;
 import com.ziehlneelsen.laboratorio.repository.examen.ExamenGeneralRepository;
 import com.ziehlneelsen.laboratorio.service.estudio.ClasificacionPacienteService;
+import com.ziehlneelsen.laboratorio.util.Utileria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -33,11 +34,14 @@ public class ClasificacionPacienteServiceImpl implements ClasificacionPacienteSe
     public ResponseDTO save(ClasificacionPacienteEntity clasificacionPaciente) {
         ResponseDTO response = new ResponseDTO();
         if(null != clasificacionPaciente.getClasificacionPacienteId() && clasificacionPacienteRepository.findById(clasificacionPaciente.getClasificacionPacienteId()).isPresent()){
+            clasificacionPaciente.setFechaActualizacion(Utileria.fechaHoraActual());
             clasificacionPacienteRepository.save(clasificacionPaciente);
             response.setErrorCode(Messages.OK);
             response.setErrorInfo(Messages.UPDATE_OK);
         } else if(null != clasificacionPaciente){
             try{
+                clasificacionPaciente.setFechaCreacion(Utileria.fechaHoraActual());
+                clasificacionPaciente.setFechaActualizacion(Utileria.fechaHoraActual());
                 clasificacionPacienteRepository.save(clasificacionPaciente);
                 response.setErrorCode(Messages.OK);
                 response.setErrorInfo(Messages.REGISTER_OK);

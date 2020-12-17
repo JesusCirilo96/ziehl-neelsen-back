@@ -1,6 +1,7 @@
 package com.ziehlneelsen.laboratorio.controller.metodo;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.metodo.MetodoDTO;
 import com.ziehlneelsen.laboratorio.constant.Url;
 import com.ziehlneelsen.laboratorio.entities.metodo.MetodoEntity;
 import com.ziehlneelsen.laboratorio.service.metodo.MetodoService;
@@ -30,6 +31,11 @@ public class MetodoController {
     @RequestMapping(value = Url.FIND_BY_ID, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
     public Optional<MetodoEntity> findMetodo(@PathVariable Integer id){
         return metodoService.findById(id);
+    }
+
+    @RequestMapping(value = Url.METODO_BY_SECCION, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
+    public List<MetodoDTO> findMetodoBySeccion(@PathVariable Integer id){
+        return metodoService.getMetodoBySeccion(id);
     }
 
     @RequestMapping(value = Url.SAVE, method = RequestMethod.POST, produces = Url.APLICATION_JSON)

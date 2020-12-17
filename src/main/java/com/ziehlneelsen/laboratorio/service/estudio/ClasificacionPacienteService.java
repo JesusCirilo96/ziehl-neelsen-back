@@ -7,9 +7,24 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ClasificacionPacienteService {
-    public List<ClasificacionPacienteEntity> findAll();
 
-    public Optional<ClasificacionPacienteEntity> findById(Integer id);
+    /**
+     * Buscamos todas las clasificaciones de los pacientes
+     * @return Lista con las clasificaciones paciente
+     */
+    List<ClasificacionPacienteEntity> findAll();
 
-    public ResponseDTO save(ClasificacionPacienteEntity clasificacionPaciente);
+    /**
+     * Obtener clasificacion por el ID
+     * @param id El id de la clasificacion
+     * @return Objeto con la clasificacion
+     */
+    Optional<ClasificacionPacienteEntity> findById(Integer id);
+
+    /**
+     * Guardar la clasificacion del paciente
+     * @param clasificacionPaciente Objeto de la clasificacion
+     * @return Respuesta 
+     */
+    ResponseDTO save(ClasificacionPacienteEntity clasificacionPaciente);
 }

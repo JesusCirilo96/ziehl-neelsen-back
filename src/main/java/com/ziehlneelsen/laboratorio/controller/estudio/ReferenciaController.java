@@ -3,6 +3,7 @@ package com.ziehlneelsen.laboratorio.controller.estudio;
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ReferenciaDTO;
 import com.ziehlneelsen.laboratorio.constant.Url;
+import com.ziehlneelsen.laboratorio.entities.estudio.Referencia;
 import com.ziehlneelsen.laboratorio.entities.estudio.ReferenciaEntity;
 import com.ziehlneelsen.laboratorio.service.estudio.ReferenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
