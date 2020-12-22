@@ -1,6 +1,5 @@
 package com.ziehlneelsen.laboratorio.controller.examen;
 
-import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenSeccionDTO;
 import com.ziehlneelsen.laboratorio.constant.Url;

@@ -4,8 +4,10 @@ import com.ziehlneelsen.laboratorio.beans.examen.ExamenSeccionDTO;
 import com.ziehlneelsen.laboratorio.beans.seccion.SeccionEstudioDTO;
 import com.ziehlneelsen.laboratorio.dao.examen.ExamenGeneralSeccionDAO;
 import com.ziehlneelsen.laboratorio.dao.seccion.SeccionEstudioDAO;
+import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralSeccion;
 import com.ziehlneelsen.laboratorio.entities.seccion.SeccionEntity;
+import com.ziehlneelsen.laboratorio.repository.examen.ExamenGeneralRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -16,12 +18,16 @@ import javax.persistence.Persistence;
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ExamenGeneralSeccionDAOImpl implements ExamenGeneralSeccionDAO {
 
     @Autowired
     SeccionEstudioDAO seccionEstudioDAO;
+
+    @Autowired
+    ExamenGeneralRepository examenGeneralRepository;
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("laboratorio");
 
@@ -51,15 +57,14 @@ public class ExamenGeneralSeccionDAOImpl implements ExamenGeneralSeccionDAO {
                 listSeccionEstudio.add(seccionEstudio);
             });
 
+            examenSeccion.setExamen(examenGeneralRepository.findById(examenId));
+            examenSeccion.setSeccion(listSeccionEstudio);
 
         }catch (DataAccessException e){
             e.printStackTrace();
         }finally {
             em.close();
         }
-
-        examenSeccion.setExamen(listExamenSeccion.get(0).getExamen());
-        examenSeccion.setSeccion(listSeccionEstudio);
 
         return examenSeccion;
     }

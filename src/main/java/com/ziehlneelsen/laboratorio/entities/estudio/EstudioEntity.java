@@ -4,13 +4,14 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @DynamicUpdate
 @Table(name = "cat_estudio")
-public class EstudioEntity {
+public class EstudioEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +33,7 @@ public class EstudioEntity {
 
 
     @OneToMany(mappedBy = "estudio")
-    Set<Referencia> refencia = new HashSet<>();
+    Set<Referencia> referencia = new HashSet<>();
 
     public EstudioEntity(){}
 

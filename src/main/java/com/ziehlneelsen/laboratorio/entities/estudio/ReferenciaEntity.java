@@ -4,6 +4,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.UUID;
 
 @Entity
 @DynamicUpdate
@@ -11,11 +12,14 @@ import java.io.Serializable;
 public class ReferenciaEntity implements Serializable {
 
     @Id
-    @Column(name = "CLASIFICACION_ID")
-    String clasificacionId;
+    @Column(name = "REFERENCIA_ID", unique = true, nullable = false)
+    private UUID referenciaId = UUID.randomUUID();
 
     @Column(name = "ESTUDIO_ID")
     String estudioId;
+
+    @Column(name = "CLASIFICACION_ID")
+    String clasificacionId;
 
     @Column(name = "MASCULINO")
     String masculino;
@@ -31,6 +35,14 @@ public class ReferenciaEntity implements Serializable {
 
     @Column(name = "FECHA_ACTUALIZACION")
     String fechaActualizacion;
+
+    public UUID getReferenciaId() {
+        return referenciaId;
+    }
+
+    public void setReferenciaId(UUID referenciaId) {
+        this.referenciaId = referenciaId;
+    }
 
     public String getClasificacionId() {
         return clasificacionId;

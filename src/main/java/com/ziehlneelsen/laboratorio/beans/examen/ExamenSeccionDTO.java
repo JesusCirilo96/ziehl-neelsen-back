@@ -4,20 +4,21 @@ import com.ziehlneelsen.laboratorio.beans.seccion.SeccionEstudioDTO;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ExamenSeccionDTO {
 
-    private ExamenGeneralEntity examen;
+    private Optional<ExamenGeneralEntity> examen;
 
     private List<SeccionEstudioDTO> seccion;
 
     private Integer orden;
 
-    public ExamenGeneralEntity getExamen() {
+    public Optional<ExamenGeneralEntity> getExamen() {
         return examen;
     }
 
-    public void setExamen(ExamenGeneralEntity examen) {
+    public void setExamen(Optional<ExamenGeneralEntity> examen) {
         this.examen = examen;
     }
 

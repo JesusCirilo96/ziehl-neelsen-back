@@ -57,7 +57,7 @@ public class SeccionEstudioDAOImpl implements SeccionEstudioDAO {
                 estudioDTO.setOrden(estudio.getOrden());
                 estudioDTO.setFechaCreacion(estudio.getEstudio().getFechaCreacion());
                 estudioDTO.setFechaActualizacion(estudio.getEstudio().getFechaActualizacion());
-                estudioDTO.setReferencia(referenciaDAO.getByEstudio(estudio.getEstudio().getEstudioId()));
+                //estudioDTO.setReferencia(referenciaDAO.getByEstudio(estudio.getEstudio().getEstudioId()));
                 listEstudio.add(estudioDTO);
             });
 

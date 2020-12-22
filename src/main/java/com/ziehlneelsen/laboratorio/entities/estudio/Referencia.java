@@ -3,18 +3,22 @@ package com.ziehlneelsen.laboratorio.entities.estudio;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @IdClass(Referencia.class)
 @Table(name = "referencia")
 public class Referencia implements Serializable {
 
+
     @Id
+    @Column(name = "REFERENCIA_ID", unique = true, nullable = false)
+    private UUID referenciaId = UUID.randomUUID();
+
     @ManyToOne
     @JoinColumn(name = "ESTUDIO_ID")
     EstudioEntity estudio;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "CLASIFICACION_ID")
     ClasificacionPacienteEntity clasificacionPaciente;
@@ -32,6 +36,14 @@ public class Referencia implements Serializable {
 
     @Column(name = "FECHA_ACTUALIZACION")
     String fechaActualizacion;
+
+    public UUID getReferenciaId() {
+        return referenciaId;
+    }
+
+    public void setReferenciaId(UUID referenciaId) {
+        this.referenciaId = referenciaId;
+    }
 
     public EstudioEntity getEstudio() {
         return estudio;

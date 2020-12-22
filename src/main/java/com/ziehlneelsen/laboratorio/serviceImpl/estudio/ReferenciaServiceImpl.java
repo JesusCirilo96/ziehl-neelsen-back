@@ -44,6 +44,15 @@ public class ReferenciaServiceImpl implements ReferenciaService {
         try{
             referencia.setFechaCreacion(Utileria.fechaHoraActual());
             referencia.setFechaActualizacion(Utileria.fechaHoraActual());
+            if(referencia.getMasculino() == null){
+                referencia.setMasculino("");
+            }
+            if (referencia.getFemenino() == null){
+                referencia.setFemenino("");
+            }
+            if (referencia.getGeneral() == null){
+                referencia.setGeneral("");
+            }
             referenciaRepository.save(referencia);
             response.setErrorCode(Messages.OK);
             response.setErrorInfo(Messages.REGISTER_OK);
