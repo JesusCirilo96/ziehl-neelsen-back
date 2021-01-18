@@ -10,10 +10,10 @@ import java.util.UUID;
 @Table(name = "referencia")
 public class Referencia implements Serializable {
 
-
     @Id
     @Column(name = "REFERENCIA_ID", unique = true, nullable = false)
     private UUID referenciaId = UUID.randomUUID();
+
 
     @ManyToOne
     @JoinColumn(name = "ESTUDIO_ID")
@@ -104,19 +104,13 @@ public class Referencia implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Referencia)) return false;
         Referencia that = (Referencia) o;
-        return Objects.equals(estudio, that.estudio) &&
-                Objects.equals(clasificacionPaciente, that.clasificacionPaciente) &&
-                Objects.equals(masculino, that.masculino) &&
-                Objects.equals(femenino, that.femenino) &&
-                Objects.equals(general, that.general) &&
-                Objects.equals(fechaCreacion, that.fechaCreacion) &&
-                Objects.equals(fechaActualizacion, that.fechaActualizacion);
+        return Objects.equals(getReferenciaId(), that.getReferenciaId()) && Objects.equals(getEstudio(), that.getEstudio()) && Objects.equals(getClasificacionPaciente(), that.getClasificacionPaciente()) && Objects.equals(getMasculino(), that.getMasculino()) && Objects.equals(getFemenino(), that.getFemenino()) && Objects.equals(getGeneral(), that.getGeneral()) && Objects.equals(getFechaCreacion(), that.getFechaCreacion()) && Objects.equals(getFechaActualizacion(), that.getFechaActualizacion());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(estudio, clasificacionPaciente, masculino, femenino, general, fechaCreacion, fechaActualizacion);
+        return Objects.hash(getReferenciaId(), getEstudio(), getClasificacionPaciente(), getMasculino(), getFemenino(), getGeneral(), getFechaCreacion(), getFechaActualizacion());
     }
 }

@@ -1,9 +1,12 @@
 package com.ziehlneelsen.laboratorio.controller.examen;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.examen.ExamenEstudioDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenSeccionDTO;
 import com.ziehlneelsen.laboratorio.constant.Url;
+import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
+import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralSeccionEntity;
 import com.ziehlneelsen.laboratorio.service.examen.ExamenGeneralService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,6 +41,11 @@ public class ExamenGeneralController {
         return examenGeneralService.findByName(name);
     }
 
+    @RequestMapping(value = Url.EXAMEN_ESTUDIO, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
+    public List<EstudioEntity> findExamenGeneralByName(@PathVariable Integer id){
+        return examenGeneralService.findEstudioExamen(id);
+    }
+
     @RequestMapping(value = Url.EXAMEN_SECCION, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
     public ExamenSeccionDTO findSeccionByExamen(@PathVariable Integer id) {
         return examenGeneralService.findSeccionByExamen(id);
@@ -51,6 +59,28 @@ public class ExamenGeneralController {
             return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.OK);
         }
         response = examenGeneralService.save(examenGeneral);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = Url.SAVE_EXAMEN_ESTUDIO, method = RequestMethod.POST, produces = Url.APLICATION_JSON)
+    public ResponseEntity saveEstudioExamen(@Valid @RequestBody ExamenEstudioDTO examenEstudioDTO, BindingResult bindingResult) {
+
+        ResponseDTO response;
+        if(bindingResult.hasErrors()) {
+            return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.OK);
+        }
+        response = examenGeneralService.saveEstudioExamen(examenEstudioDTO);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = Url.SAVE_EXAMEN_SECCION, method = RequestMethod.POST, produces = Url.APLICATION_JSON)
+    public ResponseEntity saveSeccionExamen(@Valid @RequestBody ExamenGeneralSeccionEntity examenSeccion, BindingResult bindingResult) {
+
+        ResponseDTO response;
+        if(bindingResult.hasErrors()) {
+            return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.OK);
+        }
+        response = examenGeneralService.saveSeccionExamen(examenSeccion);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

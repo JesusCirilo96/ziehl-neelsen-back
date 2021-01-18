@@ -4,6 +4,9 @@ import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.beans.metodo.MetodoDTO;
 import com.ziehlneelsen.laboratorio.constant.Url;
 import com.ziehlneelsen.laboratorio.entities.metodo.MetodoEntity;
+import com.ziehlneelsen.laboratorio.entities.metodo.SeccionMetodo;
+import com.ziehlneelsen.laboratorio.entities.metodo.SeccionMetodoEntity;
+import com.ziehlneelsen.laboratorio.service.metodo.MetodoSeccionService;
 import com.ziehlneelsen.laboratorio.service.metodo.MetodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +25,9 @@ public class MetodoController {
 
     @Autowired
     MetodoService metodoService;
+
+    @Autowired
+    MetodoSeccionService metodoSeccionService;
 
     @RequestMapping(value = Url.GET_ALL, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
     public List<MetodoEntity> findAllMetodo(){
@@ -47,5 +53,16 @@ public class MetodoController {
         }
         response = metodoService.save(metodo);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = Url.SAVE_METODO_SECCION, method = RequestMethod.POST, produces = Url.APLICATION_JSON)
+    public  ResponseEntity saveMetodoSeccion(@Valid @RequestBody SeccionMetodoEntity seccionMetodo, BindingResult bindingResult){
+        ResponseDTO responseDTO;
+        if(bindingResult.hasErrors()){
+            return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.OK);
+        }else{
+            responseDTO = metodoSeccionService.save(seccionMetodo);
+            return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+        }
     }
 }

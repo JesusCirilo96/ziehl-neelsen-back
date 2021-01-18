@@ -5,6 +5,7 @@ import com.ziehlneelsen.laboratorio.entities.descuento.DescuentoEntity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @IdClass(ExamenGeneralDescuento.class)
@@ -12,14 +13,24 @@ import java.util.Objects;
 public class ExamenGeneralDescuento implements Serializable {
 
     @Id
+    @Column(name = "EXAMEN_DESCUENTO_ID", unique = true, nullable = false)
+    private UUID examenDescuentoId = UUID.randomUUID();
+
     @ManyToOne
     @JoinColumn(name = "DESCUENTO_ID")
     DescuentoEntity descuento;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "EXAMEN_ID")
     ExamenGeneralEntity examen;
+
+    public UUID getExamenDescuentoId() {
+        return examenDescuentoId;
+    }
+
+    public void setExamenDescuentoId(UUID examenDescuentoId) {
+        this.examenDescuentoId = examenDescuentoId;
+    }
 
     public DescuentoEntity getDescuento() {
         return descuento;
@@ -42,12 +53,11 @@ public class ExamenGeneralDescuento implements Serializable {
         if (this == o) return true;
         if (!(o instanceof ExamenGeneralDescuento)) return false;
         ExamenGeneralDescuento that = (ExamenGeneralDescuento) o;
-        return Objects.equals(getDescuento(), that.getDescuento()) &&
-                Objects.equals(getExamen(), that.getExamen());
+        return Objects.equals(getExamenDescuentoId(), that.getExamenDescuentoId()) && Objects.equals(getDescuento(), that.getDescuento()) && Objects.equals(getExamen(), that.getExamen());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getDescuento(), getExamen());
+        return Objects.hash(getExamenDescuentoId(), getDescuento(), getExamen());
     }
 }

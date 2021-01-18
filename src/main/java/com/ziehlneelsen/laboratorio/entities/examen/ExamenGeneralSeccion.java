@@ -4,6 +4,8 @@ import com.ziehlneelsen.laboratorio.entities.seccion.SeccionEntity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @IdClass(ExamenGeneralSeccion.class)
@@ -11,17 +13,27 @@ import java.io.Serializable;
 public class ExamenGeneralSeccion implements Serializable {
 
     @Id
+    @Column(name = "SECCION_EXAMEN_ID", unique = true, nullable = false)
+    private UUID seccionExamenId = UUID.randomUUID();
+
     @ManyToOne
     @JoinColumn(name = "SECCION_ID")
     SeccionEntity seccion;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "EXAMEN_ID")
     ExamenGeneralEntity examen;
 
     @Column(name = "ORDEN")
     Integer orden;
+
+    public UUID getSeccionExamenId() {
+        return seccionExamenId;
+    }
+
+    public void setSeccionExamenId(UUID seccionExamenId) {
+        this.seccionExamenId = seccionExamenId;
+    }
 
     public SeccionEntity getSeccion() {
         return seccion;
@@ -47,17 +59,16 @@ public class ExamenGeneralSeccion implements Serializable {
         this.orden = orden;
     }
 
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        if (!super.equals(object)) return false;
-        ExamenGeneralSeccion that = (ExamenGeneralSeccion) object;
-        return java.util.Objects.equals(seccion, that.seccion) &&
-                java.util.Objects.equals(examen, that.examen) &&
-                java.util.Objects.equals(orden, that.orden);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ExamenGeneralSeccion)) return false;
+        ExamenGeneralSeccion that = (ExamenGeneralSeccion) o;
+        return Objects.equals(getSeccionExamenId(), that.getSeccionExamenId()) && Objects.equals(getSeccion(), that.getSeccion()) && Objects.equals(getExamen(), that.getExamen()) && Objects.equals(getOrden(), that.getOrden());
     }
 
+    @Override
     public int hashCode() {
-        return java.util.Objects.hash(super.hashCode(), seccion, examen, orden);
+        return Objects.hash(getSeccionExamenId(), getSeccion(), getExamen(), getOrden());
     }
 }

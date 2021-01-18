@@ -16,25 +16,25 @@ public class ReferenciaEntity implements Serializable {
     private UUID referenciaId = UUID.randomUUID();
 
     @Column(name = "ESTUDIO_ID")
-    String estudioId;
+    private String estudioId;
 
     @Column(name = "CLASIFICACION_ID")
-    String clasificacionId;
+    private String clasificacionId;
 
     @Column(name = "MASCULINO")
-    String masculino;
+    private String masculino;
 
     @Column(name = "FEMENINO")
-    String femenino;
+    private String femenino;
 
     @Column(name = "GENERAL")
-    String general;
+    private String general;
 
     @Column(name = "FECHA_CREACION")
-    String fechaCreacion;
+    private String fechaCreacion;
 
     @Column(name = "FECHA_ACTUALIZACION")
-    String fechaActualizacion;
+    private String fechaActualizacion;
 
     public UUID getReferenciaId() {
         return referenciaId;

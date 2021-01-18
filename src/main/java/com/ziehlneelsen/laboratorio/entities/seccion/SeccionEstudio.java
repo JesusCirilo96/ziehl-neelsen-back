@@ -5,23 +5,35 @@ import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @IdClass(SeccionEstudio.class)
 @Table(name = "estudio_seccion")
 public class SeccionEstudio implements Serializable {
+
     @Id
+    @Column(name = "ESTUDIO_SECCION_ID", unique = true, nullable = false)
+    private UUID estudioSeccionId = UUID.randomUUID();
+
     @ManyToOne
     @JoinColumn(name = "ESTUDIO_ID")
     EstudioEntity estudio;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "SECCION_ID")
     SeccionEntity seccion;
 
     @Column(name = "ORDEN")
     Integer orden;
+
+    public UUID getEstudioSeccionId() {
+        return estudioSeccionId;
+    }
+
+    public void setEstudioSeccionId(UUID estudioSeccionId) {
+        this.estudioSeccionId = estudioSeccionId;
+    }
 
     public EstudioEntity getEstudio() {
         return estudio;
@@ -50,15 +62,13 @@ public class SeccionEstudio implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof SeccionEstudio)) return false;
         SeccionEstudio that = (SeccionEstudio) o;
-        return Objects.equals(estudio, that.estudio) &&
-                Objects.equals(seccion, that.seccion) &&
-                Objects.equals(orden, that.orden);
+        return Objects.equals(getEstudioSeccionId(), that.getEstudioSeccionId()) && Objects.equals(getEstudio(), that.getEstudio()) && Objects.equals(getSeccion(), that.getSeccion()) && Objects.equals(getOrden(), that.getOrden());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(estudio, seccion, orden);
+        return Objects.hash(getEstudioSeccionId(), getEstudio(), getSeccion(), getOrden());
     }
 }

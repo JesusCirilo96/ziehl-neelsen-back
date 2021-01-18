@@ -4,6 +4,7 @@ package com.ziehlneelsen.laboratorio.entities.descuento;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @IdClass(DiaDescuento.class)
@@ -11,11 +12,13 @@ import java.util.Objects;
 public class DiaDescuento implements Serializable {
 
     @Id
+    @Column(name = "DIA_DESCUENTO_ID", unique = true, nullable = false)
+    private UUID diaDescuentoId = UUID.randomUUID();
+
     @ManyToOne
     @JoinColumn(name = "DIA_ID")
     DiaEntity dia;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "DESCUENTO_ID")
     DescuentoEntity descuento;
@@ -25,6 +28,14 @@ public class DiaDescuento implements Serializable {
 
     @Column(name = "FIN")
     String fin;
+
+    public UUID getDiaDescuentoId() {
+        return diaDescuentoId;
+    }
+
+    public void setDiaDescuentoId(UUID diaDescuentoId) {
+        this.diaDescuentoId = diaDescuentoId;
+    }
 
     public DiaEntity getDia() {
         return dia;
@@ -63,14 +74,11 @@ public class DiaDescuento implements Serializable {
         if (this == o) return true;
         if (!(o instanceof DiaDescuento)) return false;
         DiaDescuento that = (DiaDescuento) o;
-        return Objects.equals(getDia(), that.getDia()) &&
-                Objects.equals(getDescuento(), that.getDescuento()) &&
-                Objects.equals(getInicio(), that.getInicio()) &&
-                Objects.equals(getFin(), that.getFin());
+        return Objects.equals(getDiaDescuentoId(), that.getDiaDescuentoId()) && Objects.equals(getDia(), that.getDia()) && Objects.equals(getDescuento(), that.getDescuento()) && Objects.equals(getInicio(), that.getInicio()) && Objects.equals(getFin(), that.getFin());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getDia(), getDescuento(), getInicio(), getFin());
+        return Objects.hash(getDiaDescuentoId(), getDia(), getDescuento(), getInicio(), getFin());
     }
 }

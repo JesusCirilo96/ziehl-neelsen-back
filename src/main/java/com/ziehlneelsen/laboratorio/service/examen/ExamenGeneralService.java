@@ -2,8 +2,11 @@ package com.ziehlneelsen.laboratorio.service.examen;
 
 import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.examen.ExamenEstudioDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenSeccionDTO;
+import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
+import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralSeccionEntity;
 
 import java.text.ParseException;
 import java.util.List;
@@ -32,6 +35,13 @@ public interface ExamenGeneralService {
     ExamenGeneralEntity findByName(String nombre);
 
     /**
+     * Obtenemos los estduios del examen
+     * @param examenId El id del examen
+     * @return Lista con los estudios del examen
+     */
+    List<EstudioEntity> findEstudioExamen(Integer examenId);
+
+    /**
      * Metodo para realizar el registro de un examen en la BD
      * @param examenGeneral El objeto deL examen a guardar
      * @return La respuesta
@@ -51,4 +61,18 @@ public interface ExamenGeneralService {
      * @return La lista de las secciones con sus respectivos estudios
      */
     ExamenSeccionDTO findSeccionByExamen(Integer examenId);
+
+    /**
+     * Guardamos el estudio del examen
+     * @param estudio El objeto de estudio a guardar
+     * @return Respuesta del repositorio
+     */
+    ResponseDTO saveEstudioExamen(ExamenEstudioDTO estudio);
+
+    /**
+     * Guardamos la seccion del examen
+     * @param examenSeccion El objeto de el examen seccion a guardar
+     * @return respuesta del repositorio
+     */
+    ResponseDTO saveSeccionExamen(ExamenGeneralSeccionEntity examenSeccion);
 }

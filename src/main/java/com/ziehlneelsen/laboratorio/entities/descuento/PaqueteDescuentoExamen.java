@@ -5,6 +5,7 @@ import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @IdClass(PaqueteDescuentoExamen.class)
@@ -12,14 +13,24 @@ import java.util.Objects;
 public class PaqueteDescuentoExamen implements Serializable {
 
     @Id
+    @Column(name = "PAQUETE_EXAMEN_ID", unique = true, nullable = false)
+    private UUID paqueteExamenId = UUID.randomUUID();
+
     @ManyToOne
     @JoinColumn(name = "PAQUETE_ID")
     PaqueteDescuentoEntity paquete;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "EXAMEN_ID")
     ExamenGeneralEntity examen;
+
+    public UUID getPaqueteExamenId() {
+        return paqueteExamenId;
+    }
+
+    public void setPaqueteExamenId(UUID paqueteExamenId) {
+        this.paqueteExamenId = paqueteExamenId;
+    }
 
     public PaqueteDescuentoEntity getPaquete() {
         return paquete;
@@ -42,12 +53,11 @@ public class PaqueteDescuentoExamen implements Serializable {
         if (this == o) return true;
         if (!(o instanceof PaqueteDescuentoExamen)) return false;
         PaqueteDescuentoExamen that = (PaqueteDescuentoExamen) o;
-        return Objects.equals(getPaquete(), that.getPaquete()) &&
-                Objects.equals(getExamen(), that.getExamen());
+        return Objects.equals(getPaqueteExamenId(), that.getPaqueteExamenId()) && Objects.equals(getPaquete(), that.getPaquete()) && Objects.equals(getExamen(), that.getExamen());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getPaquete(), getExamen());
+        return Objects.hash(getPaqueteExamenId(), getPaquete(), getExamen());
     }
 }

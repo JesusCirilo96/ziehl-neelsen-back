@@ -7,6 +7,7 @@ import com.ziehlneelsen.laboratorio.dao.metodo.SeccionMetodoDAO;
 import com.ziehlneelsen.laboratorio.dao.seccion.SeccionEstudioDAO;
 import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.seccion.SeccionEstudio;
+import com.ziehlneelsen.laboratorio.repository.seccion.SeccionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ import java.util.List;
 public class SeccionEstudioDAOImpl implements SeccionEstudioDAO {
 
     @Autowired
-    ReferenciaDAO referenciaDAO;
+    SeccionRepository seccionRepository ;
 
     @Autowired
     SeccionMetodoDAO seccionMetodoDAO;
@@ -69,9 +70,11 @@ public class SeccionEstudioDAOImpl implements SeccionEstudioDAO {
             em.close();
         }
 
-        seccionEstudio.setSeccion(listSeccionEstudio.get(0).getSeccion());
-        seccionEstudio.setMetodo(seccionMetodoDAO.getMetodoBySeccion(listSeccionEstudio.get(0).getSeccion().getSeccionId()));
-        seccionEstudio.setEstudio(listEstudio);
+        seccionEstudio.setSeccion(seccionRepository.findById(seccionId));
+        if(!listEstudio.isEmpty()){
+            seccionEstudio.setMetodo(seccionMetodoDAO.getMetodoBySeccion(listSeccionEstudio.get(0).getSeccion().getSeccionId()));
+            seccionEstudio.setEstudio(listEstudio);
+        }
 
         return seccionEstudio;
     }

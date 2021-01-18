@@ -5,11 +5,16 @@ import com.ziehlneelsen.laboratorio.entities.seccion.SeccionEntity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @IdClass(SeccionMetodo.class)
 @Table(name = "metodo_seccion")
 public class SeccionMetodo implements Serializable {
+
+    @Id
+    @Column(name = "METODO_SECCION", unique = true, nullable = false)
+    private UUID metodoSeccionId = UUID.randomUUID();
 
     @Id
     @ManyToOne
@@ -20,6 +25,14 @@ public class SeccionMetodo implements Serializable {
     @ManyToOne
     @JoinColumn(name = "SECCION_ID")
     SeccionEntity seccion;
+
+    public UUID getMetodoSeccionId() {
+        return metodoSeccionId;
+    }
+
+    public void setMetodoSeccionId(UUID metodoSeccionId) {
+        this.metodoSeccionId = metodoSeccionId;
+    }
 
     public MetodoEntity getMetodo() {
         return metodo;
@@ -40,14 +53,13 @@ public class SeccionMetodo implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof SeccionMetodo)) return false;
         SeccionMetodo that = (SeccionMetodo) o;
-        return Objects.equals(metodo, that.metodo) &&
-                Objects.equals(seccion, that.seccion);
+        return Objects.equals(getMetodoSeccionId(), that.getMetodoSeccionId()) && Objects.equals(getMetodo(), that.getMetodo()) && Objects.equals(getSeccion(), that.getSeccion());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(metodo, seccion);
+        return Objects.hash(getMetodoSeccionId(), getMetodo(), getSeccion());
     }
 }

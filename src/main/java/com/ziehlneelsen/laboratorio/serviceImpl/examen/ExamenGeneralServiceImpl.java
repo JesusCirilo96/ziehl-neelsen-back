@@ -2,12 +2,19 @@ package com.ziehlneelsen.laboratorio.serviceImpl.examen;
 
 import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.examen.ExamenEstudioDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenSeccionDTO;
 import com.ziehlneelsen.laboratorio.constant.Messages;
 import com.ziehlneelsen.laboratorio.dao.examen.ExamenGeneralDAO;
 import com.ziehlneelsen.laboratorio.dao.examen.ExamenGeneralSeccionDAO;
+import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
+import com.ziehlneelsen.laboratorio.entities.examen.ExamenEstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
+import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralSeccionEntity;
+import com.ziehlneelsen.laboratorio.repository.estudio.EstudioRepository;
+import com.ziehlneelsen.laboratorio.repository.examen.ExamenEstudioRepository;
 import com.ziehlneelsen.laboratorio.repository.examen.ExamenGeneralRepository;
+import com.ziehlneelsen.laboratorio.repository.examen.ExamenSeccionRepository;
 import com.ziehlneelsen.laboratorio.service.examen.ExamenGeneralService;
 import com.ziehlneelsen.laboratorio.util.Utileria;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +36,15 @@ public class ExamenGeneralServiceImpl implements ExamenGeneralService {
     @Autowired
     ExamenGeneralSeccionDAO examenGeneralSeccionDAO;
 
+    @Autowired
+    ExamenEstudioRepository examenEstudioRepository;
+
+    @Autowired
+    EstudioRepository estudioRepository;
+
+    @Autowired
+    ExamenSeccionRepository examenSeccionRepository;
+
     @Override
     public List<ExamenGeneralEntity> findAll() {
         return examenGeneralRepository.findAll();
@@ -42,6 +58,11 @@ public class ExamenGeneralServiceImpl implements ExamenGeneralService {
     @Override
     public ExamenGeneralEntity findByName(String nombre) {
         return examenGeneralDAO.findByName(nombre);
+    }
+
+    @Override
+    public List<EstudioEntity> findEstudioExamen(Integer examenId) {
+        return examenGeneralDAO.findEstudioByExamen(examenId);
     }
 
     @Override
@@ -74,6 +95,56 @@ public class ExamenGeneralServiceImpl implements ExamenGeneralService {
 
     @Override
     public ExamenSeccionDTO findSeccionByExamen(Integer examenId) {
-        return examenGeneralSeccionDAO.getExamenSeccion(examenId);
+        ExamenSeccionDTO examenSeccion = examenGeneralSeccionDAO.getExamenSeccion(examenId);
+        examenSeccion.setEstudio(findEstudioExamen(examenId));
+        return examenSeccion;
+    }
+
+    @Override
+    public ResponseDTO saveEstudioExamen(ExamenEstudioDTO estudioDTO) {
+        ResponseDTO responseDTO = new ResponseDTO();
+
+        EstudioEntity estudio = new EstudioEntity();
+
+        estudio.setNombre(estudioDTO.getNombreEstudio());
+        estudio.setEstado(true);
+        estudio.setFechaCreacion(Utileria.fechaHoraActual());
+        estudio.setFechaActualizacion(Utileria.fechaHoraActual());
+
+
+        try{
+
+            estudioRepository.save(estudio);
+            Integer idEstudio = estudio.getEstudioId();
+
+            ExamenEstudioEntity examenEstudioEntity = new ExamenEstudioEntity();
+            examenEstudioEntity.setEstudioId(idEstudio);
+            examenEstudioEntity.setExamenId(estudioDTO.getExamenId());
+
+            examenEstudioRepository.save(examenEstudioEntity);
+
+
+            responseDTO.setErrorCode(Messages.OK);
+            responseDTO.setErrorInfo(Messages.REGISTER_OK);
+        }catch (DataAccessException e){
+            responseDTO.setErrorCode(Messages.ERROR);
+            responseDTO.setErrorInfo(e.getMostSpecificCause().toString());
+        }
+
+        return responseDTO;
+    }
+
+    @Override
+    public ResponseDTO saveSeccionExamen(ExamenGeneralSeccionEntity examenSeccion) {
+        ResponseDTO responseDTO = new ResponseDTO();
+        try {
+            examenSeccionRepository.save(examenSeccion);
+            responseDTO.setErrorCode(Messages.OK);
+            responseDTO.setErrorInfo(Messages.REGISTER_OK);
+        }catch (DataAccessException e){
+            responseDTO.setErrorCode(Messages.ERROR);
+            responseDTO.setErrorInfo(e.getMostSpecificCause().toString());
+        }
+        return responseDTO;
     }
 }

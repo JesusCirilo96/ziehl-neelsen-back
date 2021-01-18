@@ -3,6 +3,8 @@ package com.ziehlneelsen.laboratorio.daoImpl.examen;
 import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
 import com.ziehlneelsen.laboratorio.dao.examen.ExamenGeneralDAO;
 import com.ziehlneelsen.laboratorio.entities.descuento.DescuentoEntity;
+import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
+import com.ziehlneelsen.laboratorio.entities.examen.ExamenEstudio;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralDescuento;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
 import com.ziehlneelsen.laboratorio.service.descuento.DescuentoService;
@@ -47,6 +49,39 @@ public class ExamenGeneralDAOImpl implements ExamenGeneralDAO {
             em.close();
         }
         return examenGeneral;
+    }
+
+    @Override
+    public List<EstudioEntity> findEstudioByExamen(Integer examenId) {
+        EntityManager em = emf.createEntityManager();
+        List<ExamenEstudio> listEstudio;
+        List<EstudioEntity> estudios = new ArrayList<>();
+
+        try{
+            CriteriaBuilder cb = emf.getCriteriaBuilder();
+            CriteriaQuery<ExamenEstudio> query = cb.createQuery(ExamenEstudio.class);
+
+            Root<ExamenEstudio> c = query.from(ExamenEstudio.class);
+            Fetch<ExamenEstudio, EstudioEntity> p = c.fetch("examen");
+
+            Predicate idExamen = cb.equal(c.get("examen").get("examenGeneralId"), examenId);
+
+            query.select(c).where(idExamen);
+
+            listEstudio = em.createQuery(query).getResultList();
+
+
+            listEstudio.forEach((estudio) -> {
+                estudios.add(estudio.getEstudio());
+            });
+
+        }catch (DataAccessException e){
+            e.printStackTrace();
+        }finally {
+            em.close();
+        }
+
+        return estudios;
     }
 
     @Override

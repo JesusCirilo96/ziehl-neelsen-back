@@ -5,20 +5,21 @@ import com.ziehlneelsen.laboratorio.beans.metodo.MetodoDTO;
 import com.ziehlneelsen.laboratorio.entities.seccion.SeccionEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 public class SeccionEstudioDTO {
 
-    private SeccionEntity seccion;
+    private Optional<SeccionEntity> seccion;
 
     private List<MetodoDTO> metodo;
 
     private List<EstudioDTO> estudio;
 
-    public SeccionEntity getSeccion() {
+    public Optional<SeccionEntity> getSeccion() {
         return seccion;
     }
 
-    public void setSeccion(SeccionEntity seccion) {
+    public void setSeccion(Optional<SeccionEntity> seccion) {
         this.seccion = seccion;
     }
 

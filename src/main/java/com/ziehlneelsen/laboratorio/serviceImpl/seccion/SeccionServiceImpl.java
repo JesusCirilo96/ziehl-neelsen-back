@@ -9,6 +9,7 @@ import com.ziehlneelsen.laboratorio.entities.seccion.SeccionEntity;
 import com.ziehlneelsen.laboratorio.repository.persona.UsuarioRepository;
 import com.ziehlneelsen.laboratorio.repository.seccion.SeccionRepository;
 import com.ziehlneelsen.laboratorio.service.seccion.SeccionService;
+import com.ziehlneelsen.laboratorio.util.Utileria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -39,11 +40,14 @@ public class SeccionServiceImpl implements SeccionService {
     public ResponseDTO save(SeccionEntity seccion) {
         ResponseDTO response = new ResponseDTO();
         if(null != seccion.getSeccionId() && seccionRepository.findById(seccion.getSeccionId()).isPresent()){
+            seccion.setFechaActualizacion(Utileria.fechaHoraActual());
             seccionRepository.save(seccion);
             response.setErrorCode(Messages.OK);
             response.setErrorInfo(Messages.UPDATE_OK);
         } else if(null != seccion){
             try{
+                seccion.setFechaCreacion(Utileria.fechaHoraActual());
+                seccion.setFechaActualizacion(Utileria.fechaHoraActual());
                 seccionRepository.save(seccion);
                 response.setErrorCode(Messages.OK);
                 response.setErrorInfo(Messages.REGISTER_OK);

@@ -1,9 +1,11 @@
 package com.ziehlneelsen.laboratorio.dao.examen;
 
 import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
+import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
 
 import java.text.ParseException;
+import java.util.List;
 
 public interface ExamenGeneralDAO {
 
@@ -12,12 +14,19 @@ public interface ExamenGeneralDAO {
      * @param nombre el nombre del examen general a buscar
      * @return El objeto del examen general encontrado
      */
-    public ExamenGeneralEntity findByName(String nombre);
+    ExamenGeneralEntity findByName(String nombre);
+
+    /**
+     * Buscamos los estudios del examen
+     * @param examenId El id del examen a buscar
+     * @return la lista de estudios correspondientes al examen
+     */
+    List<EstudioEntity> findEstudioByExamen(Integer examenId);
 
     /**
      * Metodo para buscar los descuentos de un examen en especifico
      * @param examenId El id del examen general a buscar
      * @return Objeto con la lista de descuentos y el examen
      */
-    public ExamenDescuentoDTO findDescuentoByExamen(Integer examenId);
+    ExamenDescuentoDTO findDescuentoByExamen(Integer examenId);
 }

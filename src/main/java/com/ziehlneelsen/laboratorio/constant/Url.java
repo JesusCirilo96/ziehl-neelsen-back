@@ -33,6 +33,9 @@ public class Url {
     public static final String EXAMEN_GENERAL = "/examen";
     public static final String EXAMEN_DESCUENTO = "/descuento/{id}";
     public static final String EXAMEN_SECCION = "/seccion/{id}";
+    public static final String SAVE_EXAMEN_ESTUDIO = "/estudio/save";
+    public static final String SAVE_EXAMEN_SECCION = "/seccion/save";
+    public static final String EXAMEN_ESTUDIO = "/estudio/{id}";
 
     //Estudio
     public static final String ESTUDIO = "/estudio";
@@ -54,6 +57,7 @@ public class Url {
     //Metodo
     public static final String METODO = "/metodo";
     public static final String METODO_BY_SECCION = "/seccion/{id}";
+    public static final String SAVE_METODO_SECCION = "/seccion/save";
 
     //Persona
     public static final String USUARIO = "/usuario";
