@@ -105,18 +105,20 @@ public class ExamenGeneralServiceImpl implements ExamenGeneralService {
         ResponseDTO responseDTO = new ResponseDTO();
 
         EstudioEntity estudio = new EstudioEntity();
-
-        estudio.setNombre(estudioDTO.getNombreEstudio());
-        estudio.setEstado(true);
-        estudio.setFechaCreacion(Utileria.fechaHoraActual());
-        estudio.setFechaActualizacion(Utileria.fechaHoraActual());
-
-
-        try{
+        Integer idEstudio;
+        if(estudioDTO.isPorId()){
+            idEstudio = estudioDTO.getEstudioId();
+        }else{
+            estudio.setNombre(estudioDTO.getNombreEstudio());
+            estudio.setEstado(true);
+            estudio.setFechaCreacion(Utileria.fechaHoraActual());
+            estudio.setFechaActualizacion(Utileria.fechaHoraActual());
 
             estudioRepository.save(estudio);
-            Integer idEstudio = estudio.getEstudioId();
 
+            idEstudio = estudio.getEstudioId();
+        }
+        try{
             ExamenEstudioEntity examenEstudioEntity = new ExamenEstudioEntity();
             examenEstudioEntity.setEstudioId(idEstudio);
             examenEstudioEntity.setExamenId(estudioDTO.getExamenId());

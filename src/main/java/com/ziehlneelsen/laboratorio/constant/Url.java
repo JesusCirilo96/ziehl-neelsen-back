@@ -73,6 +73,7 @@ public class Url {
     //Seccion
     public static final String SECCION = "/seccion";
     public static final String SECCION_ESTUDIO = "/estudio/{id}";
+    public static final String SAVE_SECCION_ESTUDIO = "/estudio/save";
 
 
     /**

@@ -2,6 +2,7 @@ package com.ziehlneelsen.laboratorio.entities.examen;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -40,5 +41,18 @@ public class ExamenEstudioEntity implements Serializable {
 
     public void setExamenId(Integer examenId) {
         this.examenId = examenId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ExamenEstudioEntity)) return false;
+        ExamenEstudioEntity that = (ExamenEstudioEntity) o;
+        return Objects.equals(getExamenEstudioId(), that.getExamenEstudioId()) && Objects.equals(getEstudioId(), that.getEstudioId()) && Objects.equals(getExamenId(), that.getExamenId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getExamenEstudioId(), getEstudioId(), getExamenId());
     }
 }

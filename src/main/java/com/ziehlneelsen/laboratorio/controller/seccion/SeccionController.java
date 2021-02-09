@@ -1,9 +1,11 @@
 package com.ziehlneelsen.laboratorio.controller.seccion;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.seccion.AuxSeccionEstudioDTO;
 import com.ziehlneelsen.laboratorio.beans.seccion.SeccionEstudioDTO;
 import com.ziehlneelsen.laboratorio.constant.Url;
 import com.ziehlneelsen.laboratorio.entities.seccion.SeccionEntity;
+import com.ziehlneelsen.laboratorio.entities.seccion.SeccionEstudioEntity;
 import com.ziehlneelsen.laboratorio.service.seccion.SeccionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,6 +47,17 @@ public class SeccionController {
             return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.OK);
         }
         response = seccionService.save(seccionEntity);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = Url.SAVE_SECCION_ESTUDIO, method = RequestMethod.POST, produces = Url.APLICATION_JSON)
+    public ResponseEntity saveSeccionEstudio(@Valid @RequestBody AuxSeccionEstudioDTO seccionEstudio, BindingResult bindingResult) {
+
+        ResponseDTO response;
+        if(bindingResult.hasErrors()) {
+            return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.OK);
+        }
+        response = seccionService.saveSeccionEstudio(seccionEstudio);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
