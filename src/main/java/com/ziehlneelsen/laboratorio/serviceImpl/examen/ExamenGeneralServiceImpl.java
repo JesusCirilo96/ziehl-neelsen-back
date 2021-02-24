@@ -19,7 +19,9 @@ import com.ziehlneelsen.laboratorio.service.examen.ExamenGeneralService;
 import com.ziehlneelsen.laboratorio.util.Utileria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -148,5 +150,19 @@ public class ExamenGeneralServiceImpl implements ExamenGeneralService {
             responseDTO.setErrorInfo(e.getMostSpecificCause().toString());
         }
         return responseDTO;
+    }
+
+    @Override
+    @Transactional
+    @Modifying
+    public ResponseDTO deleteExamenSeccion(Integer examenId, Integer seccionId) {
+        return examenGeneralSeccionDAO.deleteExamenSeccion(examenId,seccionId);
+    }
+
+    @Override
+    @Transactional
+    @Modifying
+    public ResponseDTO deleteExamenEstudio(Integer examenId, Integer estudioId) {
+        return examenGeneralDAO.deleteExamenEstudio(examenId, estudioId);
     }
 }

@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = Url.EXAMEN_GENERAL)
-@CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET})
+@CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET, RequestMethod.DELETE})
 public class ExamenGeneralController {
 
     @Autowired
@@ -82,5 +82,19 @@ public class ExamenGeneralController {
         }
         response = examenGeneralService.saveSeccionExamen(examenSeccion);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = Url.DELETE_EXAMEN_SECCION, method = RequestMethod.DELETE, produces = Url.APLICATION_JSON)
+    public ResponseEntity deleteExamenSeccion(@PathVariable Integer examenId, @PathVariable Integer seccionId){
+        ResponseDTO responseDTO = examenGeneralService.deleteExamenSeccion(examenId, seccionId);
+
+        return  new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = Url.DELETE_EXAMEN_ESTUDIO, method = RequestMethod.DELETE, produces = Url.APLICATION_JSON)
+    public ResponseEntity deleteExamenEstudio(@PathVariable Integer examenId, @PathVariable Integer estudioId){
+        ResponseDTO responseDTO = examenGeneralService.deleteExamenEstudio(examenId, estudioId);
+
+        return  new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 }

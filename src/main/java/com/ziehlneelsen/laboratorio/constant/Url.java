@@ -36,6 +36,8 @@ public class Url {
     public static final String SAVE_EXAMEN_ESTUDIO = "/estudio/save";
     public static final String SAVE_EXAMEN_SECCION = "/seccion/save";
     public static final String EXAMEN_ESTUDIO = "/estudio/{id}";
+    public static final String DELETE_EXAMEN_SECCION = "/seccion/delete/{examenId}/{seccionId}";
+    public static final String DELETE_EXAMEN_ESTUDIO = "/estudio/delete/{examenId}/{estudioId}";
 
     //Estudio
     public static final String ESTUDIO = "/estudio";
@@ -74,6 +76,7 @@ public class Url {
     public static final String SECCION = "/seccion";
     public static final String SECCION_ESTUDIO = "/estudio/{id}";
     public static final String SAVE_SECCION_ESTUDIO = "/estudio/save";
+    public static final String DELETE_SECCION_ESTUDIO = "/estudio/delete/{seccionId}/{estudioId}";
 
 
     /**

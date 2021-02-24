@@ -1,6 +1,7 @@
 package com.ziehlneelsen.laboratorio.dao.examen;
 
 import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
+import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
 
@@ -29,4 +30,12 @@ public interface ExamenGeneralDAO {
      * @return Objeto con la lista de descuentos y el examen
      */
     ExamenDescuentoDTO findDescuentoByExamen(Integer examenId);
+
+    /**
+     * Eliminar de la BD el examen estudio
+     * @param examenId El id del examen relacionado a eliminar
+     * @param estudioId El id del estudio a eliminar
+     * @return Respuesta del servicio
+     */
+    ResponseDTO deleteExamenEstudio(Integer examenId, Integer estudioId);
 }

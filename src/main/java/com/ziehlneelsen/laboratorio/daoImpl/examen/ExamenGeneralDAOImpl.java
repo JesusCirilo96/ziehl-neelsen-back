@@ -1,16 +1,18 @@
 package com.ziehlneelsen.laboratorio.daoImpl.examen;
 
 import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
+import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.constant.Messages;
 import com.ziehlneelsen.laboratorio.dao.examen.ExamenGeneralDAO;
 import com.ziehlneelsen.laboratorio.entities.descuento.DescuentoEntity;
 import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
-import com.ziehlneelsen.laboratorio.entities.examen.ExamenEstudio;
-import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralDescuento;
-import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
+import com.ziehlneelsen.laboratorio.entities.examen.*;
 import com.ziehlneelsen.laboratorio.service.descuento.DescuentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -129,4 +131,45 @@ public class ExamenGeneralDAOImpl implements ExamenGeneralDAO {
 
         return examenDescuento;
     }
+
+    @Override
+    @Transactional
+    @Modifying
+    public ResponseDTO deleteExamenEstudio(Integer examenId, Integer estudioId) {
+        //EntityManagerFactory emf = Persistence.createEntityManagerFactory("laboratorio");
+        EntityManager em = emf.createEntityManager();
+
+        ResponseDTO response = new ResponseDTO();
+        try{
+            CriteriaBuilder cb = emf.getCriteriaBuilder();
+            CriteriaDelete<ExamenEstudioEntity> queryDelete = cb.createCriteriaDelete(ExamenEstudioEntity.class);
+
+            Root<ExamenEstudioEntity> root = queryDelete.from(ExamenEstudioEntity.class);
+
+            Predicate idExamen = cb.equal(root.get("examenId"), examenId);
+            Predicate idEstudio = cb.equal(root.get("estudioId"), estudioId);
+
+            Predicate andPredicate = cb.and(idExamen,idEstudio);
+            queryDelete.where(andPredicate);
+
+            em.getTransaction().begin();
+            int result = em.createQuery(queryDelete).executeUpdate();
+            em.getTransaction().commit();
+
+            response.setErrorCode(Messages.OK);
+            response.setErrorInfo(Messages.DELETE_OK);
+
+            if(result == 0){
+                response.setErrorCode(Messages.ERROR);
+                response.setErrorInfo(Messages.ERROR_DELETE);
+            }
+        }catch (DataAccessException e){
+            response.setErrorCode(Messages.ERROR);
+            response.setErrorInfo(e.getMostSpecificCause().toString());
+        }finally {
+            em.close();
+        }
+        return response;
+    }
+
 }

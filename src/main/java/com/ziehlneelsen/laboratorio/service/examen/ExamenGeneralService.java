@@ -8,7 +8,6 @@ import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralSeccionEntity;
 
-import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,4 +74,20 @@ public interface ExamenGeneralService {
      * @return respuesta del repositorio
      */
     ResponseDTO saveSeccionExamen(ExamenGeneralSeccionEntity examenSeccion);
+
+    /**
+     * Eliminamos la seccion relacionada con el examen general
+     * @param examenId El ID del examen
+     * @param seccionId El ID de la seccion
+     * @return Respuesta del servicio
+     */
+    ResponseDTO deleteExamenSeccion(Integer examenId, Integer seccionId);
+
+    /**
+     * Eliminar el examen estudio relacionado de BD
+     * @param examenId El id del examen
+     * @param estudioId El id del estudio
+     * @return Respuesta del repositorio
+     */
+    ResponseDTO deleteExamenEstudio(Integer examenId, Integer estudioId);
 }

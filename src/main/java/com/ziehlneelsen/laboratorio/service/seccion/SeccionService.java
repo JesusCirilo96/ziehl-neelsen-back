@@ -32,4 +32,12 @@ public interface SeccionService {
      */
     ResponseDTO saveSeccionEstudio(AuxSeccionEstudioDTO seccionEstudio);
 
+    /**
+     * Eliminar un estudio relacionado con la seccion
+     * @param seccionId El ID  de la seccion
+     * @param estudioId El ID del estudio
+     * @return Respuesta del servicio
+     */
+    ResponseDTO deleteSeccionEstudio(Integer seccionId, Integer estudioId);
+
 }

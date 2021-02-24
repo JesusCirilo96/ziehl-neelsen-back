@@ -1,16 +1,21 @@
 package com.ziehlneelsen.laboratorio.daoImpl.seccion;
 
+import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.beans.estudio.EstudioDTO;
 import com.ziehlneelsen.laboratorio.beans.seccion.SeccionEstudioDTO;
-import com.ziehlneelsen.laboratorio.dao.estudio.ReferenciaDAO;
+import com.ziehlneelsen.laboratorio.constant.Messages;
 import com.ziehlneelsen.laboratorio.dao.metodo.SeccionMetodoDAO;
 import com.ziehlneelsen.laboratorio.dao.seccion.SeccionEstudioDAO;
 import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
+import com.ziehlneelsen.laboratorio.entities.examen.ExamenEstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.seccion.SeccionEstudio;
+import com.ziehlneelsen.laboratorio.entities.seccion.SeccionEstudioEntity;
 import com.ziehlneelsen.laboratorio.repository.seccion.SeccionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -77,5 +82,44 @@ public class SeccionEstudioDAOImpl implements SeccionEstudioDAO {
         }
 
         return seccionEstudio;
+    }
+
+    @Override
+    @Transactional
+    @Modifying
+    public ResponseDTO deleteSeccionEstudio(Integer seccionId, Integer estudioId) {
+        EntityManager em = emf.createEntityManager();
+
+        ResponseDTO response = new ResponseDTO();
+        try{
+            CriteriaBuilder cb = emf.getCriteriaBuilder();
+            CriteriaDelete<SeccionEstudioEntity> queryDelete = cb.createCriteriaDelete(SeccionEstudioEntity.class);
+
+            Root<SeccionEstudioEntity> root = queryDelete.from(SeccionEstudioEntity.class);
+
+            Predicate idSeccion = cb.equal(root.get("seccionId"), seccionId);
+            Predicate idEstudio = cb.equal(root.get("estudioId"), estudioId);
+
+            Predicate andPredicate = cb.and(idSeccion,idEstudio);
+            queryDelete.where(andPredicate);
+
+            em.getTransaction().begin();
+            int result = em.createQuery(queryDelete).executeUpdate();
+            em.getTransaction().commit();
+
+            response.setErrorCode(Messages.OK);
+            response.setErrorInfo(Messages.DELETE_OK);
+
+            if(result == 0){
+                response.setErrorCode(Messages.ERROR);
+                response.setErrorInfo(Messages.ERROR_DELETE);
+            }
+        }catch (DataAccessException e){
+            response.setErrorCode(Messages.ERROR);
+            response.setErrorInfo(e.getMostSpecificCause().toString());
+        }finally {
+            em.close();
+        }
+        return response;
     }
 }

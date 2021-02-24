@@ -1,5 +1,6 @@
 package com.ziehlneelsen.laboratorio.dao.examen;
 
+import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenSeccionDTO;
 
 public interface ExamenGeneralSeccionDAO {
@@ -11,4 +12,11 @@ public interface ExamenGeneralSeccionDAO {
      */
     ExamenSeccionDTO getExamenSeccion(Integer examenId);
 
+    /**
+     * Borramos la relacion entre la seccion y examen
+     * @param examenId el ID del examen
+     * @param seccionId el ID de la seccion
+     * @return Respuesta del servicio
+     */
+    ResponseDTO deleteExamenSeccion(Integer examenId, Integer seccionId);
 }
