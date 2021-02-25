@@ -78,6 +78,9 @@ public class Url {
     public static final String SAVE_SECCION_ESTUDIO = "/estudio/save";
     public static final String DELETE_SECCION_ESTUDIO = "/estudio/delete/{seccionId}/{estudioId}";
 
+    //Recepcion
+    public static final String RECEPCION = "/recepcion";
+    public static final String RECEPCION_FICHA = "/get/ficha";
 
     /**
      * Construtor de la clase

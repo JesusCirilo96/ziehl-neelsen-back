@@ -9,5 +9,5 @@ public interface UsuarioLoginDAO {
      * @param password la contrasena del usuario
      * @return El objeto de usuario
      */
-    public UserAuthDTO login(String user, String password);
+    UserAuthDTO login(String user, String password);
 }
