@@ -1,5 +1,6 @@
 package com.ziehlneelsen.laboratorio.beans.examen;
 
+import com.ziehlneelsen.laboratorio.beans.estudio.EstudioDTO;
 import com.ziehlneelsen.laboratorio.beans.seccion.SeccionEstudioDTO;
 import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
@@ -13,7 +14,7 @@ public class ExamenSeccionDTO {
 
     private List<SeccionEstudioDTO> seccion;
 
-    private List<EstudioEntity> estudio;
+    private List<EstudioDTO> estudio;
 
     private Integer orden;
 
@@ -33,11 +34,11 @@ public class ExamenSeccionDTO {
         this.seccion = seccion;
     }
 
-    public List<EstudioEntity> getEstudio() {
+    public List<EstudioDTO> getEstudio() {
         return estudio;
     }
 
-    public void setEstudio(List<EstudioEntity> estudio) {
+    public void setEstudio(List<EstudioDTO> estudio) {
         this.estudio = estudio;
     }
 

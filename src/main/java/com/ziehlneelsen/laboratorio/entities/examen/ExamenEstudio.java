@@ -24,6 +24,8 @@ public class ExamenEstudio implements Serializable {
     @JoinColumn(name = "EXAMEN_ID")
     ExamenGeneralEntity examen;
 
+    Integer orden;
+
     public UUID getExamenEstudioId() {
         return examenEstudioId;
     }
@@ -48,16 +50,24 @@ public class ExamenEstudio implements Serializable {
         this.examen = examen;
     }
 
+    public Integer getOrden() {
+        return orden;
+    }
+
+    public void setOrden(Integer orden) {
+        this.orden = orden;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof ExamenEstudio)) return false;
         ExamenEstudio that = (ExamenEstudio) o;
-        return Objects.equals(getExamenEstudioId(), that.getExamenEstudioId()) && Objects.equals(getEstudio(), that.getEstudio()) && Objects.equals(getExamen(), that.getExamen());
+        return Objects.equals(getExamenEstudioId(), that.getExamenEstudioId()) && Objects.equals(getEstudio(), that.getEstudio()) && Objects.equals(getExamen(), that.getExamen()) && Objects.equals(getOrden(), that.getOrden());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getExamenEstudioId(), getEstudio(), getExamen());
+        return Objects.hash(getExamenEstudioId(), getEstudio(), getExamen(), getOrden());
     }
 }

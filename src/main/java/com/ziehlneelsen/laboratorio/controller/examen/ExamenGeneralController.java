@@ -42,7 +42,7 @@ public class ExamenGeneralController {
     }
 
     @RequestMapping(value = Url.EXAMEN_ESTUDIO, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
-    public List<EstudioEntity> findExamenGeneralByName(@PathVariable Integer id){
+    public List<EstudioEntity> findExamenEstudio(@PathVariable Integer id){
         return examenGeneralService.findEstudioExamen(id);
     }
 

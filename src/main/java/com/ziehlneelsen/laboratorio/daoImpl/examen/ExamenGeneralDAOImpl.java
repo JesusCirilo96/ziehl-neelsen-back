@@ -2,7 +2,9 @@ package com.ziehlneelsen.laboratorio.daoImpl.examen;
 
 import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.estudio.EstudioDTO;
 import com.ziehlneelsen.laboratorio.constant.Messages;
+import com.ziehlneelsen.laboratorio.dao.estudio.ReferenciaDAO;
 import com.ziehlneelsen.laboratorio.dao.examen.ExamenGeneralDAO;
 import com.ziehlneelsen.laboratorio.entities.descuento.DescuentoEntity;
 import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
@@ -27,6 +29,9 @@ public class ExamenGeneralDAOImpl implements ExamenGeneralDAO {
 
     @Autowired
     DescuentoService descuentoService;
+
+    @Autowired
+    ReferenciaDAO referenciaDAO;
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("laboratorio");
 
@@ -85,6 +90,48 @@ public class ExamenGeneralDAOImpl implements ExamenGeneralDAO {
 
         return estudios;
     }
+
+    @Override
+    public List<EstudioDTO> findEstudioByExamenReferencia(Integer examenId) {
+        EntityManager em = emf.createEntityManager();
+        List<ExamenEstudio> listEstudio;
+        List<EstudioDTO> estudios = new ArrayList<>();
+
+        try{
+            CriteriaBuilder cb = emf.getCriteriaBuilder();
+            CriteriaQuery<ExamenEstudio> query = cb.createQuery(ExamenEstudio.class);
+
+            Root<ExamenEstudio> c = query.from(ExamenEstudio.class);
+            Fetch<ExamenEstudio, EstudioEntity> p = c.fetch("examen");
+
+            Predicate idExamen = cb.equal(c.get("examen").get("examenGeneralId"), examenId);
+
+            query.select(c).where(idExamen);
+
+            listEstudio = em.createQuery(query).getResultList();
+
+
+            listEstudio.forEach((estudio) -> {
+                EstudioDTO estudioDTO = new EstudioDTO();
+                estudioDTO.setEstudioId(estudio.getEstudio().getEstudioId());
+                estudioDTO.setNombre(estudio.getEstudio().getNombre());
+                estudioDTO.setEstado(estudio.getEstudio().getEstado());
+                estudioDTO.setOrden(estudio.getOrden());
+                estudioDTO.setFechaCreacion(estudio.getEstudio().getFechaCreacion());
+                estudioDTO.setFechaActualizacion(estudio.getEstudio().getFechaActualizacion());
+                estudioDTO.setReferencia(referenciaDAO.getByEstudio(estudio.getEstudio().getEstudioId()));
+                estudios.add(estudioDTO);
+            });
+
+        }catch (DataAccessException e){
+            e.printStackTrace();
+        }finally {
+            em.close();
+        }
+
+        return estudios;
+    }
+
 
     @Override
     public ExamenDescuentoDTO findDescuentoByExamen(Integer examenId) {

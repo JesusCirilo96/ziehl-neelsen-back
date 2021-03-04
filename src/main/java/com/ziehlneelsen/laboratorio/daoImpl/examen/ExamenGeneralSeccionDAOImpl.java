@@ -50,8 +50,7 @@ public class ExamenGeneralSeccionDAOImpl implements ExamenGeneralSeccionDAO {
             Fetch<ExamenGeneralSeccion, SeccionEntity> p = c.fetch("seccion");
 
             Predicate idExamen = cb.equal(c.get("examen").get("examenGeneralId"), examenId);
-
-            query.select(c).where(idExamen);
+            query.select(c).where(idExamen).orderBy(cb.asc(c.get("orden")));
 
             listExamenSeccion = em.createQuery(query).getResultList();
             listExamenSeccion.forEach((seccion) -> {

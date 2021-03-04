@@ -2,6 +2,7 @@ package com.ziehlneelsen.laboratorio.dao.examen;
 
 import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.estudio.EstudioDTO;
 import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
 
@@ -23,6 +24,13 @@ public interface ExamenGeneralDAO {
      * @return la lista de estudios correspondientes al examen
      */
     List<EstudioEntity> findEstudioByExamen(Integer examenId);
+
+    /**
+     * Buscamos los estudios relacionados con el examen y sus referencias
+     * @param examenId El ID del examen a buscar
+     * @return Respuesta del servicio
+     */
+    List<EstudioDTO> findEstudioByExamenReferencia(Integer examenId);
 
     /**
      * Metodo para buscar los descuentos de un examen en especifico

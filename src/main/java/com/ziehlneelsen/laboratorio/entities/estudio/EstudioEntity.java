@@ -31,10 +31,6 @@ public class EstudioEntity implements Serializable {
     @Column(name = "FECHA_ACTUALIZACION")
     String fechaActualizacion;
 
-
-    @OneToMany(mappedBy = "estudio")
-    Set<Referencia> referencia = new HashSet<>();
-
     public EstudioEntity(){}
 
     public Integer getEstudioId() {

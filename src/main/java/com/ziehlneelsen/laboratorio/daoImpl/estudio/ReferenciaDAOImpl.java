@@ -17,13 +17,14 @@ import java.util.List;
 @Service
 public class ReferenciaDAOImpl implements ReferenciaDAO {
 
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("laboratorio");
+
     @Override
     public List<ReferenciaDTO> getByEstudio(Integer idEstudio) {
         List<Referencia> listReferencia = new ArrayList<>();
 
         List<ReferenciaDTO> referencias = new ArrayList<>();
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("laboratorio");
         EntityManager em = emf.createEntityManager();
 
         try{

@@ -54,7 +54,7 @@ public class SeccionEstudioDAOImpl implements SeccionEstudioDAO {
 
             Predicate idSeccion = cb.equal(c.get("seccion").get("seccionId"), seccionId);
 
-            query.select(c).where(idSeccion);
+            query.select(c).where(idSeccion).orderBy(cb.asc(c.get("orden")));
 
             listSeccionEstudio = em.createQuery(query).getResultList();
             listSeccionEstudio.forEach((estudio) -> {
