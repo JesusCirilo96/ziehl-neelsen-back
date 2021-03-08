@@ -9,12 +9,6 @@
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
        <!-- <mapping-file>META-INF/mappingFile.xml</mapping-file>-->
        <!-- <jar-file>packedEntity.jar</jar-file>-->
-        <class>UsuarioEntity</class>
-        <class>ReferenciaEntity</class>
-        <class>CotizacionExamenSencillo</class>
-        <class>CotizacionExamenGeneral</class>
-        <class>DiaDescuentoEntity</class>
-        <class>UsuarioRol</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>

@@ -18,13 +18,14 @@ public class ExamenEstudio implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "ESTUDIO_ID")
-    EstudioEntity estudio;
+    private EstudioEntity estudio;
 
     @ManyToOne
     @JoinColumn(name = "EXAMEN_ID")
-    ExamenGeneralEntity examen;
+    private ExamenGeneralEntity examen;
 
-    Integer orden;
+    @Column(name = "ORDEN")
+    private Integer orden;
 
     public UUID getExamenEstudioId() {
         return examenEstudioId;

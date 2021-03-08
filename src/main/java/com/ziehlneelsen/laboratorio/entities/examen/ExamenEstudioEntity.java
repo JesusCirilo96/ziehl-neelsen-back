@@ -19,6 +19,9 @@ public class ExamenEstudioEntity implements Serializable {
     @Column(name = "EXAMEN_ID")
     private Integer examenId;
 
+    @Column(name="ORDEN")
+    private Integer orden;
+
     public UUID getExamenEstudioId() {
         return examenEstudioId;
     }
@@ -43,16 +46,23 @@ public class ExamenEstudioEntity implements Serializable {
         this.examenId = examenId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ExamenEstudioEntity)) return false;
-        ExamenEstudioEntity that = (ExamenEstudioEntity) o;
-        return Objects.equals(getExamenEstudioId(), that.getExamenEstudioId()) && Objects.equals(getEstudioId(), that.getEstudioId()) && Objects.equals(getExamenId(), that.getExamenId());
+    public Integer getOrden() {
+        return orden;
     }
 
-    @Override
+    public void setOrden(Integer orden) {
+        this.orden = orden;
+    }
+
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        if (!super.equals(object)) return false;
+        ExamenEstudioEntity that = (ExamenEstudioEntity) object;
+        return java.util.Objects.equals(examenEstudioId, that.examenEstudioId) && java.util.Objects.equals(estudioId, that.estudioId) && java.util.Objects.equals(examenId, that.examenId) && java.util.Objects.equals(orden, that.orden);
+    }
+
     public int hashCode() {
-        return Objects.hash(getExamenEstudioId(), getEstudioId(), getExamenId());
+        return java.util.Objects.hash(super.hashCode(), examenEstudioId, estudioId, examenId, orden);
     }
 }

@@ -126,6 +126,7 @@ public class ExamenGeneralServiceImpl implements ExamenGeneralService {
             ExamenEstudioEntity examenEstudioEntity = new ExamenEstudioEntity();
             examenEstudioEntity.setEstudioId(idEstudio);
             examenEstudioEntity.setExamenId(estudioDTO.getExamenId());
+            examenEstudioEntity.setOrden(estudioDTO.getOrden());
 
             examenEstudioRepository.save(examenEstudioEntity);
 
