@@ -72,8 +72,8 @@ public class ExamenGeneralDAOImpl implements ExamenGeneralDAO {
             Fetch<ExamenEstudio, EstudioEntity> p = c.fetch("examen");
 
             Predicate idExamen = cb.equal(c.get("examen").get("examenGeneralId"), examenId);
+            query.select(c).where(idExamen).orderBy(cb.asc(c.get("orden")));
 
-            query.select(c).where(idExamen);
 
             listEstudio = em.createQuery(query).getResultList();
 
@@ -106,10 +106,9 @@ public class ExamenGeneralDAOImpl implements ExamenGeneralDAO {
 
             Predicate idExamen = cb.equal(c.get("examen").get("examenGeneralId"), examenId);
 
-            query.select(c).where(idExamen);
+            query.select(c).where(idExamen).orderBy(cb.asc(c.get("orden")));
 
             listEstudio = em.createQuery(query).getResultList();
-
 
             listEstudio.forEach((estudio) -> {
                 EstudioDTO estudioDTO = new EstudioDTO();

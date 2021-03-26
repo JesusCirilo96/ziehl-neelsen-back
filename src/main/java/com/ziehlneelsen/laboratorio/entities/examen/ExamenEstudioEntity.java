@@ -59,10 +59,8 @@ public class ExamenEstudioEntity implements Serializable {
         if (this == o) return true;
         if (!(o instanceof ExamenEstudioEntity)) return false;
         ExamenEstudioEntity that = (ExamenEstudioEntity) o;
-        return Objects.equals(getExamenEstudioId(), that.getExamenEstudioId()) && Objects.equals(getEstudioId(), that.getEstudioId()) && Objects.equals(getExamenId(), that.getExamenId()) && Objects.equals(getOrden(), that.getOrden());
-    }
+        return Objects.equals(getExamenEstudioId(), that.getExamenEstudioId()) && Objects.equals(getEstudioId(), that.getEstudioId()) && Objects.equals(getExamenId(), that.getExamenId()) && Objects.equals(getOrden(), that.getOrden()); }
 
-    @Override
     public int hashCode() {
         return Objects.hash(getExamenEstudioId(), getEstudioId(), getExamenId(), getOrden());
     }
