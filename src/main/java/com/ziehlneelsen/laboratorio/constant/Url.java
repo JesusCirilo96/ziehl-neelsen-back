@@ -81,6 +81,9 @@ public class Url {
     //Recepcion
     public static final String RECEPCION = "/recepcion";
     public static final String RECEPCION_FICHA = "/get/ficha";
+    public static final String RECEPCION_FECHA = "/get/fecha/{fecha}";
+    public static final String RECEPCION_RESULTADO = "/resultado/{idRecepcion}";
+    public static final String SAVE_RECEPCION_EXAMEN = "/examen/save";
 
     /**
      * Construtor de la clase

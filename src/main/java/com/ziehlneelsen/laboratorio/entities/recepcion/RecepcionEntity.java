@@ -5,6 +5,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "recepcion")
@@ -23,9 +24,11 @@ public class RecepcionEntity implements Serializable {
     @Column(name = "HORA_INGRESO")
     private String horaIngreso;
 
-    @NotBlank(message = "El nombre no puede estar vacio")
     @Column(name = "FICHA")
     private Integer ficha;
+
+    @Column(name = "TOTAL")
+    private Float total;
 
     @Column(name = "SUB_TOTAL")
     private Float subTotal;
@@ -39,15 +42,18 @@ public class RecepcionEntity implements Serializable {
     @Column(name = "RESTANTE")
     private Float restante;
 
-    @NotBlank(message = "El ID del usuario no puede ser vacio")
+    @Column(name = "MUESTRAS")
+    private String muestras;
+
+    @Column(name = "NOTAS")
+    private String notas;
+
     @Column(name = "USUARIO_ID")
     private Integer usuarioId;
 
-    @NotBlank(message = "El ID del medico no puede ser vacio")
     @Column(name = "MEDICO_ID")
     private Integer medicoId;
 
-    @NotBlank(message = "El ID del paciente no puede ser vacio")
     @Column(name = "PACIENTE_ID")
     private Integer pacienteId;
 
@@ -137,5 +143,42 @@ public class RecepcionEntity implements Serializable {
 
     public void setPacienteId(Integer pacienteId) {
         this.pacienteId = pacienteId;
+    }
+
+    public Float getTotal() {
+        return total;
+    }
+
+    public void setTotal(Float total) {
+        this.total = total;
+    }
+
+    public String getMuestras() {
+        return muestras;
+    }
+
+    public void setMuestras(String muestras) {
+        this.muestras = muestras;
+    }
+
+    public String getNotas() {
+        return notas;
+    }
+
+    public void setNotas(String notas) {
+        this.notas = notas;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof RecepcionEntity)) return false;
+        RecepcionEntity that = (RecepcionEntity) o;
+        return Objects.equals(getRecepcionId(), that.getRecepcionId()) && Objects.equals(getFechaIngreso(), that.getFechaIngreso()) && Objects.equals(getHoraIngreso(), that.getHoraIngreso()) && Objects.equals(getFicha(), that.getFicha()) && Objects.equals(getTotal(), that.getTotal()) && Objects.equals(getSubTotal(), that.getSubTotal()) && Objects.equals(getDescuento(), that.getDescuento()) && Objects.equals(getAnticipo(), that.getAnticipo()) && Objects.equals(getRestante(), that.getRestante()) && Objects.equals(getMuestras(), that.getMuestras()) && Objects.equals(getNotas(), that.getNotas()) && Objects.equals(getUsuarioId(), that.getUsuarioId()) && Objects.equals(getMedicoId(), that.getMedicoId()) && Objects.equals(getPacienteId(), that.getPacienteId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getRecepcionId(), getFechaIngreso(), getHoraIngreso(), getFicha(), getTotal(), getSubTotal(), getDescuento(), getAnticipo(), getRestante(), getMuestras(), getNotas(), getUsuarioId(), getMedicoId(), getPacienteId());
     }
 }

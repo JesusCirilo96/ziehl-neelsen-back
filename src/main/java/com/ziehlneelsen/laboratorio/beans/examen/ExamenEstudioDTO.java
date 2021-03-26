@@ -10,6 +10,8 @@ public class ExamenEstudioDTO {
 
     private Integer estudioId;
 
+    private Integer orden;
+
     public String getNombreEstudio() {
         return nombreEstudio;
     }
@@ -40,5 +42,13 @@ public class ExamenEstudioDTO {
 
     public void setEstudioId(Integer estudioId) {
         this.estudioId = estudioId;
+    }
+
+    public Integer getOrden() {
+        return orden;
+    }
+
+    public void setOrden(Integer orden) {
+        this.orden = orden;
     }
 }

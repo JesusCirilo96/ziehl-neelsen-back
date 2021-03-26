@@ -10,6 +10,8 @@ public class EstudioDTO {
 
     private String nombre;
 
+    private String resultado;
+
     private Boolean estado;
 
     private String fechaCreacion;
@@ -34,6 +36,14 @@ public class EstudioDTO {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getResultado() {
+        return resultado;
+    }
+
+    public void setResultado(String resultado) {
+        this.resultado = resultado;
     }
 
     public Boolean getEstado() {

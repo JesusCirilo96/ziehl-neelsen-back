@@ -22,6 +22,9 @@ public class EstudioEntity implements Serializable {
     @Column(name = "NOMBRE")
     String nombre;
 
+    @Column(name = "RESULTADO")
+    String resultado;
+
     @Column(name = "ESTADO", columnDefinition = "boolean default true")
     Boolean estado;
 
@@ -47,6 +50,14 @@ public class EstudioEntity implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getResultado() {
+        return resultado;
+    }
+
+    public void setResultado(String resultado) {
+        this.resultado = resultado;
     }
 
     public Boolean getEstado() {
