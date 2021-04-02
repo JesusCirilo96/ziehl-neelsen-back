@@ -51,6 +51,17 @@ public class RecepcionController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @RequestMapping(value = Url.SAVE_RESULTADO, method = RequestMethod.POST, produces = Url.APLICATION_JSON)
+    public ResponseEntity saveResultado(@Valid @RequestBody RecepcionExamenGeneralEntity resultado, BindingResult bindingResult) {
+
+        ResponseDTO response;
+        if(bindingResult.hasErrors()) {
+            return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.OK);
+        }
+        response = recepcionService.guardarResultados(resultado);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     @RequestMapping(value = Url.RECEPCION_FECHA, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
     public List<RecepcionDTO> recepcionPorFecha(@PathVariable String fecha){
         return recepcionService.obtenerRecepcionPorFecha(fecha);

@@ -16,7 +16,7 @@ public class RecepcionExamenGeneralEntity implements Serializable {
 
     @Id
     @Column(name = "EXAMEN_RECEPCION_ID", unique = true, nullable = false)
-    private UUID metodoSeccionId = UUID.randomUUID();
+    private UUID examenRecepcionId = UUID.randomUUID();
 
     @Column(name = "EXAMEN_ID")
     private String examenId;
@@ -39,12 +39,12 @@ public class RecepcionExamenGeneralEntity implements Serializable {
     @Column(name = "RESULTADO")
     private String resultado;
 
-    public UUID getMetodoSeccionId() {
-        return metodoSeccionId;
+    public UUID getExamenRecepcionId() {
+        return examenRecepcionId;
     }
 
-    public void setMetodoSeccionId(UUID metodoSeccionId) {
-        this.metodoSeccionId = metodoSeccionId;
+    public void setExamenRecepcionId(UUID examenRecepcionId) {
+        this.examenRecepcionId = examenRecepcionId;
     }
 
     public String getExamenId() {

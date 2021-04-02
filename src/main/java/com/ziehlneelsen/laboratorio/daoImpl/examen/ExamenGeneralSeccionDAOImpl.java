@@ -38,7 +38,7 @@ public class ExamenGeneralSeccionDAOImpl implements ExamenGeneralSeccionDAO {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("laboratorio");
         EntityManager em = emf.createEntityManager();
 
-        List<ExamenGeneralSeccion> listExamenSeccion = new ArrayList<>();
+        List<ExamenGeneralSeccion> listExamenSeccion;
         List<SeccionEstudioDTO> listSeccionEstudio = new ArrayList<>();
 
         ExamenSeccionDTO examenSeccion = new ExamenSeccionDTO();

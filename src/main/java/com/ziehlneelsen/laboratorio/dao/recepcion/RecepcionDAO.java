@@ -1,5 +1,7 @@
 package com.ziehlneelsen.laboratorio.dao.recepcion;
 
+import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.recepcion.RecepcionResultadoDTO;
 import com.ziehlneelsen.laboratorio.entities.recepcion.RecepcionEntity;
 import com.ziehlneelsen.laboratorio.entities.recepcion.RecepcionExamenGeneralEntity;
 
@@ -27,4 +29,6 @@ public interface RecepcionDAO {
      * @return Lista con las recepciones
      */
     List<RecepcionEntity> obtenerRecepcion(String where, String equal);
+
+    ResponseDTO saveResultado(RecepcionExamenGeneralEntity resultado);
 }

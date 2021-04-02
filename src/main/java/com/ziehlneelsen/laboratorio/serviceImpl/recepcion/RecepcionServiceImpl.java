@@ -9,6 +9,7 @@ import com.ziehlneelsen.laboratorio.dao.persona.PacienteDAO;
 import com.ziehlneelsen.laboratorio.dao.recepcion.RecepcionDAO;
 import com.ziehlneelsen.laboratorio.entities.recepcion.RecepcionEntity;
 import com.ziehlneelsen.laboratorio.entities.recepcion.RecepcionExamenGeneralEntity;
+import com.ziehlneelsen.laboratorio.repository.persona.MedicoRepository;
 import com.ziehlneelsen.laboratorio.repository.persona.PacienteRepository;
 import com.ziehlneelsen.laboratorio.repository.recepcion.RecepcionExamenGeneralRepository;
 import com.ziehlneelsen.laboratorio.repository.recepcion.RecepcionRepository;
@@ -37,6 +38,9 @@ public class RecepcionServiceImpl implements RecepcionService {
 
     @Autowired
     PacienteRepository pacienteRepository;
+
+    @Autowired
+    MedicoRepository medicoRepository;
 
     @Override
     public Integer obtenerFicha() {
@@ -103,7 +107,13 @@ public class RecepcionServiceImpl implements RecepcionService {
 
         recepcionResultadoDTO.setRecepcion(recepcionEntity);
         recepcionResultadoDTO.setPaciente(pacienteRepository.findById(recepcionEntity.getPacienteId()));
+        recepcionResultadoDTO.setMedico(medicoRepository.findById(recepcionEntity.getMedicoId()));
 
         return recepcionResultadoDTO;
+    }
+
+    @Override
+    public ResponseDTO guardarResultados(RecepcionExamenGeneralEntity resultado) {
+        return recepcionDAO.saveResultado(resultado);
     }
 }

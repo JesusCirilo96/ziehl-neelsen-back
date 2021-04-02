@@ -1,5 +1,6 @@
 package com.ziehlneelsen.laboratorio.beans.recepcion;
 
+import com.ziehlneelsen.laboratorio.entities.persona.MedicoEntity;
 import com.ziehlneelsen.laboratorio.entities.persona.PacienteEntity;
 import com.ziehlneelsen.laboratorio.entities.recepcion.RecepcionEntity;
 import com.ziehlneelsen.laboratorio.entities.recepcion.RecepcionExamenGeneralEntity;
@@ -11,6 +12,8 @@ public class RecepcionResultadoDTO {
 
     Optional<PacienteEntity> paciente;
 
+    Optional<MedicoEntity> medico;
+
     RecepcionEntity recepcion;
 
     List<RecepcionExamenGeneralEntity> recepcionExamen;
@@ -21,6 +24,14 @@ public class RecepcionResultadoDTO {
 
     public void setPaciente(Optional<PacienteEntity> paciente) {
         this.paciente = paciente;
+    }
+
+    public Optional<MedicoEntity> getMedico() {
+        return medico;
+    }
+
+    public void setMedico(Optional<MedicoEntity> medico) {
+        this.medico = medico;
     }
 
     public RecepcionEntity getRecepcion() {

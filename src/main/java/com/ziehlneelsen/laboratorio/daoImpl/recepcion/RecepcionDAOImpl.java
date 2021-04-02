@@ -1,23 +1,22 @@
 package com.ziehlneelsen.laboratorio.daoImpl.recepcion;
 
-import com.ziehlneelsen.laboratorio.beans.recepcion.RecepcionResultadoDTO;
+import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.constant.Constantes;
+import com.ziehlneelsen.laboratorio.constant.Messages;
 import com.ziehlneelsen.laboratorio.dao.recepcion.RecepcionDAO;
 import com.ziehlneelsen.laboratorio.entities.recepcion.RecepcionEntity;
 import com.ziehlneelsen.laboratorio.entities.recepcion.RecepcionExamenGeneralEntity;
 import com.ziehlneelsen.laboratorio.repository.persona.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
+import javax.persistence.criteria.*;
 import java.util.List;
 
 @Service
@@ -25,12 +24,14 @@ public class RecepcionDAOImpl implements RecepcionDAO {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("laboratorio");
 
+    private EntityManager em;
+
     @Autowired
     PacienteRepository pacienteRepository;
 
     @Override
     public Integer obtenerFicha() {
-        EntityManager em = emf.createEntityManager();
+        em = emf.createEntityManager();
         int max = 0;
         try {
             CriteriaBuilder cb = emf.getCriteriaBuilder();
@@ -60,9 +61,9 @@ public class RecepcionDAOImpl implements RecepcionDAO {
     @Override
     public List<RecepcionExamenGeneralEntity> obtenerResultados(String idRecepcion) {
 
-        List<RecepcionExamenGeneralEntity> recepcionExamen = new ArrayList<>();
+        List<RecepcionExamenGeneralEntity> recepcionExamen;
 
-        EntityManager em = emf.createEntityManager();
+        em = emf.createEntityManager();
         try {
             CriteriaBuilder cb = emf.getCriteriaBuilder();
 
@@ -90,7 +91,7 @@ public class RecepcionDAOImpl implements RecepcionDAO {
 
         System.out.println("WHERE:: " + where + " Igual A:: " + equal);
 
-        EntityManager em = emf.createEntityManager();
+        em = emf.createEntityManager();
         try {
             CriteriaBuilder cb = emf.getCriteriaBuilder();
 
@@ -120,5 +121,45 @@ public class RecepcionDAOImpl implements RecepcionDAO {
         }
 
         return recepcionList;
+    }
+
+    @Override
+    @Transactional
+    @Modifying
+    public ResponseDTO saveResultado(RecepcionExamenGeneralEntity resultado) {
+        ResponseDTO response = new ResponseDTO();
+
+        em = emf.createEntityManager();
+        try {
+            CriteriaBuilder cb = emf.getCriteriaBuilder();
+
+            CriteriaUpdate<RecepcionExamenGeneralEntity> update = cb.createCriteriaUpdate(RecepcionExamenGeneralEntity.class);
+
+            Root saveResult = update.from(RecepcionExamenGeneralEntity.class);
+
+            Predicate examenId = cb.equal(saveResult.get("examenId"),resultado.getExamenId());
+            Predicate recepcionId = cb.equal(saveResult.get("recepcionId"),resultado.getRecepcionId());
+            Predicate clausula = cb.and(examenId,recepcionId);
+
+            update.set("resultado", resultado.getResultado());
+
+            update.where(clausula);
+
+            em.getTransaction().begin();
+            em.createQuery(update).executeUpdate();
+            em.getTransaction().commit();
+
+            response.setErrorCode(Messages.OK);
+            response.setErrorInfo(Messages.UPDATE_OK);
+
+        }catch (DataAccessException e){
+            response.setErrorCode(Messages.ERROR);
+            response.setErrorInfo(Messages.UPDATE_ERROR);
+            throw e;
+        }finally {
+            em.close();
+        }
+
+        return response;
     }
 }

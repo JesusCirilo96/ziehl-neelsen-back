@@ -43,4 +43,11 @@ public interface RecepcionService {
      * @return Objeto con los datos de la recepcion del paciente y los resultados
      */
     RecepcionResultadoDTO obtenerResultados(String idRecepcion);
+
+    /**
+     * Guardamos los resultados del examen
+     * @param resultado La entidad con el examen y el resultado
+     * @return Respuesta del service
+     */
+    ResponseDTO guardarResultados(RecepcionExamenGeneralEntity resultado);
 }

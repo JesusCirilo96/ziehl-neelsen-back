@@ -37,6 +37,9 @@ public class ExamenGeneralEntity {
     @Column(name = "CLAVE")
     String clave;
 
+    @Column(name = "LAYOUT")
+    Integer layout;
+
     @Column(name = "CATEGORIA_ID")
     Integer categoriaId;
 
@@ -122,6 +125,14 @@ public class ExamenGeneralEntity {
     public void setCotizacionExamenGeneral(Set<CotizacionExamenGeneral> cotizacionExamenGeneral) {
         this.cotizacionExamenGeneral = cotizacionExamenGeneral;
     }*/
+
+    public Integer getLayout() {
+        return layout;
+    }
+
+    public void setLayout(Integer layout) {
+        this.layout = layout;
+    }
 
     public String getFechaCreacion() {
         return fechaCreacion;
