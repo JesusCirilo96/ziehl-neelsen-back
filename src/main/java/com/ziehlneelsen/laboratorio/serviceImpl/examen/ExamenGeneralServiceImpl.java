@@ -5,6 +5,7 @@ import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.beans.estudio.EstudioDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenEstudioDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenSeccionDTO;
+import com.ziehlneelsen.laboratorio.beans.examen.ExamenSeccionSaveDTO;
 import com.ziehlneelsen.laboratorio.constant.Messages;
 import com.ziehlneelsen.laboratorio.dao.examen.ExamenGeneralDAO;
 import com.ziehlneelsen.laboratorio.dao.examen.ExamenGeneralSeccionDAO;
@@ -12,10 +13,12 @@ import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenEstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralSeccionEntity;
+import com.ziehlneelsen.laboratorio.entities.seccion.SeccionEntity;
 import com.ziehlneelsen.laboratorio.repository.estudio.EstudioRepository;
 import com.ziehlneelsen.laboratorio.repository.examen.ExamenEstudioRepository;
 import com.ziehlneelsen.laboratorio.repository.examen.ExamenGeneralRepository;
 import com.ziehlneelsen.laboratorio.repository.examen.ExamenSeccionRepository;
+import com.ziehlneelsen.laboratorio.repository.seccion.SeccionRepository;
 import com.ziehlneelsen.laboratorio.service.examen.ExamenGeneralService;
 import com.ziehlneelsen.laboratorio.util.Utileria;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +50,9 @@ public class ExamenGeneralServiceImpl implements ExamenGeneralService {
 
     @Autowired
     ExamenSeccionRepository examenSeccionRepository;
+
+    @Autowired
+    SeccionRepository seccionRepository;
 
     @Override
     public List<ExamenGeneralEntity> findAll() {
@@ -117,6 +123,7 @@ public class ExamenGeneralServiceImpl implements ExamenGeneralService {
             estudio.setEstado(true);
             estudio.setFechaCreacion(Utileria.fechaHoraActual());
             estudio.setFechaActualizacion(Utileria.fechaHoraActual());
+            estudio.setComodin(false);
 
             estudioRepository.save(estudio);
 
@@ -142,16 +149,42 @@ public class ExamenGeneralServiceImpl implements ExamenGeneralService {
     }
 
     @Override
-    public ResponseDTO saveSeccionExamen(ExamenGeneralSeccionEntity examenSeccion) {
+    public ResponseDTO saveSeccionExamen(ExamenSeccionSaveDTO examenSeccion) {
         ResponseDTO responseDTO = new ResponseDTO();
-        try {
-            examenSeccionRepository.save(examenSeccion);
+
+        Integer idSeccion;
+        if(examenSeccion.isPorId()){
+            idSeccion = examenSeccion.getSeccionId();
+        }else{
+            SeccionEntity seccion = new SeccionEntity();
+            seccion.setNombre(examenSeccion.getNombreSeccion());
+            seccion.setTitulo(examenSeccion.getTitulo());
+            seccion.setTextoCent(examenSeccion.getTextoCent());
+            seccion.setTextoDer(examenSeccion.getTextoDer());
+            seccion.setEstado(true);
+            seccion.setFechaCreacion(Utileria.fechaHoraActual());
+            seccion.setFechaActualizacion(Utileria.fechaHoraActual());
+
+            seccionRepository.save(seccion);
+
+            idSeccion = seccion.getSeccionId();
+        }
+        try{
+            ExamenGeneralSeccionEntity seccionExamen = new ExamenGeneralSeccionEntity();
+
+            seccionExamen.setSeccionId(idSeccion);
+            seccionExamen.setExamenId(examenSeccion.getExamenId());
+            seccionExamen.setOrden(examenSeccion.getOrden());
+
+            examenSeccionRepository.save(seccionExamen);
+
             responseDTO.setErrorCode(Messages.OK);
             responseDTO.setErrorInfo(Messages.REGISTER_OK);
         }catch (DataAccessException e){
             responseDTO.setErrorCode(Messages.ERROR);
             responseDTO.setErrorInfo(e.getMostSpecificCause().toString());
         }
+
         return responseDTO;
     }
 

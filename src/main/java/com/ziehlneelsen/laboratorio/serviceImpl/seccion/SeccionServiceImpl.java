@@ -4,6 +4,7 @@ import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.beans.seccion.AuxSeccionEstudioDTO;
 import com.ziehlneelsen.laboratorio.beans.seccion.SeccionEstudioDTO;
 import com.ziehlneelsen.laboratorio.constant.Messages;
+import com.ziehlneelsen.laboratorio.dao.estudio.ReferenciaDAO;
 import com.ziehlneelsen.laboratorio.dao.seccion.SeccionEstudioDAO;
 import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.seccion.SeccionEntity;
@@ -36,6 +37,9 @@ public class SeccionServiceImpl implements SeccionService {
 
     @Autowired
     EstudioRepository estudioRepository;
+
+    @Autowired
+    ReferenciaDAO referenciaDAO;
 
     @Override
     public List<SeccionEntity> findAll() {
@@ -85,6 +89,7 @@ public class SeccionServiceImpl implements SeccionService {
             idEstudio = seccionEstudio.getEstudioId();
         }else{
             estudio.setNombre(seccionEstudio.getNombreEstudio());
+            estudio.setComodin(false);
             estudio.setEstado(true);
             estudio.setFechaCreacion(Utileria.fechaHoraActual());
             estudio.setFechaActualizacion(Utileria.fechaHoraActual());
@@ -117,5 +122,23 @@ public class SeccionServiceImpl implements SeccionService {
     @Modifying
     public ResponseDTO deleteSeccionEstudio(Integer seccionId, Integer estudioId) {
         return seccionEstudioDAO.deleteSeccionEstudio(seccionId, estudioId);
+    }
+
+    @Override
+    @Transactional
+    @Modifying
+    public ResponseDTO updateSeccionEstudio(AuxSeccionEstudioDTO seccionEstudio) {
+        ResponseDTO responseDTO = new ResponseDTO();
+        try {
+            referenciaDAO.actualizaNombreEstudio(seccionEstudio.getEstudioId(), seccionEstudio.getNombreEstudio());
+            seccionEstudioDAO.updateOrdenSeccionEstudio(seccionEstudio.getSeccionId(), seccionEstudio.getEstudioId(), seccionEstudio.getOrden());
+            responseDTO.setErrorCode(Messages.OK);
+            responseDTO.setErrorInfo(Messages.UPDATE_OK);
+        }catch (DataAccessException ex){
+            responseDTO.setErrorCode(Messages.ERROR);
+            responseDTO.setErrorInfo(ex.getMostSpecificCause().toString());
+        }
+
+        return responseDTO;
     }
 }

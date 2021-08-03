@@ -18,15 +18,21 @@ public class ExamenGeneralEntity {
     @Column(name = "EXAMEN_ID")
     Integer examenGeneralId;
 
-    @NotBlank(message = "En nombre es obligatorio")
+    @NotBlank(message = "El nombre es obligatorio")
     @Column(name = "NOMBRE")
     String nombre;
 
     @Column(name = "ALIAS")
     String alias;
 
-    @Column(name = "TITULO_EXAMEN")
-    String titulo;
+    @Column(name = "TITULO_EXAMEN_IZQUIERDO")
+    String tituloIzquierdo;
+
+    @Column(name = "TITULO_EXAMEN_CENTRO")
+    String tituloCentro;
+
+    @Column(name = "TITULO_EXAMEN_DERECHO")
+    String tituloDerecho;
 
     @Column(name = "ESTADO", columnDefinition = "boolean default true")
     Boolean estado;
@@ -94,12 +100,28 @@ public class ExamenGeneralEntity {
         this.precio = precio;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getTituloIzquierdo() {
+        return tituloIzquierdo;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setTituloIzquierdo(String tituloIzquierdo) {
+        this.tituloIzquierdo = tituloIzquierdo;
+    }
+
+    public String getTituloCentro() {
+        return tituloCentro;
+    }
+
+    public void setTituloCentro(String tituloCentro) {
+        this.tituloCentro = tituloCentro;
+    }
+
+    public String getTituloDerecho() {
+        return tituloDerecho;
+    }
+
+    public void setTituloDerecho(String tituloDerecho) {
+        this.tituloDerecho = tituloDerecho;
     }
 
     public String getClave() {

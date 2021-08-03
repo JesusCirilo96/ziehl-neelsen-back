@@ -41,6 +41,8 @@ public class Url {
 
     //Estudio
     public static final String ESTUDIO = "/estudio";
+    public static final String COMODIN = "/update/comodin/{estudioId}/{estado}";
+    public static final String RES_SELECT = "/update/select";
 
     //Clasificacion paciente
     public static final String CLASIFICACION_PACIENTE = "/clasificacion/paciente";
@@ -59,7 +61,11 @@ public class Url {
     //Metodo
     public static final String METODO = "/metodo";
     public static final String METODO_BY_SECCION = "/seccion/{id}";
+    public static final String METODO_BY_ESTUDIO = "/estudio/{estudioId}";
     public static final String SAVE_METODO_SECCION = "/seccion/save";
+    public static final String SAVE_METODO_ESTUDIO = "/estudio/save";
+    public static final String DELETE_METODO_SECCION = "/seccion/delete/{seccionId}/{metodoId}";
+    public static final String DELETE_METODO_ESTUDIO = "/estudio/delete/{estudioId}/{metodoId}";
 
     //Persona
     public static final String USUARIO = "/usuario";
@@ -77,6 +83,7 @@ public class Url {
     public static final String SECCION_ESTUDIO = "/estudio/{id}";
     public static final String SAVE_SECCION_ESTUDIO = "/estudio/save";
     public static final String DELETE_SECCION_ESTUDIO = "/estudio/delete/{seccionId}/{estudioId}";
+    public static final String UPDATE_SECCION_ESTUDIO = "/estudio/update";
 
     //Recepcion
     public static final String RECEPCION = "/recepcion";

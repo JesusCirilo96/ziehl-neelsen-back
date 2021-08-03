@@ -5,6 +5,8 @@ public class AuxSeccionEstudioDTO {
 
     private String nombreEstudio;
 
+    private String comodin;
+
     private boolean porId;
 
     private Integer estudioId;

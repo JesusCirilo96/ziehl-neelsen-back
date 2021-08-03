@@ -4,6 +4,7 @@ import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenEstudioDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenSeccionDTO;
+import com.ziehlneelsen.laboratorio.beans.examen.ExamenSeccionSaveDTO;
 import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralSeccionEntity;
@@ -73,7 +74,7 @@ public interface ExamenGeneralService {
      * @param examenSeccion El objeto de el examen seccion a guardar
      * @return respuesta del repositorio
      */
-    ResponseDTO saveSeccionExamen(ExamenGeneralSeccionEntity examenSeccion);
+    ResponseDTO saveSeccionExamen(ExamenSeccionSaveDTO examenSeccion);
 
     /**
      * Eliminamos la seccion relacionada con el examen general

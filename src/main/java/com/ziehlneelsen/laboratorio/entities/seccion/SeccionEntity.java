@@ -19,6 +19,12 @@ public class SeccionEntity {
     @Column(name = "NOMBRE")
     String nombre;
 
+    @Column(name = "TEXTO_CENTRO")
+    String textoCent;
+
+    @Column(name = "TEXTO_DERECHO")
+    String textoDer;
+
     @Column(name = "TITULO")
     String titulo;
 
@@ -45,6 +51,22 @@ public class SeccionEntity {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getTextoCent() {
+        return textoCent;
+    }
+
+    public void setTextoCent(String textoCent) {
+        this.textoCent = textoCent;
+    }
+
+    public String getTextoDer() {
+        return textoDer;
+    }
+
+    public void setTextoDer(String textoDer) {
+        this.textoDer = textoDer;
     }
 
     public Boolean getEstado() {

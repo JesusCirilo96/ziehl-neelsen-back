@@ -40,4 +40,11 @@ public interface SeccionService {
      */
     ResponseDTO deleteSeccionEstudio(Integer seccionId, Integer estudioId);
 
+    /**
+     * Actualizamos los datos de la seccion estudio.
+     * @param seccionEstudio El objeto con la seccion y el estudio a guardar
+     * @return Respuesta del repositorio
+     */
+    ResponseDTO updateSeccionEstudio(AuxSeccionEstudioDTO seccionEstudio);
+
 }

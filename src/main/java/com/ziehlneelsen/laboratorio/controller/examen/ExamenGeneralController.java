@@ -3,10 +3,10 @@ package com.ziehlneelsen.laboratorio.controller.examen;
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenEstudioDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenSeccionDTO;
+import com.ziehlneelsen.laboratorio.beans.examen.ExamenSeccionSaveDTO;
 import com.ziehlneelsen.laboratorio.constant.Url;
 import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
-import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralSeccionEntity;
 import com.ziehlneelsen.laboratorio.service.examen.ExamenGeneralService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -74,7 +74,7 @@ public class ExamenGeneralController {
     }
 
     @RequestMapping(value = Url.SAVE_EXAMEN_SECCION, method = RequestMethod.POST, produces = Url.APLICATION_JSON)
-    public ResponseEntity saveSeccionExamen(@Valid @RequestBody ExamenGeneralSeccionEntity examenSeccion, BindingResult bindingResult) {
+    public ResponseEntity saveSeccionExamen(@Valid @RequestBody ExamenSeccionSaveDTO examenSeccion, BindingResult bindingResult) {
 
         ResponseDTO response;
         if(bindingResult.hasErrors()) {

@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = Url.SECCION)
-@CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET, RequestMethod.DELETE})
+@CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET, RequestMethod.DELETE, RequestMethod.PUT})
 public class SeccionController {
     @Autowired
     SeccionService seccionService;
@@ -62,9 +62,20 @@ public class SeccionController {
     }
 
     @RequestMapping(value = Url.DELETE_SECCION_ESTUDIO, method = RequestMethod.DELETE, produces = Url.APLICATION_JSON)
-    public ResponseEntity deleteExamenEstudio(@PathVariable Integer seccionId, @PathVariable Integer estudioId){
+    public ResponseEntity deleteSeccionEstudio(@PathVariable Integer seccionId, @PathVariable Integer estudioId){
         ResponseDTO responseDTO = seccionService.deleteSeccionEstudio(seccionId, estudioId);
 
         return  new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = Url.UPDATE_SECCION_ESTUDIO, method = RequestMethod.PUT, produces = Url.APLICATION_JSON)
+    public ResponseEntity updateSeccionEstudio(@Valid @RequestBody AuxSeccionEstudioDTO seccionEstudio, BindingResult bindingResult) {
+
+        ResponseDTO response;
+        if(bindingResult.hasErrors()) {
+            return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.OK);
+        }
+        response = seccionService.updateSeccionEstudio(seccionEstudio);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

@@ -30,10 +30,33 @@ public interface MetodoService {
     List<MetodoDTO> getMetodoBySeccion(Integer seccionId);
 
     /**
+     * Obtener los metodos del estudio
+     * @param estudioId El id del estudio
+     * @return Lista con los metodos
+     */
+    List<MetodoDTO> getMetodoByEstudio(Integer estudioId);
+
+    /**
      * Guardar o actualizar en BD un metodo
      * @param metodo El metodo a guardar
      * @return Respuesta
      */
     ResponseDTO save(MetodoEntity metodo);
+
+    /**
+     * Eliminamos el metodoseccion
+     * @param seccionId El id de la seccion a eliminar
+     * @param metodoId El id del metodo a eliminar
+     * @return Respuesta del servicio
+     */
+    ResponseDTO deleteMetodoSeccion(Integer seccionId, Integer metodoId);
+
+    /**
+     * Eliminamos metodoestudio
+     * @param estudioId El id del estudio a eliminar
+     * @param metodoId El id del metodo a eliminar
+     * @return Respuesta del servicio
+     */
+    ResponseDTO deleteMetodoEstudio(Integer estudioId, Integer metodoId);
 
 }

@@ -25,6 +25,12 @@ public class EstudioEntity implements Serializable {
     @Column(name = "RESULTADO")
     String resultado;
 
+    @Column(name = "RESULTADO_SELECT")
+    String resultadoSelect;
+
+    @Column(name = "COMODIN")
+    Boolean comodin;
+
     @Column(name = "ESTADO", columnDefinition = "boolean default true")
     Boolean estado;
 
@@ -58,6 +64,22 @@ public class EstudioEntity implements Serializable {
 
     public void setResultado(String resultado) {
         this.resultado = resultado;
+    }
+
+    public String getResultadoSelect() {
+        return resultadoSelect;
+    }
+
+    public void setResultadoSelect(String resultadoSelect) {
+        this.resultadoSelect = resultadoSelect;
+    }
+
+    public Boolean getComodin() {
+        return comodin;
+    }
+
+    public void setComodin(Boolean comodin) {
+        this.comodin = comodin;
     }
 
     public Boolean getEstado() {

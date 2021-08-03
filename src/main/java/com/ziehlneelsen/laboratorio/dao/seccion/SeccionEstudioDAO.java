@@ -21,4 +21,13 @@ public interface SeccionEstudioDAO {
      * @return Respuesta del servicio
      */
     ResponseDTO deleteSeccionEstudio(Integer seccionId, Integer estudioId);
+
+    /**
+     * Actualiza el orden del seccionEstudio
+     * @param seccionId El id de la seccion
+     * @param estudioId El id del estudio
+     * @param orden El orden a colocar
+     * @return
+     */
+    ResponseDTO updateOrdenSeccionEstudio(Integer seccionId, Integer estudioId,Integer orden);
 }

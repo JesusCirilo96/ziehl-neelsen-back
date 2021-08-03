@@ -1,7 +1,9 @@
 package com.ziehlneelsen.laboratorio.serviceImpl.estudio;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.estudio.EstudioSelectDTO;
 import com.ziehlneelsen.laboratorio.constant.Messages;
+import com.ziehlneelsen.laboratorio.dao.estudio.ReferenciaDAO;
 import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.repository.estudio.EstudioRepository;
 import com.ziehlneelsen.laboratorio.service.estudio.EstudioService;
@@ -16,6 +18,9 @@ import java.util.Optional;
 public class EstudioServiceImpl implements EstudioService {
     @Autowired
     EstudioRepository estudioRepository;
+
+    @Autowired
+    ReferenciaDAO referenciaDAO;
 
     @Override
     public List<EstudioEntity> findAll() {
@@ -45,5 +50,15 @@ public class EstudioServiceImpl implements EstudioService {
             }
         }
         return response;
+    }
+
+    @Override
+    public ResponseDTO updateComodin(Integer estudioId, Boolean estado) {
+        return referenciaDAO.actualizarComodin(estudioId, estado);
+    }
+
+    @Override
+    public ResponseDTO updateSelect(EstudioSelectDTO selectEstudio) {
+        return referenciaDAO.actualizarSelectRespuesta(selectEstudio);
     }
 }

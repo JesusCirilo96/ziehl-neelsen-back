@@ -1,6 +1,7 @@
 package com.ziehlneelsen.laboratorio.controller.estudio;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.estudio.EstudioSelectDTO;
 import com.ziehlneelsen.laboratorio.constant.Url;
 import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.service.estudio.EstudioService;
@@ -40,6 +41,24 @@ public class EstudioController {
             return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.OK);
         }
         response = estudioService.save(estudio);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = Url.COMODIN, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
+    public ResponseEntity updateComodin(@PathVariable Integer estudioId, @PathVariable Boolean estado){
+        ResponseDTO response;
+        response = estudioService.updateComodin(estudioId, estado);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = Url.RES_SELECT, method = RequestMethod.POST, produces = Url.APLICATION_JSON)
+    public ResponseEntity updateSelect(@Valid @RequestBody EstudioSelectDTO estudio, BindingResult bindingResult) {
+
+        ResponseDTO response;
+        if(bindingResult.hasErrors()) {
+            return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.OK);
+        }
+        response = estudioService.updateSelect(estudio);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

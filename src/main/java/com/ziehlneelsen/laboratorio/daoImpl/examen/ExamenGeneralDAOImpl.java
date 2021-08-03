@@ -6,6 +6,7 @@ import com.ziehlneelsen.laboratorio.beans.estudio.EstudioDTO;
 import com.ziehlneelsen.laboratorio.constant.Messages;
 import com.ziehlneelsen.laboratorio.dao.estudio.ReferenciaDAO;
 import com.ziehlneelsen.laboratorio.dao.examen.ExamenGeneralDAO;
+import com.ziehlneelsen.laboratorio.dao.metodo.SeccionMetodoDAO;
 import com.ziehlneelsen.laboratorio.entities.descuento.DescuentoEntity;
 import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.examen.*;
@@ -32,6 +33,9 @@ public class ExamenGeneralDAOImpl implements ExamenGeneralDAO {
 
     @Autowired
     ReferenciaDAO referenciaDAO;
+
+    @Autowired
+    SeccionMetodoDAO seccionMetodoDAO;
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("laboratorio");
 
@@ -119,6 +123,7 @@ public class ExamenGeneralDAOImpl implements ExamenGeneralDAO {
                 estudioDTO.setFechaCreacion(estudio.getEstudio().getFechaCreacion());
                 estudioDTO.setFechaActualizacion(estudio.getEstudio().getFechaActualizacion());
                 estudioDTO.setReferencia(referenciaDAO.getByEstudio(estudio.getEstudio().getEstudioId()));
+                estudioDTO.setMetodo(seccionMetodoDAO.getMetodoByEstudio(estudio.getEstudio().getEstudioId()));
                 estudios.add(estudioDTO);
             });
 

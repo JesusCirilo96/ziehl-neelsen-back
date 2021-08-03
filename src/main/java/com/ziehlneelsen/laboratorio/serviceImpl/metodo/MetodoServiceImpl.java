@@ -42,6 +42,11 @@ public class MetodoServiceImpl implements MetodoService {
     }
 
     @Override
+    public List<MetodoDTO> getMetodoByEstudio(Integer estudioId) {
+        return seccionMetodoDAO.getMetodoByEstudio(estudioId);
+    }
+
+    @Override
     public ResponseDTO save(MetodoEntity metodo) {
         ResponseDTO response = new ResponseDTO();
 
@@ -63,5 +68,15 @@ public class MetodoServiceImpl implements MetodoService {
             }
         }
         return response;
+    }
+
+    @Override
+    public ResponseDTO deleteMetodoSeccion(Integer seccionId, Integer metodoId) {
+        return seccionMetodoDAO.deleteMetodoSeccion(seccionId,metodoId);
+    }
+
+    @Override
+    public ResponseDTO deleteMetodoEstudio(Integer estudioId, Integer metodoId) {
+        return seccionMetodoDAO.deleteMetodoEstudio(estudioId,metodoId);
     }
 }
