@@ -80,13 +80,15 @@ public class RolDAOImpl implements RolDAO {
 
             query.select(c).where(idRol);
 
-            listRolMenu = em.createQuery(query).getResultList();
-            listRolMenu.forEach((menu) -> {
-                listMenu.add(menu.getSubMenu());
-            });
+            if (!listMenu.isEmpty()){
+                listRolMenu = em.createQuery(query).getResultList();
+                listRolMenu.forEach((menu) -> {
+                    listMenu.add(menu.getSubMenu());
+                });
 
-            rolMenu.setRol(listRolMenu.get(0).getRol());
-            rolMenu.setSubMenu(listMenu);
+                rolMenu.setRol(listRolMenu.get(0).getRol());
+                rolMenu.setSubMenu(listMenu);
+            }
 
         }catch (DataAccessException e){
             e.printStackTrace();

@@ -49,6 +49,9 @@ public class ExamenGeneralEntity {
     @Column(name = "CATEGORIA_ID")
     Integer categoriaId;
 
+    @Column(name = "METODO")
+    String metodo;
+
     @Column(name = "FECHA_CREACION")
     String fechaCreacion;
 

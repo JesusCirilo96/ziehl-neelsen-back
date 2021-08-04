@@ -2,8 +2,8 @@ package com.ziehlneelsen.laboratorio.serviceImpl.examen;
 
 import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
-import com.ziehlneelsen.laboratorio.beans.estudio.EstudioDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenEstudioDTO;
+import com.ziehlneelsen.laboratorio.beans.examen.ExamenMetodoAux;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenSeccionDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenSeccionSaveDTO;
 import com.ziehlneelsen.laboratorio.constant.Messages;
@@ -219,5 +219,12 @@ public class ExamenGeneralServiceImpl implements ExamenGeneralService {
     @Modifying
     public ResponseDTO deleteExamenEstudio(Integer examenId, Integer estudioId) {
         return examenGeneralDAO.deleteExamenEstudio(examenId, estudioId);
+    }
+
+    @Override
+    @Transactional
+    @Modifying
+    public ResponseDTO updateMetodo(ExamenMetodoAux examen) {
+        return examenGeneralDAO.updateMetodo(examen);
     }
 }

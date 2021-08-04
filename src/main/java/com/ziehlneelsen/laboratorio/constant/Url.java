@@ -31,6 +31,7 @@ public class Url {
 
     //Examen
     public static final String EXAMEN_GENERAL = "/examen";
+    public static final String UPDATE_METODO_EXAMEN = "/metodo/update";
     public static final String EXAMEN_DESCUENTO = "/descuento/{id}";
     public static final String EXAMEN_SECCION = "/seccion/{id}";
     public static final String SAVE_EXAMEN_ESTUDIO = "/estudio/save";

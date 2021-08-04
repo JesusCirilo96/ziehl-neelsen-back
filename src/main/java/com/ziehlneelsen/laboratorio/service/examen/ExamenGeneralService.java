@@ -3,6 +3,7 @@ package com.ziehlneelsen.laboratorio.service.examen;
 import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenEstudioDTO;
+import com.ziehlneelsen.laboratorio.beans.examen.ExamenMetodoAux;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenSeccionDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenSeccionSaveDTO;
 import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
@@ -98,4 +99,11 @@ public interface ExamenGeneralService {
      * @return Respuesta del repositorio
      */
     ResponseDTO deleteExamenEstudio(Integer examenId, Integer estudioId);
+
+    /**
+     * Actualizamos el metodo del examen
+     * @param examen Datos a actualizar
+     * @return Respuesta del servicio
+     */
+    ResponseDTO updateMetodo(ExamenMetodoAux examen);
 }

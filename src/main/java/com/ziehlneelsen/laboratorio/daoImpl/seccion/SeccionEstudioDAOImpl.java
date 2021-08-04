@@ -87,6 +87,7 @@ public class SeccionEstudioDAOImpl implements SeccionEstudioDAO {
                 estudioDTO.setFechaActualizacion(estudio.getEstudio().getFechaActualizacion());
                 estudioDTO.setReferencia(referenciaDAO.getByEstudio(estudio.getEstudio().getEstudioId()));
                 estudioDTO.setMetodo(seccionMetodoDAO.getMetodoByEstudio(estudio.getEstudio().getEstudioId()));
+                estudioDTO.setMostrarInput(estudio.getEstudio().getMostrarInput());
                 listEstudio.add(estudioDTO);
             });
 

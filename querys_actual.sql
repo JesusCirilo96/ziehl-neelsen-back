@@ -1,13 +1,23 @@
 INSERT INTO cat_usuario VALUES
 ('1', 'Jesus Alberto', 'Martinez', 'Cirilo', 'jesuscirilo', '1234567', '12345', '1', '2019-07-19 00:00:00', '2019-07-19 00:00:00'),
-('2', 'Jaime', 'Cirilo', 'Jimenez', 'jaimecirilo', '01', '54321', '1', '2019-07-19 00:00:00', '2019-07-19 00:00:00');
+('2', 'Jaime', 'Cirilo', 'Jimenez', 'jaimecirilo', '01', '54321', '1', '2019-07-19 00:00:00', '2019-07-19 00:00:00'),
+('3', 'Ziehl', 'Neelsen', '', 'ziehneelsen', '01', 'ziehlneelse2021_', '1', '2019-07-19 00:00:00', '2019-07-19 00:00:00'),
+('4', 'Karen Dennis', 'Martinez', 'Cirilo', 'karen2021', '01', 'karen2021', '1', '2019-07-19 00:00:00', '2019-07-19 00:00:00');
 
 INSERT INTO rol VALUES
 ('1','Super Administrador','1'),
 ('2','Administrador','1'),
-('3', 'Recepcion', '1');
+('3', 'Recepcion', '1'),
+('4', 'Quimico', '1');
 
-INSERT INTO usuario_rol VALUES(UUID_TO_BIN(UUID()),1,1);
+
+INSERT INTO usuario_rol VALUES
+(UUID_TO_BIN(UUID()),1,1),
+(UUID_TO_BIN(UUID()),2,2),
+(UUID_TO_BIN(UUID()),2,4),
+(UUID_TO_BIN(UUID()),3,3),
+(UUID_TO_BIN(UUID()),4,4);
+
 
 INSERT INTO menu VALUES
 ('1', 'Inicio', '/inicio',0,'',1),
@@ -46,7 +56,10 @@ INSERT INTO rol_menu VALUES
 (UUID_TO_BIN(UUID()),1,3,1,1,1,1),
 (UUID_TO_BIN(UUID()),1,4,1,1,1,1),
 (UUID_TO_BIN(UUID()),1,5,1,1,1,1),
-(UUID_TO_BIN(UUID()),1,6,1,1,1,1);
+(UUID_TO_BIN(UUID()),1,6,1,1,1,1),
+(UUID_TO_BIN(UUID()),3,2,1,1,1,1),
+(UUID_TO_BIN(UUID()),3,3,1,1,1,1),
+(UUID_TO_BIN(UUID()),4,3,1,1,1,1);
 
 INSERT INTO rol_sub_menu VALUES
 (UUID_TO_BIN(UUID()),1,1,1,1,1,1),

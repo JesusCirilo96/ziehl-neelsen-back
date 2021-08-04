@@ -3,6 +3,7 @@ package com.ziehlneelsen.laboratorio.dao.examen;
 import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.beans.estudio.EstudioDTO;
+import com.ziehlneelsen.laboratorio.beans.examen.ExamenMetodoAux;
 import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
 
@@ -46,4 +47,11 @@ public interface ExamenGeneralDAO {
      * @return Respuesta del servicio
      */
     ResponseDTO deleteExamenEstudio(Integer examenId, Integer estudioId);
+
+    /**
+     * Actualiza los metodos del examen
+     * @param examen Los datos a actualizar
+     * @return Respuesta del servicio
+     */
+    ResponseDTO updateMetodo(ExamenMetodoAux examen);
 }

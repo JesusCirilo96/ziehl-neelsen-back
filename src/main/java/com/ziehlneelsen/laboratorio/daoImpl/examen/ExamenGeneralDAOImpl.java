@@ -3,6 +3,7 @@ package com.ziehlneelsen.laboratorio.daoImpl.examen;
 import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.beans.estudio.EstudioDTO;
+import com.ziehlneelsen.laboratorio.beans.examen.ExamenMetodoAux;
 import com.ziehlneelsen.laboratorio.constant.Messages;
 import com.ziehlneelsen.laboratorio.dao.estudio.ReferenciaDAO;
 import com.ziehlneelsen.laboratorio.dao.examen.ExamenGeneralDAO;
@@ -224,4 +225,40 @@ public class ExamenGeneralDAOImpl implements ExamenGeneralDAO {
         return response;
     }
 
+    @Override
+    @Transactional
+    @Modifying
+    public ResponseDTO updateMetodo(ExamenMetodoAux examen) {
+        ResponseDTO response = new ResponseDTO();
+        EntityManager em = emf.createEntityManager();
+        try {
+            CriteriaBuilder cb = emf.getCriteriaBuilder();
+
+            CriteriaUpdate<ExamenGeneralEntity> update = cb.createCriteriaUpdate(ExamenGeneralEntity.class);
+
+            Root updateComodin = update.from(ExamenGeneralEntity.class);
+
+            Predicate examenId = cb.equal(updateComodin.get("examenGeneralId"),examen.getExamenId());
+
+            update.set("metodo", examen.getMetodo());
+
+            update.where(examenId);
+
+            em.getTransaction().begin();
+            em.createQuery(update).executeUpdate();
+            em.getTransaction().commit();
+
+            response.setErrorCode(Messages.OK);
+            response.setErrorInfo(Messages.UPDATE_OK);
+
+        }catch (DataAccessException e){
+            response.setErrorCode(Messages.ERROR);
+            response.setErrorInfo(Messages.UPDATE_ERROR);
+            throw e;
+        }finally {
+            em.close();
+        }
+
+        return response;
+    }
 }

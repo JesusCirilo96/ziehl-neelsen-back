@@ -2,6 +2,7 @@ package com.ziehlneelsen.laboratorio.controller.examen;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenEstudioDTO;
+import com.ziehlneelsen.laboratorio.beans.examen.ExamenMetodoAux;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenSeccionDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenSeccionSaveDTO;
 import com.ziehlneelsen.laboratorio.constant.Url;
@@ -107,5 +108,16 @@ public class ExamenGeneralController {
         ResponseDTO responseDTO = examenGeneralService.deleteExamenEstudio(examenId, estudioId);
 
         return  new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = Url.UPDATE_METODO_EXAMEN, method = RequestMethod.PUT, produces = Url.APLICATION_JSON)
+    public ResponseEntity actualizarMetodo(@Valid @RequestBody ExamenMetodoAux examen, BindingResult bindingResult) {
+
+        ResponseDTO response;
+        if(bindingResult.hasErrors()) {
+            return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.OK);
+        }
+        response = examenGeneralService.updateMetodo(examen);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
