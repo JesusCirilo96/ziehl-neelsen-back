@@ -9,7 +9,7 @@ import com.ziehlneelsen.laboratorio.dao.estudio.ReferenciaDAO;
 import com.ziehlneelsen.laboratorio.dao.metodo.SeccionMetodoDAO;
 import com.ziehlneelsen.laboratorio.dao.seccion.SeccionEstudioDAO;
 import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
-import com.ziehlneelsen.laboratorio.entities.seccion.SeccionEntity;
+import com.ziehlneelsen.laboratorio.entities.examen.ExamenEstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.seccion.SeccionEstudio;
 import com.ziehlneelsen.laboratorio.entities.seccion.SeccionEstudioEntity;
 import com.ziehlneelsen.laboratorio.repository.seccion.SeccionRepository;
@@ -65,7 +65,6 @@ public class SeccionEstudioDAOImpl implements SeccionEstudioDAO {
             listSeccionEstudio = em.createQuery(query).getResultList();
             listSeccionEstudio.forEach((estudio) -> {
 
-
                 EstudioDTO estudioDTO = new EstudioDTO();
                 estudioDTO.setEstudioId(estudio.getEstudio().getEstudioId());
                 estudioDTO.setNombre(estudio.getEstudio().getNombre());
@@ -98,7 +97,6 @@ public class SeccionEstudioDAOImpl implements SeccionEstudioDAO {
         }finally {
             em.close();
         }
-
         seccionEstudio.setSeccion(seccionRepository.findById(seccionId));
         if(!listEstudio.isEmpty()){
             seccionEstudio.setMetodo(seccionMetodoDAO.getMetodoBySeccion(listSeccionEstudio.get(0).getSeccion().getSeccionId()));
@@ -163,6 +161,49 @@ public class SeccionEstudioDAOImpl implements SeccionEstudioDAO {
             Predicate examenId = cb.equal(updateOrden.get("estudioId"),idEstudio);
             Predicate seccionId = cb.equal(updateOrden.get("seccionId"),idSeccion);
             Predicate andPredicate = cb.and(examenId,seccionId);
+
+            update.set("orden", orden);
+
+            update.where(andPredicate);
+
+            em.getTransaction().begin();
+            int result = em.createQuery(update).executeUpdate();
+            em.getTransaction().commit();
+
+            if(result == 0){
+                response.setErrorCode(Messages.ERROR);
+                response.setErrorInfo(Messages.UPDATE_ERROR);
+            }
+            response.setErrorCode(Messages.OK);
+            response.setErrorInfo(Messages.UPDATE_OK);
+
+        }catch (DataAccessException e){
+            response.setErrorCode(Messages.ERROR);
+            response.setErrorInfo(Messages.UPDATE_ERROR);
+            throw e;
+        }finally {
+            em.close();
+        }
+
+        return response;
+    }
+
+    @Override
+    @Transactional
+    @Modifying
+    public ResponseDTO updateOrdenExamenEstudio(Integer idExamen, Integer idEstudio, Integer orden) {
+        ResponseDTO response = new ResponseDTO();
+        em = emf.createEntityManager();
+        try {
+            CriteriaBuilder cb = emf.getCriteriaBuilder();
+
+            CriteriaUpdate<ExamenEstudioEntity> update = cb.createCriteriaUpdate(ExamenEstudioEntity.class);
+
+            Root updateOrden = update.from(ExamenEstudioEntity.class);
+
+            Predicate examenId = cb.equal(updateOrden.get("examenId"),idExamen);
+            Predicate estudioId = cb.equal(updateOrden.get("estudioId"),idEstudio);
+            Predicate andPredicate = cb.and(examenId,estudioId);
 
             update.set("orden", orden);
 

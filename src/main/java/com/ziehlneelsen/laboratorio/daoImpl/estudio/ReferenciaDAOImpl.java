@@ -1,17 +1,14 @@
 package com.ziehlneelsen.laboratorio.daoImpl.estudio;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
-import com.ziehlneelsen.laboratorio.beans.estudio.EstudioDTO;
 import com.ziehlneelsen.laboratorio.beans.estudio.EstudioSelectDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ReferenciaDTO;
-import com.ziehlneelsen.laboratorio.beans.seccion.SeccionEstudioDTO;
 import com.ziehlneelsen.laboratorio.constant.Messages;
 import com.ziehlneelsen.laboratorio.dao.estudio.ReferenciaDAO;
 import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.estudio.Referencia;
-import com.ziehlneelsen.laboratorio.entities.recepcion.RecepcionExamenGeneralEntity;
-import com.ziehlneelsen.laboratorio.entities.seccion.SeccionEstudio;
-import com.ziehlneelsen.laboratorio.entities.seccion.SeccionEstudioEntity;
+import com.ziehlneelsen.laboratorio.entities.estudio.ReferenciaEntity;
+import com.ziehlneelsen.laboratorio.util.Utileria;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
@@ -23,6 +20,7 @@ import javax.persistence.Persistence;
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ReferenciaDAOImpl implements ReferenciaDAO {
@@ -46,16 +44,22 @@ public class ReferenciaDAOImpl implements ReferenciaDAO {
             Fetch<Referencia,EstudioEntity> p = c.fetch("estudio");
 
             Predicate predicateEstudioId = cb.equal(c.get("estudio"),idEstudio);
-            q.select(c).where(predicateEstudioId);
+            q.select(c).where(predicateEstudioId).orderBy(cb.asc(c.get("orden")));
+
             listReferencia = em.createQuery(q).getResultList();
             listReferencia.forEach((referencia) -> {
 
                 ReferenciaDTO referenciaDTO = new ReferenciaDTO();
 
                 referenciaDTO.setClasificacion(referencia.getClasificacionPaciente());
+                referenciaDTO.setReferenciaId(referencia.getReferenciaId());
                 referenciaDTO.setReferenciaFemenino(referencia.getFemenino());
                 referenciaDTO.setReferenciaMasculino(referencia.getMasculino());
                 referenciaDTO.setReferenciaGeneral(referencia.getGeneral());
+                referenciaDTO.setOrden(referencia.getOrden());
+                referenciaDTO.setNota(referencia.getNota());
+
+
                 referencias.add(referenciaDTO);
             });
 
@@ -158,8 +162,89 @@ public class ReferenciaDAOImpl implements ReferenciaDAO {
             Predicate examenId = cb.equal(updateNombre.get("estudioId"),idEstudio);
 
             update.set("nombre", nombre);
+            update.set("fechaActualizacion", Utileria.fechaHoraActual());
 
             update.where(examenId);
+
+            em.getTransaction().begin();
+            int result = em.createQuery(update).executeUpdate();
+            em.getTransaction().commit();
+
+            if(result == 0){
+                response.setErrorCode(Messages.ERROR);
+                response.setErrorInfo(Messages.UPDATE_ERROR);
+            }
+            response.setErrorCode(Messages.OK);
+            response.setErrorInfo(Messages.UPDATE_OK);
+
+        }catch (DataAccessException e){
+            response.setErrorCode(Messages.ERROR);
+            response.setErrorInfo(Messages.UPDATE_ERROR);
+            throw e;
+        }finally {
+            em.close();
+        }
+
+        return response;
+    }
+
+    @Override
+    public ResponseDTO eliminaReferencia(UUID referenciaId) {
+        EntityManager em = emf.createEntityManager();
+
+        ResponseDTO response = new ResponseDTO();
+        try{
+            CriteriaBuilder cb = emf.getCriteriaBuilder();
+            CriteriaDelete<ReferenciaEntity> queryDelete = cb.createCriteriaDelete(ReferenciaEntity.class);
+
+            Root<ReferenciaEntity> root = queryDelete.from(ReferenciaEntity.class);
+
+            Predicate idReferencia = cb.equal(root.get("referenciaId"), referenciaId);
+
+            queryDelete.where(idReferencia);
+
+            em.getTransaction().begin();
+            int result = em.createQuery(queryDelete).executeUpdate();
+            em.getTransaction().commit();
+
+            response.setErrorCode(Messages.OK);
+            response.setErrorInfo(Messages.DELETE_OK);
+
+            if(result == 0){
+                response.setErrorCode(Messages.ERROR);
+                response.setErrorInfo(Messages.ERROR_DELETE);
+            }
+        }catch (DataAccessException e){
+            response.setErrorCode(Messages.ERROR);
+            response.setErrorInfo(e.getMostSpecificCause().toString());
+        }finally {
+            em.close();
+        }
+        return response;
+    }
+
+    @Override
+    public ResponseDTO actualizaReferencia(ReferenciaEntity referenciaDTO) {
+        ResponseDTO response = new ResponseDTO();
+        em = emf.createEntityManager();
+        try {
+            CriteriaBuilder cb = emf.getCriteriaBuilder();
+
+            CriteriaUpdate<ReferenciaEntity> update = cb.createCriteriaUpdate(ReferenciaEntity.class);
+
+            Root updateRef = update.from(ReferenciaEntity.class);
+
+            Predicate referenciaId = cb.equal(updateRef.get("referenciaId"),referenciaDTO.getReferenciaId());
+
+            update.set("clasificacionId", referenciaDTO.getClasificacionId());
+            update.set("masculino", referenciaDTO.getMasculino());
+            update.set("femenino", referenciaDTO.getFemenino());
+            update.set("general", referenciaDTO.getGeneral());
+            update.set("orden", referenciaDTO.getOrden());
+            update.set("nota", referenciaDTO.getNota());
+
+
+            update.where(referenciaId);
 
             em.getTransaction().begin();
             int result = em.createQuery(update).executeUpdate();

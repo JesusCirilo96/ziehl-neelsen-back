@@ -30,4 +30,13 @@ public interface SeccionEstudioDAO {
      * @return
      */
     ResponseDTO updateOrdenSeccionEstudio(Integer seccionId, Integer estudioId,Integer orden);
+
+    /**
+     * Actualiza el orden el estudio del examen
+     * @param idExamen El id del examen
+     * @param idEstudio El id del estudio
+     * @param orden El orden a colocar
+     * @return
+     */
+    ResponseDTO updateOrdenExamenEstudio(Integer idExamen, Integer idEstudio, Integer orden);
 }

@@ -124,6 +124,7 @@ public class ExamenGeneralDAOImpl implements ExamenGeneralDAO {
                 estudioDTO.setFechaActualizacion(estudio.getEstudio().getFechaActualizacion());
                 estudioDTO.setReferencia(referenciaDAO.getByEstudio(estudio.getEstudio().getEstudioId()));
                 estudioDTO.setMetodo(seccionMetodoDAO.getMetodoByEstudio(estudio.getEstudio().getEstudioId()));
+                estudioDTO.setMostrarInput(estudio.getEstudio().getMostrarInput());
                 estudios.add(estudioDTO);
             });
 

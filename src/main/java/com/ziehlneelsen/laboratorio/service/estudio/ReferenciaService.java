@@ -5,6 +5,7 @@ import com.ziehlneelsen.laboratorio.beans.examen.ReferenciaDTO;
 import com.ziehlneelsen.laboratorio.entities.estudio.ReferenciaEntity;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface ReferenciaService {
 
@@ -27,4 +28,18 @@ public interface ReferenciaService {
      * @return Respuesta del service
      */
     ResponseDTO save(ReferenciaEntity referencia);
+
+    /**
+     * Elimina la referencia vinculada al estudio
+     * @param referenciaId la referencia a elimina
+     * @return Respuesta del servicio
+     */
+    ResponseDTO deleteReferencia(UUID referenciaId);
+
+    /**
+     * Actualizamos la referencia
+     * @param referencia Objeto con los datos de la referencia
+     * @return Respuesta del servicio
+     */
+    ResponseDTO updateReferencia(ReferenciaEntity referencia);
 }

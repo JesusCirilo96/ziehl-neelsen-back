@@ -13,6 +13,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ReferenciaServiceImpl implements ReferenciaService {
@@ -31,8 +32,6 @@ public class ReferenciaServiceImpl implements ReferenciaService {
     public List<ReferenciaDTO> findByEstudio(Integer idEstudio) {
 
         List<ReferenciaDTO> referencia = referenciaDAO.getByEstudio(idEstudio);
-
-        System.out.println(referencia.toString());
 
         return referencia;
     }
@@ -53,6 +52,9 @@ public class ReferenciaServiceImpl implements ReferenciaService {
             if (referencia.getGeneral() == null){
                 referencia.setGeneral("");
             }
+            if (referencia.getNota() == null) {
+                referencia.setNota("");
+            }
             referenciaRepository.save(referencia);
             response.setErrorCode(Messages.OK);
             response.setErrorInfo(Messages.REGISTER_OK);
@@ -61,5 +63,15 @@ public class ReferenciaServiceImpl implements ReferenciaService {
             response.setErrorInfo(ex.getMostSpecificCause().toString());
         }
         return response;
+    }
+
+    @Override
+    public ResponseDTO deleteReferencia(UUID referenciaId) {
+        return referenciaDAO.eliminaReferencia(referenciaId);
+    }
+
+    @Override
+    public ResponseDTO updateReferencia(ReferenciaEntity referencia) {
+        return referenciaDAO.actualizaReferencia(referencia);
     }
 }

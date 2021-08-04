@@ -15,6 +15,8 @@ public class AuxSeccionEstudioDTO {
 
     private Integer orden;
 
+    private Integer examenGeneralId;
+
     public String getNombreEstudio() {
         return nombreEstudio;
     }
@@ -53,5 +55,21 @@ public class AuxSeccionEstudioDTO {
 
     public void setOrden(Integer orden) {
         this.orden = orden;
+    }
+
+    public String getComodin() {
+        return comodin;
+    }
+
+    public void setComodin(String comodin) {
+        this.comodin = comodin;
+    }
+
+    public Integer getExamenGeneralId() {
+        return examenGeneralId;
+    }
+
+    public void setExamenGeneralId(Integer examenGeneralId) {
+        this.examenGeneralId = examenGeneralId;
     }
 }

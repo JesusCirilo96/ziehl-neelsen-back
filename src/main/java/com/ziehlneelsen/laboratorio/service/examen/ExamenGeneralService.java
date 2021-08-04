@@ -77,6 +77,13 @@ public interface ExamenGeneralService {
     ResponseDTO saveSeccionExamen(ExamenSeccionSaveDTO examenSeccion);
 
     /**
+     * Actualiza el examen seccion
+     * @param examenSeccion Datos a actualizar
+     * @return Respuesta del servicio
+     */
+    ResponseDTO updateSeccionExamen(ExamenSeccionSaveDTO examenSeccion);
+
+    /**
      * Eliminamos la seccion relacionada con el examen general
      * @param examenId El ID del examen
      * @param seccionId El ID de la seccion

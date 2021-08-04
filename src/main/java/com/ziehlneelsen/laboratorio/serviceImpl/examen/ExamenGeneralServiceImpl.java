@@ -191,6 +191,25 @@ public class ExamenGeneralServiceImpl implements ExamenGeneralService {
     @Override
     @Transactional
     @Modifying
+    public ResponseDTO updateSeccionExamen(ExamenSeccionSaveDTO examenSeccion) {
+        ResponseDTO responseDTO = new ResponseDTO();
+        try{
+            examenGeneralSeccionDAO.updateOrdenSeccionExamen(examenSeccion.getSeccionId(),examenSeccion.getExamenId(), examenSeccion.getOrden());
+            examenGeneralSeccionDAO.updateSeccion(examenSeccion);
+
+            responseDTO.setErrorCode(Messages.OK);
+            responseDTO.setErrorInfo(Messages.UPDATE_OK);
+        }catch (DataAccessException ex){
+            responseDTO.setErrorCode(Messages.OK);
+            responseDTO.setErrorInfo(Messages.UPDATE_ERROR);
+        }
+
+        return responseDTO;
+    }
+
+    @Override
+    @Transactional
+    @Modifying
     public ResponseDTO deleteExamenSeccion(Integer examenId, Integer seccionId) {
         return examenGeneralSeccionDAO.deleteExamenSeccion(examenId,seccionId);
     }

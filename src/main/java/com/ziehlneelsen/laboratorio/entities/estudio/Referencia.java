@@ -22,14 +22,21 @@ public class Referencia implements Serializable {
     @ManyToOne
     @JoinColumn(name = "CLASIFICACION_ID")
     ClasificacionPacienteEntity clasificacionPaciente;
+
     @Column(name = "MASCULINO")
-    String masculino;
+    private String masculino;
 
     @Column(name = "FEMENINO")
-    String femenino;
+    private String femenino;
 
     @Column(name = "GENERAL")
-    String general;
+    private String general;
+
+    @Column(name = "ORDEN" )
+    private Integer orden;
+
+    @Column(name="NOTA")
+    private String nota;
 
     @Column(name = "FECHA_CREACION")
     String fechaCreacion;
@@ -101,16 +108,41 @@ public class Referencia implements Serializable {
         this.fechaActualizacion = fechaActualizacion;
     }
 
+    public Integer getOrden() {
+        return orden;
+    }
+
+    public void setOrden(Integer orden) {
+        this.orden = orden;
+    }
+
+    public String getNota() {
+        return nota;
+    }
+
+    public void setNota(String nota) {
+        this.nota = nota;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Referencia)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Referencia that = (Referencia) o;
-        return Objects.equals(getReferenciaId(), that.getReferenciaId()) && Objects.equals(getEstudio(), that.getEstudio()) && Objects.equals(getClasificacionPaciente(), that.getClasificacionPaciente()) && Objects.equals(getMasculino(), that.getMasculino()) && Objects.equals(getFemenino(), that.getFemenino()) && Objects.equals(getGeneral(), that.getGeneral()) && Objects.equals(getFechaCreacion(), that.getFechaCreacion()) && Objects.equals(getFechaActualizacion(), that.getFechaActualizacion());
+        return Objects.equals(referenciaId, that.referenciaId) &&
+                Objects.equals(estudio, that.estudio) &&
+                Objects.equals(clasificacionPaciente, that.clasificacionPaciente) &&
+                Objects.equals(masculino, that.masculino) &&
+                Objects.equals(femenino, that.femenino) &&
+                Objects.equals(general, that.general) &&
+                Objects.equals(orden, that.orden) &&
+                Objects.equals(nota, that.nota) &&
+                Objects.equals(fechaCreacion, that.fechaCreacion) &&
+                Objects.equals(fechaActualizacion, that.fechaActualizacion);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getReferenciaId(), getEstudio(), getClasificacionPaciente(), getMasculino(), getFemenino(), getGeneral(), getFechaCreacion(), getFechaActualizacion());
+        return Objects.hash(referenciaId, estudio, clasificacionPaciente, masculino, femenino, general, orden, nota, fechaCreacion, fechaActualizacion);
     }
 }

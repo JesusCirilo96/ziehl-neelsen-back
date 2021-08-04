@@ -30,6 +30,12 @@ public class ReferenciaEntity implements Serializable {
     @Column(name = "GENERAL")
     private String general;
 
+    @Column(name = "ORDEN")
+    private Integer orden;
+
+    @Column(name = "NOTA")
+    private String nota;
+
     @Column(name = "FECHA_CREACION")
     private String fechaCreacion;
 
@@ -98,5 +104,21 @@ public class ReferenciaEntity implements Serializable {
 
     public void setFechaActualizacion(String fechaActualizacion) {
         this.fechaActualizacion = fechaActualizacion;
+    }
+
+    public Integer getOrden() {
+        return orden;
+    }
+
+    public void setOrden(Integer orden) {
+        this.orden = orden;
+    }
+
+    public String getNota() {
+        return nota;
+    }
+
+    public void setNota(String nota) {
+        this.nota = nota;
     }
 }

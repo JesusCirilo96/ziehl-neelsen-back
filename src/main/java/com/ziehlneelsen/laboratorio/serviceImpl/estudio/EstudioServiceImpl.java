@@ -41,6 +41,7 @@ public class EstudioServiceImpl implements EstudioService {
             response.setErrorInfo(Messages.UPDATE_OK);
         } else if(null != estudio){
             try{
+                estudio.setMostrarInput(false);
                 estudioRepository.save(estudio);
                 response.setErrorCode(Messages.OK);
                 response.setErrorInfo(Messages.REGISTER_OK);

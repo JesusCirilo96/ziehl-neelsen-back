@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = Url.EXAMEN_GENERAL)
-@CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET, RequestMethod.DELETE})
+@CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET, RequestMethod.DELETE, RequestMethod.PUT})
 public class ExamenGeneralController {
 
     @Autowired
@@ -81,6 +81,17 @@ public class ExamenGeneralController {
             return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.OK);
         }
         response = examenGeneralService.saveSeccionExamen(examenSeccion);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = Url.UPDATE_EXAMEN_SECCION, method = RequestMethod.PUT, produces = Url.APLICATION_JSON)
+    public ResponseEntity updateSeccionExamen(@Valid @RequestBody ExamenSeccionSaveDTO examenSeccion, BindingResult bindingResult) {
+
+        ResponseDTO response;
+        if(bindingResult.hasErrors()) {
+            return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.OK);
+        }
+        response = examenGeneralService.updateSeccionExamen(examenSeccion);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

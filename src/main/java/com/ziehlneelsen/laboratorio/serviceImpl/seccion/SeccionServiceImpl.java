@@ -131,7 +131,11 @@ public class SeccionServiceImpl implements SeccionService {
         ResponseDTO responseDTO = new ResponseDTO();
         try {
             referenciaDAO.actualizaNombreEstudio(seccionEstudio.getEstudioId(), seccionEstudio.getNombreEstudio());
-            seccionEstudioDAO.updateOrdenSeccionEstudio(seccionEstudio.getSeccionId(), seccionEstudio.getEstudioId(), seccionEstudio.getOrden());
+            if(seccionEstudio.getSeccionId() == 0){
+                seccionEstudioDAO.updateOrdenExamenEstudio(seccionEstudio.getExamenGeneralId(),seccionEstudio.getEstudioId(),seccionEstudio.getOrden());
+            }else{
+                seccionEstudioDAO.updateOrdenSeccionEstudio(seccionEstudio.getSeccionId(), seccionEstudio.getEstudioId(), seccionEstudio.getOrden());
+            }
             responseDTO.setErrorCode(Messages.OK);
             responseDTO.setErrorInfo(Messages.UPDATE_OK);
         }catch (DataAccessException ex){

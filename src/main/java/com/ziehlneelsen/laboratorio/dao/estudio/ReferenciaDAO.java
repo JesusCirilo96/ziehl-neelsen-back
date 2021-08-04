@@ -3,8 +3,10 @@ package com.ziehlneelsen.laboratorio.dao.estudio;
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.beans.estudio.EstudioSelectDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ReferenciaDTO;
+import com.ziehlneelsen.laboratorio.entities.estudio.ReferenciaEntity;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface ReferenciaDAO {
     /**
@@ -36,4 +38,18 @@ public interface ReferenciaDAO {
      * @return Respuesta del servicio
      */
     ResponseDTO actualizaNombreEstudio(Integer idEstudio, String nombre);
+
+    /**
+     * Elimina la referencia vinculada al estudio
+     * @param referenciaId El id de la referencia
+     * @return Respuesta del servicio
+     */
+    ResponseDTO eliminaReferencia(UUID referenciaId);
+
+    /**
+     * Actauliamos la referencia
+     * @param referenciaDTO Objeto con los datos a actualizar
+     * @return Respuesta del servicio
+     */
+    ResponseDTO actualizaReferencia(ReferenciaEntity referenciaDTO);
 }

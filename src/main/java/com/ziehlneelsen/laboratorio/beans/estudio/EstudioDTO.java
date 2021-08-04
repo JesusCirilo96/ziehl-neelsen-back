@@ -2,7 +2,6 @@ package com.ziehlneelsen.laboratorio.beans.estudio;
 
 import com.ziehlneelsen.laboratorio.beans.examen.ReferenciaDTO;
 import com.ziehlneelsen.laboratorio.beans.metodo.MetodoDTO;
-import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +13,8 @@ public class EstudioDTO {
     private String nombre;
 
     private Boolean comodin;
+
+    private Boolean mostrarInput;
 
     private ArrayList<EstudioSelectAuxDTO> resultadoSelect;
 
@@ -117,5 +118,13 @@ public class EstudioDTO {
 
     public void setMetodo(List<MetodoDTO> metodo) {
         this.metodo = metodo;
+    }
+
+    public Boolean getMostrarInput() {
+        return mostrarInput;
+    }
+
+    public void setMostrarInput(Boolean mostrarInput) {
+        this.mostrarInput = mostrarInput;
     }
 }

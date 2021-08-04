@@ -15,6 +15,8 @@ public class SeccionEstudioDTO {
 
     private List<EstudioDTO> estudio;
 
+    private Integer orden;
+
     public Optional<SeccionEntity> getSeccion() {
         return seccion;
     }
@@ -37,5 +39,13 @@ public class SeccionEstudioDTO {
 
     public void setEstudio(List<EstudioDTO> estudio) {
         this.estudio = estudio;
+    }
+
+    public Integer getOrden() {
+        return orden;
+    }
+
+    public void setOrden(Integer orden) {
+        this.orden = orden;
     }
 }
