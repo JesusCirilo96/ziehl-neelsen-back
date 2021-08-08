@@ -3,6 +3,7 @@ package com.ziehlneelsen.laboratorio.daoImpl.examen;
 import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.beans.estudio.EstudioDTO;
+import com.ziehlneelsen.laboratorio.beans.estudio.EstudioSelectAuxDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenMetodoAux;
 import com.ziehlneelsen.laboratorio.constant.Messages;
 import com.ziehlneelsen.laboratorio.dao.estudio.ReferenciaDAO;
@@ -12,6 +13,8 @@ import com.ziehlneelsen.laboratorio.entities.descuento.DescuentoEntity;
 import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.examen.*;
 import com.ziehlneelsen.laboratorio.service.descuento.DescuentoService;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.Modifying;
@@ -64,10 +67,10 @@ public class ExamenGeneralDAOImpl implements ExamenGeneralDAO {
     }
 
     @Override
-    public List<EstudioEntity> findEstudioByExamen(Integer examenId) {
+    public List<EstudioDTO> findEstudioByExamen(Integer examenId) {
         EntityManager em = emf.createEntityManager();
         List<ExamenEstudio> listEstudio;
-        List<EstudioEntity> estudios = new ArrayList<>();
+        List<EstudioDTO> estudios = new ArrayList<>();
 
         try{
             CriteriaBuilder cb = emf.getCriteriaBuilder();
@@ -84,7 +87,29 @@ public class ExamenGeneralDAOImpl implements ExamenGeneralDAO {
 
 
             listEstudio.forEach((estudio) -> {
-                estudios.add(estudio.getEstudio());
+                EstudioDTO estudioDTO = new EstudioDTO();
+                estudioDTO.setEstudioId(estudio.getEstudio().getEstudioId());
+                estudioDTO.setNombre(estudio.getEstudio().getNombre());
+                estudioDTO.setEstado(estudio.getEstudio().getEstado());
+                estudioDTO.setOrden(estudio.getOrden());
+                estudioDTO.setFechaCreacion(estudio.getEstudio().getFechaCreacion());
+                estudioDTO.setFechaActualizacion(estudio.getEstudio().getFechaActualizacion());
+                estudioDTO.setReferencia(referenciaDAO.getByEstudio(estudio.getEstudio().getEstudioId()));
+                estudioDTO.setMetodo(seccionMetodoDAO.getMetodoByEstudio(estudio.getEstudio().getEstudioId()));
+                estudioDTO.setMostrarInput(estudio.getEstudio().getMostrarInput());
+                if(estudio.getEstudio().getResultadoSelect() != null){
+                    ArrayList<EstudioSelectAuxDTO> respuestas = new ArrayList<>();
+                    JSONArray jsonArr = new JSONArray(estudio.getEstudio().getResultadoSelect());
+                    for(int i = 0 ; i < jsonArr.length(); i++){
+                        EstudioSelectAuxDTO resp = new EstudioSelectAuxDTO();
+                        JSONObject object = jsonArr.getJSONObject(i);
+                        resp.setValue(object.getString("value"));
+                        resp.setViewValue(object.getString("viewValue"));
+                        respuestas.add(resp);
+                    }
+                    estudioDTO.setResultadoSelect(respuestas);
+                }
+                estudios.add(estudioDTO);
             });
 
         }catch (DataAccessException e){
@@ -126,6 +151,18 @@ public class ExamenGeneralDAOImpl implements ExamenGeneralDAO {
                 estudioDTO.setReferencia(referenciaDAO.getByEstudio(estudio.getEstudio().getEstudioId()));
                 estudioDTO.setMetodo(seccionMetodoDAO.getMetodoByEstudio(estudio.getEstudio().getEstudioId()));
                 estudioDTO.setMostrarInput(estudio.getEstudio().getMostrarInput());
+                if(estudio.getEstudio().getResultadoSelect() != null){
+                    ArrayList<EstudioSelectAuxDTO> respuestas = new ArrayList<>();
+                    JSONArray jsonArr = new JSONArray(estudio.getEstudio().getResultadoSelect());
+                    for(int i = 0 ; i < jsonArr.length(); i++){
+                        EstudioSelectAuxDTO resp = new EstudioSelectAuxDTO();
+                        JSONObject object = jsonArr.getJSONObject(i);
+                        resp.setValue(object.getString("value"));
+                        resp.setViewValue(object.getString("viewValue"));
+                        respuestas.add(resp);
+                    }
+                    estudioDTO.setResultadoSelect(respuestas);
+                }
                 estudios.add(estudioDTO);
             });
 

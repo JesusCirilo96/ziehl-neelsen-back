@@ -1,9 +1,11 @@
 package com.ziehlneelsen.laboratorio.service.estudio;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.estudio.EstudioSaveDTO;
 import com.ziehlneelsen.laboratorio.beans.estudio.EstudioSelectDTO;
 import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +29,13 @@ public interface EstudioService {
      * @return Respuesta del servicio
      */
     ResponseDTO save(EstudioEntity estudio);
+
+    /**
+     * Guarmos una lista de estudios
+     * @param request La peticion del front
+     * @return Respuesta del servicio
+     */
+    ResponseDTO saveMasivo(ArrayList<EstudioSaveDTO> request);
 
     /**
      * Actualizamos el campo comodin del estudio

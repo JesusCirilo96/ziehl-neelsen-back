@@ -73,21 +73,23 @@ public class RolServiceImpl implements RolService {
 
                 List<SubMenuDTO> listSubMenuDTO = new ArrayList<>();
 
-                rolSubMenu.getSubMenu().forEach((list) -> {
-                    submenuList.forEach((submenu) -> {
-                        if(list.getSubMenuId() == submenu.getSubMenuId()){
-                            SubMenuDTO subMenuDTO = new SubMenuDTO();
-                            subMenuDTO.setSubMenuId(submenu.getSubMenuId());
-                            subMenuDTO.setNombre(submenu.getNombre());
-                            subMenuDTO.setRuta(submenu.getRuta());
-                            subMenuDTO.setDropdown(submenu.getDropdown());
-                            subMenuDTO.setIcono(submenu.getIcono());
+                    rolSubMenu.getSubMenu().forEach((list) -> {
+                        submenuList.forEach((submenu) -> {
+                            if(list.getSubMenuId() == submenu.getSubMenuId()){
+                                SubMenuDTO subMenuDTO = new SubMenuDTO();
+                                subMenuDTO.setSubMenuId(submenu.getSubMenuId());
+                                subMenuDTO.setNombre(submenu.getNombre());
+                                subMenuDTO.setRuta(submenu.getRuta());
+                                subMenuDTO.setDropdown(submenu.getDropdown());
+                                subMenuDTO.setIcono(submenu.getIcono());
 
-                            listSubMenuDTO.add(subMenuDTO);
-                        }
+                                listSubMenuDTO.add(subMenuDTO);
+                            }
+                        });
+                        menuDTO.setSubmenu(listSubMenuDTO);
                     });
-                    menuDTO.setSubmenu(listSubMenuDTO);
-                });
+
+
             }
             lisMenuDTO.add(menuDTO);
         });

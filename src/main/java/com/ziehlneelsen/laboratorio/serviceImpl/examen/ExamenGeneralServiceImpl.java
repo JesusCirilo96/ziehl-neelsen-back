@@ -2,6 +2,7 @@ package com.ziehlneelsen.laboratorio.serviceImpl.examen;
 
 import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.estudio.EstudioDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenEstudioDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenMetodoAux;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenSeccionDTO;
@@ -70,7 +71,7 @@ public class ExamenGeneralServiceImpl implements ExamenGeneralService {
     }
 
     @Override
-    public List<EstudioEntity> findEstudioExamen(Integer examenId) {
+    public List<EstudioDTO> findEstudioExamen(Integer examenId) {
         return examenGeneralDAO.findEstudioByExamen(examenId);
     }
 

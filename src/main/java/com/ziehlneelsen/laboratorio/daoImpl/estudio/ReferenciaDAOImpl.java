@@ -58,6 +58,8 @@ public class ReferenciaDAOImpl implements ReferenciaDAO {
                 referenciaDTO.setReferenciaGeneral(referencia.getGeneral());
                 referenciaDTO.setOrden(referencia.getOrden());
                 referenciaDTO.setNota(referencia.getNota());
+                referenciaDTO.setPrefijo(referencia.getPrefijo());
+                referenciaDTO.setSufijo(referencia.getSufijo());
 
 
                 referencias.add(referenciaDTO);
@@ -237,6 +239,8 @@ public class ReferenciaDAOImpl implements ReferenciaDAO {
             Predicate referenciaId = cb.equal(updateRef.get("referenciaId"),referenciaDTO.getReferenciaId());
 
             update.set("clasificacionId", referenciaDTO.getClasificacionId());
+            update.set("sufijo", referenciaDTO.getSufijo());
+            update.set("prefijo", referenciaDTO.getPrefijo());
             update.set("masculino", referenciaDTO.getMasculino());
             update.set("femenino", referenciaDTO.getFemenino());
             update.set("general", referenciaDTO.getGeneral());

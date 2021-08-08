@@ -4,8 +4,6 @@ import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.beans.menu.MenuDTO;
 import com.ziehlneelsen.laboratorio.beans.menu.MenuSubmenuDTO;
 import com.ziehlneelsen.laboratorio.beans.menu.SubMenuDTO;
-import com.ziehlneelsen.laboratorio.beans.rol.RolMenuDTO;
-import com.ziehlneelsen.laboratorio.beans.rol.RolMenuSubmenuDTO;
 import com.ziehlneelsen.laboratorio.beans.rol.RolSubMenuDTO;
 import com.ziehlneelsen.laboratorio.constant.Messages;
 import com.ziehlneelsen.laboratorio.dao.rol.RolDAO;

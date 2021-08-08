@@ -21,4 +21,5 @@ public class EstudioSelectAuxDTO {
     public void setViewValue(String viewValue) {
         this.viewValue = viewValue;
     }
+
 }

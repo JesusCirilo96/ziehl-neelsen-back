@@ -110,7 +110,7 @@ public class RecepcionDAOImpl implements RecepcionDAO {
                     throw new IllegalStateException("Valor inesperado: " + where);
             }
 
-            consulta.select(recepcion).where(predicateActualDate);
+            consulta.select(recepcion).where(predicateActualDate).orderBy(cb.desc(recepcion.get("ficha")));
 
             recepcionList = em.createQuery(consulta).getResultList();
 

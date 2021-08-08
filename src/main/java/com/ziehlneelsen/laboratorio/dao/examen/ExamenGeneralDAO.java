@@ -24,7 +24,7 @@ public interface ExamenGeneralDAO {
      * @param examenId El id del examen a buscar
      * @return la lista de estudios correspondientes al examen
      */
-    List<EstudioEntity> findEstudioByExamen(Integer examenId);
+    List<EstudioDTO> findEstudioByExamen(Integer examenId);
 
     /**
      * Buscamos los estudios relacionados con el examen y sus referencias

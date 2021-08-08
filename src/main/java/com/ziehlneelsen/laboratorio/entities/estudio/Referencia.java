@@ -14,7 +14,6 @@ public class Referencia implements Serializable {
     @Column(name = "REFERENCIA_ID", unique = true, nullable = false)
     private UUID referenciaId = UUID.randomUUID();
 
-
     @ManyToOne
     @JoinColumn(name = "ESTUDIO_ID")
     EstudioEntity estudio;
@@ -22,6 +21,7 @@ public class Referencia implements Serializable {
     @ManyToOne
     @JoinColumn(name = "CLASIFICACION_ID")
     ClasificacionPacienteEntity clasificacionPaciente;
+
 
     @Column(name = "MASCULINO")
     private String masculino;
@@ -31,6 +31,12 @@ public class Referencia implements Serializable {
 
     @Column(name = "GENERAL")
     private String general;
+
+    @Column(name = "PREFIJO")
+    private String prefijo;
+
+    @Column(name = "SUFIJO")
+    private String sufijo;
 
     @Column(name = "ORDEN" )
     private Integer orden;
@@ -92,6 +98,22 @@ public class Referencia implements Serializable {
         this.general = general;
     }
 
+    public String getPrefijo() {
+        return prefijo;
+    }
+
+    public void setPrefijo(String prefijo) {
+        this.prefijo = prefijo;
+    }
+
+    public String getSufijo() {
+        return sufijo;
+    }
+
+    public void setSufijo(String sufijo) {
+        this.sufijo = sufijo;
+    }
+
     public String getFechaCreacion() {
         return fechaCreacion;
     }
@@ -127,22 +149,13 @@ public class Referencia implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Referencia)) return false;
         Referencia that = (Referencia) o;
-        return Objects.equals(referenciaId, that.referenciaId) &&
-                Objects.equals(estudio, that.estudio) &&
-                Objects.equals(clasificacionPaciente, that.clasificacionPaciente) &&
-                Objects.equals(masculino, that.masculino) &&
-                Objects.equals(femenino, that.femenino) &&
-                Objects.equals(general, that.general) &&
-                Objects.equals(orden, that.orden) &&
-                Objects.equals(nota, that.nota) &&
-                Objects.equals(fechaCreacion, that.fechaCreacion) &&
-                Objects.equals(fechaActualizacion, that.fechaActualizacion);
+        return Objects.equals(getReferenciaId(), that.getReferenciaId()) && Objects.equals(getEstudio(), that.getEstudio()) && Objects.equals(getClasificacionPaciente(), that.getClasificacionPaciente()) && Objects.equals(getMasculino(), that.getMasculino()) && Objects.equals(getFemenino(), that.getFemenino()) && Objects.equals(getGeneral(), that.getGeneral()) && Objects.equals(getPrefijo(), that.getPrefijo()) && Objects.equals(getSufijo(), that.getSufijo()) && Objects.equals(getOrden(), that.getOrden()) && Objects.equals(getNota(), that.getNota()) && Objects.equals(getFechaCreacion(), that.getFechaCreacion()) && Objects.equals(getFechaActualizacion(), that.getFechaActualizacion());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(referenciaId, estudio, clasificacionPaciente, masculino, femenino, general, orden, nota, fechaCreacion, fechaActualizacion);
+        return Objects.hash(getReferenciaId(), getEstudio(), getClasificacionPaciente(), getMasculino(), getFemenino(), getGeneral(), getPrefijo(), getSufijo(), getOrden(), getNota(), getFechaCreacion(), getFechaActualizacion());
     }
 }

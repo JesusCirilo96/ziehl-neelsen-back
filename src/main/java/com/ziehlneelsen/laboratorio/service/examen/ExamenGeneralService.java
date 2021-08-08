@@ -2,6 +2,7 @@ package com.ziehlneelsen.laboratorio.service.examen;
 
 import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.estudio.EstudioDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenEstudioDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenMetodoAux;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenSeccionDTO;
@@ -40,7 +41,7 @@ public interface ExamenGeneralService {
      * @param examenId El id del examen
      * @return Lista con los estudios del examen
      */
-    List<EstudioEntity> findEstudioExamen(Integer examenId);
+    List<EstudioDTO> findEstudioExamen(Integer examenId);
 
     /**
      * Metodo para realizar el registro de un examen en la BD

@@ -13,6 +13,10 @@ public class ReferenciaDTO {
 
     private UUID referenciaId;
 
+    private String sufijo;
+
+    private String prefijo;
+
     private String referenciaMasculino;
 
     private String referenciaFemenino;
@@ -95,5 +99,21 @@ public class ReferenciaDTO {
 
     public void setNota(String nota) {
         this.nota = nota;
+    }
+
+    public String getSufijo() {
+        return sufijo;
+    }
+
+    public void setSufijo(String sufijo) {
+        this.sufijo = sufijo;
+    }
+
+    public String getPrefijo() {
+        return prefijo;
+    }
+
+    public void setPrefijo(String prefijo) {
+        this.prefijo = prefijo;
     }
 }

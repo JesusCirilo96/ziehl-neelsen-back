@@ -1,6 +1,7 @@
 package com.ziehlneelsen.laboratorio.controller.estudio;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.estudio.EstudioSaveDTO;
 import com.ziehlneelsen.laboratorio.beans.estudio.EstudioSelectDTO;
 import com.ziehlneelsen.laboratorio.constant.Url;
 import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
@@ -12,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +43,14 @@ public class EstudioController {
             return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.OK);
         }
         response = estudioService.save(estudio);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = Url.SAVE_MASIVO, method = RequestMethod.POST, produces = Url.APLICATION_JSON)
+    public ResponseEntity saveEstudioMasivo(@RequestBody ArrayList<EstudioSaveDTO> estudio) {
+
+        ResponseDTO response;
+        response = estudioService.saveMasivo(estudio);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

@@ -30,6 +30,12 @@ public class ReferenciaEntity implements Serializable {
     @Column(name = "GENERAL")
     private String general;
 
+    @Column(name = "SUFIJO")
+    private String sufijo;
+
+    @Column(name = "PREFIJO")
+    private String prefijo;
+
     @Column(name = "ORDEN")
     private Integer orden;
 
@@ -120,5 +126,21 @@ public class ReferenciaEntity implements Serializable {
 
     public void setNota(String nota) {
         this.nota = nota;
+    }
+
+    public String getSufijo() {
+        return sufijo;
+    }
+
+    public void setSufijo(String sufijo) {
+        this.sufijo = sufijo;
+    }
+
+    public String getPrefijo() {
+        return prefijo;
+    }
+
+    public void setPrefijo(String prefijo) {
+        this.prefijo = prefijo;
     }
 }
