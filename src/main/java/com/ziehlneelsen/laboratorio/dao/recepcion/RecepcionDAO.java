@@ -1,6 +1,7 @@
 package com.ziehlneelsen.laboratorio.dao.recepcion;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.recepcion.HistorialDTO;
 import com.ziehlneelsen.laboratorio.beans.recepcion.RecepcionResultadoDTO;
 import com.ziehlneelsen.laboratorio.entities.recepcion.RecepcionEntity;
 import com.ziehlneelsen.laboratorio.entities.recepcion.RecepcionExamenGeneralEntity;
@@ -31,4 +32,11 @@ public interface RecepcionDAO {
     List<RecepcionEntity> obtenerRecepcion(String where, String equal);
 
     ResponseDTO saveResultado(RecepcionExamenGeneralEntity resultado);
+
+    /**
+     * Obtenemos el historial del paciente
+     * @param pacienteId El id del paciente
+     * @return Objeto con el historial del paciente
+     */
+    HistorialDTO obtenerHistorial(Integer pacienteId);
 }

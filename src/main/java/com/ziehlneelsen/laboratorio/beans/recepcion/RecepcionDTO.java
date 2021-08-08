@@ -10,6 +10,8 @@ public class RecepcionDTO {
 
     private String paciente;
 
+    private Integer pacienteId;
+
     public String getRecepcionId() {
         return recepcionId;
     }
@@ -40,5 +42,13 @@ public class RecepcionDTO {
 
     public void setPaciente(String paciente) {
         this.paciente = paciente;
+    }
+
+    public Integer getPacienteId() {
+        return pacienteId;
+    }
+
+    public void setPacienteId(Integer pacienteId) {
+        this.pacienteId = pacienteId;
     }
 }

@@ -1,6 +1,7 @@
 package com.ziehlneelsen.laboratorio.serviceImpl.recepcion;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.recepcion.HistorialDTO;
 import com.ziehlneelsen.laboratorio.beans.recepcion.RecepcionDTO;
 import com.ziehlneelsen.laboratorio.beans.recepcion.RecepcionResultadoDTO;
 import com.ziehlneelsen.laboratorio.constant.Constantes;
@@ -89,6 +90,7 @@ public class RecepcionServiceImpl implements RecepcionService {
                 recepcionDTO.setFicha(recepcionFetch.getFicha());
                 recepcionDTO.setPaciente(pacienteDAO.obtenerNombrePaciente(recepcionFetch.getPacienteId()));
                 recepcionDTO.setHoraIngreso(recepcionFetch.getHoraIngreso());
+                recepcionDTO.setPacienteId(recepcionFetch.getPacienteId());
 
                 recepcionDTOList.add(recepcionDTO);
             });
@@ -115,5 +117,10 @@ public class RecepcionServiceImpl implements RecepcionService {
     @Override
     public ResponseDTO guardarResultados(RecepcionExamenGeneralEntity resultado) {
         return recepcionDAO.saveResultado(resultado);
+    }
+
+    @Override
+    public HistorialDTO obtenerHistorial(Integer pacienteId) {
+        return recepcionDAO.obtenerHistorial(pacienteId);
     }
 }

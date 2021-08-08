@@ -1,6 +1,7 @@
 package com.ziehlneelsen.laboratorio.service.recepcion;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.recepcion.HistorialDTO;
 import com.ziehlneelsen.laboratorio.beans.recepcion.RecepcionDTO;
 import com.ziehlneelsen.laboratorio.beans.recepcion.RecepcionResultadoDTO;
 import com.ziehlneelsen.laboratorio.entities.recepcion.RecepcionEntity;
@@ -50,4 +51,11 @@ public interface RecepcionService {
      * @return Respuesta del service
      */
     ResponseDTO guardarResultados(RecepcionExamenGeneralEntity resultado);
+
+    /**
+     * Obtenemos el historial de recepciones del paciente
+     * @param pacienteId el id del paciente a obtener
+     * @return objeto con los datos del historial
+     */
+    HistorialDTO obtenerHistorial(Integer pacienteId);
 }

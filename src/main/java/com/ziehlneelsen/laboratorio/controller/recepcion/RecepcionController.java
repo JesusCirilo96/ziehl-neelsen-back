@@ -1,6 +1,7 @@
 package com.ziehlneelsen.laboratorio.controller.recepcion;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.recepcion.HistorialDTO;
 import com.ziehlneelsen.laboratorio.beans.recepcion.RecepcionDTO;
 import com.ziehlneelsen.laboratorio.beans.recepcion.RecepcionResultadoDTO;
 import com.ziehlneelsen.laboratorio.constant.Url;
@@ -70,6 +71,11 @@ public class RecepcionController {
     @RequestMapping(value = Url.RECEPCION_RESULTADO, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
     public RecepcionResultadoDTO obtenerResultado(@PathVariable String idRecepcion){
         return recepcionService.obtenerResultados(idRecepcion);
+    }
+
+    @RequestMapping(value = Url.RECEPCION_HISTORIAL, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
+    public HistorialDTO obtenerResultado(@PathVariable Integer pacienteId){
+        return recepcionService.obtenerHistorial(pacienteId);
     }
 
 }

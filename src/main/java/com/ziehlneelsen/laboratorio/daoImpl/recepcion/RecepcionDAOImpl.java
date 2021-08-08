@@ -1,9 +1,14 @@
 package com.ziehlneelsen.laboratorio.daoImpl.recepcion;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.examen.ReferenciaDTO;
+import com.ziehlneelsen.laboratorio.beans.recepcion.HistorialAuxDTO;
+import com.ziehlneelsen.laboratorio.beans.recepcion.HistorialDTO;
 import com.ziehlneelsen.laboratorio.constant.Constantes;
 import com.ziehlneelsen.laboratorio.constant.Messages;
 import com.ziehlneelsen.laboratorio.dao.recepcion.RecepcionDAO;
+import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
+import com.ziehlneelsen.laboratorio.entities.estudio.Referencia;
 import com.ziehlneelsen.laboratorio.entities.recepcion.RecepcionEntity;
 import com.ziehlneelsen.laboratorio.entities.recepcion.RecepcionExamenGeneralEntity;
 import com.ziehlneelsen.laboratorio.repository.persona.PacienteRepository;
@@ -17,6 +22,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.criteria.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -161,5 +167,49 @@ public class RecepcionDAOImpl implements RecepcionDAO {
         }
 
         return response;
+    }
+
+    @Override
+    public HistorialDTO obtenerHistorial(Integer pacienteId) {
+        HistorialDTO historial = new HistorialDTO();
+
+        List<RecepcionEntity> listRecepcion = new ArrayList<>();
+        List<HistorialAuxDTO> historialAuxDTOS = new ArrayList<>();
+
+        em = emf.createEntityManager();
+
+        try{
+            CriteriaBuilder cb = emf.getCriteriaBuilder();
+            CriteriaQuery<RecepcionEntity> q = cb.createQuery(RecepcionEntity.class);
+
+            Root<RecepcionEntity> c = q.from(RecepcionEntity.class);
+
+            Predicate idPaciente = cb.equal(c.get("pacienteId"),pacienteId);
+            q.select(c).where(idPaciente).orderBy(cb.desc(c.get("fechaIngreso")));
+
+            listRecepcion = em.createQuery(q).getResultList();
+            listRecepcion.forEach((recepcion) -> {
+
+                HistorialAuxDTO historia = new HistorialAuxDTO();
+
+                historia.setRecepcionId(recepcion.getRecepcionId());
+                historia.setFolio(recepcion.getFicha());
+                historia.setFechaIngreso(recepcion.getFechaIngreso());
+                historia.setHoraIngreso(recepcion.getHoraIngreso());
+
+                historialAuxDTOS.add(historia);
+            });
+
+            historial.setHistorial(historialAuxDTOS);
+            historial.setPaciente(pacienteRepository.findById(pacienteId));
+
+        }catch (DataAccessException e){
+            e.printStackTrace();
+        }finally {
+            em.close();
+        }
+
+        return historial;
+
     }
 }

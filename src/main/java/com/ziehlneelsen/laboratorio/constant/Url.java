@@ -97,6 +97,7 @@ public class Url {
     public static final String RECEPCION_RESULTADO = "/resultado/{idRecepcion}";
     public static final String SAVE_RECEPCION_EXAMEN = "/examen/save";
     public static final String SAVE_RESULTADO = "/resultado/save";
+    public static final String RECEPCION_HISTORIAL = "/historial/{pacienteId}";
 
     /**
      * Construtor de la clase
