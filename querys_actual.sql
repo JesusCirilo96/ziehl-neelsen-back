@@ -25,7 +25,8 @@ INSERT INTO menu VALUES
 ('3', 'Resultados', '/resultado',0,'',1),
 ('4', 'Cotizar', '/Cotizar',0,'',1),
 ('5', 'Examen', '/examen',1,'',1),
-('6', 'Administrar', '/administracion',1,'',1);
+('6', 'Administrar', '/administracion',1,'',1),
+('7', 'Configuracion', '/configuracion', 0, '',1);
 -- catalogos
 
 INSERT INTO sub_menu VALUES
@@ -56,6 +57,7 @@ INSERT INTO rol_menu VALUES
 (UUID_TO_BIN(UUID()),1,3,1,1,1,1),
 (UUID_TO_BIN(UUID()),1,4,1,1,1,1),
 (UUID_TO_BIN(UUID()),1,5,1,1,1,1),
+(UUID_TO_BIN(UUID()),1,7,1,1,1,1),
 (UUID_TO_BIN(UUID()),1,6,1,1,1,1),
 (UUID_TO_BIN(UUID()),3,2,1,1,1,1),
 (UUID_TO_BIN(UUID()),3,3,1,1,1,1),
@@ -71,6 +73,8 @@ INSERT INTO rol_sub_menu VALUES
 (UUID_TO_BIN(UUID()),1,7,1,1,1,1),
 (UUID_TO_BIN(UUID()),1,8,1,1,1,1),
 (UUID_TO_BIN(UUID()),1,9,1,1,1,1);
+
+SELECT * FROM cat_usuario;
 
 INSERT INTO cat_dias VALUES
 (1,"1","Domingo"),

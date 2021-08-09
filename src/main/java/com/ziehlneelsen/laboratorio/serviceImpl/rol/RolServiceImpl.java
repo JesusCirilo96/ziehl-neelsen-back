@@ -52,8 +52,6 @@ public class RolServiceImpl implements RolService {
         RolMenuDTO rolMenuDTO = rolDAO.findMenuByRol(rolId);
         RolSubMenuDTO rolSubMenu = findSubMenuByRol(rolId);
 
-        List<MenuEntity> listMenu = rolMenuDTO.getMenu();
-
         List<MenuDTO> lisMenuDTO = new ArrayList<>();
 
         rolMenuDTO.getMenu().forEach((menu) -> {

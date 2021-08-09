@@ -4,6 +4,8 @@ import com.ziehlneelsen.laboratorio.beans.persona.UsuarioRolDTO;
 import com.ziehlneelsen.laboratorio.dao.persona.UsuarioRolDAO;
 import com.ziehlneelsen.laboratorio.entities.persona.UsuarioRol;
 import com.ziehlneelsen.laboratorio.entities.rol.RolEntity;
+import com.ziehlneelsen.laboratorio.repository.persona.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,9 @@ import java.util.List;
 
 @Service
 public class UsuarioRolDAOImpl implements UsuarioRolDAO {
+
+    @Autowired
+    UsuarioRepository usuarioRepository;
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("laboratorio");
 
@@ -42,8 +47,11 @@ public class UsuarioRolDAOImpl implements UsuarioRolDAO {
                 listRol.add(rol.getRol());
             });
 
-            usuariRol.setUsuario(listUsuarioRol.get(0).getUsuario());
-            usuariRol.setRol(listRol);
+            if(!listUsuarioRol.isEmpty()){
+                usuariRol.setRol(listRol);
+            }
+
+            usuariRol.setUsuario(usuarioRepository.findById(usuarioId));
 
         }catch (DataAccessException e){
             e.printStackTrace();

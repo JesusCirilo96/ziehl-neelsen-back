@@ -41,7 +41,7 @@ public class RolDAOImpl implements RolDAO {
 
             Predicate idRol = cb.equal(c.get("rol").get("rolId"), rolId);
 
-            query.select(c).where(idRol);
+            query.select(c).where(idRol).orderBy(cb.asc(c.get("menu").get("menuId")));
 
             listRolMenu = em.createQuery(query).getResultList();
             listRolMenu.forEach((menu) -> {

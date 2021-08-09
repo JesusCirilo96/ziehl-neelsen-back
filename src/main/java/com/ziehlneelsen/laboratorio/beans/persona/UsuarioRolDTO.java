@@ -4,18 +4,19 @@ import com.ziehlneelsen.laboratorio.entities.persona.UsuarioEntity;
 import com.ziehlneelsen.laboratorio.entities.rol.RolEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 public class UsuarioRolDTO {
 
-    UsuarioEntity usuario;
+    Optional<UsuarioEntity> usuario;
 
     List<RolEntity> rol;
 
-    public UsuarioEntity getUsuario() {
+    public Optional<UsuarioEntity> getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(UsuarioEntity usuario) {
+    public void setUsuario(Optional<UsuarioEntity> usuario) {
         this.usuario = usuario;
     }
 
