@@ -37,7 +37,6 @@ public class MenuEntity implements Serializable {
     /**
      * Identificamos si va a ser un menu desplegable
      */
-    @NotBlank
     @Column(name = "DROPDOWN")
     Boolean dropdown;
 
@@ -49,7 +48,6 @@ public class MenuEntity implements Serializable {
 
     @Column(name = "ESTADO", columnDefinition = "boolean default true")
     Boolean estado;
-
 
     public Integer getMenuId() {
         return menuId;
@@ -91,6 +89,11 @@ public class MenuEntity implements Serializable {
         this.icono = icono;
     }
 
+    public Boolean getEstado() {
+        return estado;
+    }
 
-
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
 }

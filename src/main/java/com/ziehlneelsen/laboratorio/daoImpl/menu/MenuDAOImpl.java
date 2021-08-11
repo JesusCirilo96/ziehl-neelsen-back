@@ -42,12 +42,15 @@ public class MenuDAOImpl implements MenuDao {
 
 
             listMenuSubmenu = em.createQuery(query).getResultList();
-            listMenuSubmenu.forEach((menu) -> {
-                listSubMenu.add(menu.getSubMenu());
-            });
 
-            menuSubmenu.setMenu(listMenuSubmenu.get(0).getMenu());
-            menuSubmenu.setSubMenu(listSubMenu);
+            if(!listMenuSubmenu.isEmpty()){
+                listMenuSubmenu.forEach((menu) -> {
+                    listSubMenu.add(menu.getSubMenu());
+                });
+                menuSubmenu.setMenu(listMenuSubmenu.get(0).getMenu());
+                menuSubmenu.setSubMenu(listSubMenu);
+            }
+
 
         }catch (DataAccessException e){
             e.printStackTrace();

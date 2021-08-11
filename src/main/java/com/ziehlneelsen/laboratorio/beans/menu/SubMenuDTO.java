@@ -2,15 +2,17 @@ package com.ziehlneelsen.laboratorio.beans.menu;
 
 public class SubMenuDTO {
 
-    Integer subMenuId;
+    private Integer subMenuId;
 
-    String nombre;
+    private String nombre;
 
-    String ruta;
+    private String ruta;
 
-    Boolean dropdown;
+    private Boolean dropdown;
 
-    String icono;
+    private String icono;
+
+    private Boolean estado;
 
     public Integer getSubMenuId() {
         return subMenuId;
@@ -50,5 +52,13 @@ public class SubMenuDTO {
 
     public void setIcono(String icono) {
         this.icono = icono;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
     }
 }

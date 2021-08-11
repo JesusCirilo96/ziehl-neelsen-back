@@ -20,13 +20,15 @@ INSERT INTO usuario_rol VALUES
 
 
 INSERT INTO menu VALUES
-('1', 'Inicio', '/inicio',0,'',1),
-('2', 'Recepcion', '/recepcion',0,'',1),
-('3', 'Resultados', '/resultado',0,'',1),
-('4', 'Cotizar', '/Cotizar',0,'',1),
-('5', 'Examen', '/examen',1,'',1),
-('6', 'Administrar', '/administracion',1,'',1),
-('7', 'Configuracion', '/configuracion', 0, '',1);
+('1', 'Inicio', '/inicio',0,'home',1),
+('2', 'Panel de control', '/dashboard',0,'dashboard',1),
+('3', 'Recepcion', '/recepcion',0,'meeting_room',1),
+('4', 'Resultados', '/resultado',0,'note_add',1),
+('5', 'Cotización', '/cotizar',0,'monetization_on',1),
+('6', 'Examenes', '/examen',1,'library_books',1),
+('7', 'Personas', '/personas',1,'group',1),
+('8', 'Configuración', '/configuracion', 0, 'settings',1),
+('9', 'Administración', '/administracion',0,'settings_applications',1);
 -- catalogos
 
 INSERT INTO sub_menu VALUES

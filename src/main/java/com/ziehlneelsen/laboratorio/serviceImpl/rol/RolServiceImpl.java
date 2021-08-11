@@ -54,22 +54,23 @@ public class RolServiceImpl implements RolService {
 
         List<MenuDTO> lisMenuDTO = new ArrayList<>();
 
-        rolMenuDTO.getMenu().forEach((menu) -> {
-            MenuDTO menuDTO = new MenuDTO();
+        if(rolMenuDTO.getMenu() != null){
+            rolMenuDTO.getMenu().forEach((menu) -> {
+                MenuDTO menuDTO = new MenuDTO();
 
-            menuDTO.setMenuId(menu.getMenuId());
-            menuDTO.setNombre(menu.getNombre());
-            menuDTO.setRuta(menu.getRuta());
-            menuDTO.setDropdown(menu.getDropdown());
-            menuDTO.setIcono(menu.getIcono());
-            System.out.println("ES DROPDOWN " + menuDTO.getDropdown());
-            if(menuDTO.getDropdown()){
+                menuDTO.setMenuId(menu.getMenuId());
+                menuDTO.setNombre(menu.getNombre());
+                menuDTO.setRuta(menu.getRuta());
+                menuDTO.setDropdown(menu.getDropdown());
+                menuDTO.setIcono(menu.getIcono());
+                System.out.println("ES DROPDOWN " + menuDTO.getDropdown());
+                if(menuDTO.getDropdown()){
 
-                System.out.println("Dentro del if DROPDOWN");
-                MenuSubmenuDTO menuSubmenu = menuDao.getSubmenuByMenu(menuDTO.getMenuId());
-                List<SubMenuEntity> submenuList = menuSubmenu.getSubMenu();
+                    System.out.println("Dentro del if DROPDOWN");
+                    MenuSubmenuDTO menuSubmenu = menuDao.getSubmenuByMenu(menuDTO.getMenuId());
+                    List<SubMenuEntity> submenuList = menuSubmenu.getSubMenu();
 
-                List<SubMenuDTO> listSubMenuDTO = new ArrayList<>();
+                    List<SubMenuDTO> listSubMenuDTO = new ArrayList<>();
 
                     rolSubMenu.getSubMenu().forEach((list) -> {
                         submenuList.forEach((submenu) -> {
@@ -88,14 +89,18 @@ public class RolServiceImpl implements RolService {
                     });
 
 
-            }
-            lisMenuDTO.add(menuDTO);
-        });
+                }
+                lisMenuDTO.add(menuDTO);
+            });
+        }
 
         RolMenuSubmenuDTO rolMenuSubmenu = new RolMenuSubmenuDTO();
 
-        rolMenuSubmenu.setRol(rolMenuDTO.getRol());
-        rolMenuSubmenu.setMenu(lisMenuDTO);
+        if(rolMenuDTO.getMenu() != null){
+            rolMenuSubmenu.setRol(rolMenuDTO.getRol());
+            rolMenuSubmenu.setMenu(lisMenuDTO);
+        }
+
 
         return rolMenuSubmenu;
     }

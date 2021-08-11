@@ -4,17 +4,19 @@ import java.util.List;
 
 public class MenuDTO {
 
-    Integer menuId;
+    private Integer menuId;
 
-    String nombre;
+    private String nombre;
 
-    String ruta;
+    private String ruta;
 
-    Boolean dropdown;
+    private Boolean dropdown;
 
-    String icono;
+    private String icono;
 
-    List<SubMenuDTO> submenu;
+    private Boolean estado;
+
+    private List<SubMenuDTO> submenu;
 
     public Integer getMenuId() {
         return menuId;
@@ -62,5 +64,13 @@ public class MenuDTO {
 
     public void setSubmenu(List<SubMenuDTO> submenu) {
         this.submenu = submenu;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
     }
 }

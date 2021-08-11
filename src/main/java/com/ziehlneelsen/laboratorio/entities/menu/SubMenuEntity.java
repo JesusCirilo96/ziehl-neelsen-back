@@ -36,7 +36,6 @@ public class SubMenuEntity implements Serializable {
     /**
      * Identificamos si va a ser un menu desplegable
      */
-    @NotBlank
     @Column(name = "DROPDOWN")
     Boolean dropdown;
 

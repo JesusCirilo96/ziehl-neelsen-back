@@ -67,30 +67,33 @@ public class MenuServiceImpl implements MenuService {
             menuDTO.setRuta(menu.getRuta());
             menuDTO.setDropdown(menu.getDropdown());
             menuDTO.setIcono(menu.getIcono());
+            menuDTO.setEstado(menu.getEstado());
             System.out.println("ES DROPDOWN " + menuDTO.getDropdown());
-            if(menuDTO.getDropdown()){
+            if(menuDTO.getDropdown()) {
 
                 System.out.println("Dentro del if DROPDOWN");
                 MenuSubmenuDTO menuSubmenu = menuDAO.getSubmenuByMenu(menuDTO.getMenuId());
-                List<SubMenuEntity> submenuList = menuSubmenu.getSubMenu();
+                if (menuSubmenu.getSubMenu() != null) {
+                    List<SubMenuEntity> submenuList = menuSubmenu.getSubMenu();
 
-                List<SubMenuDTO> listSubMenuDTO = new ArrayList<>();
+                    List<SubMenuDTO> listSubMenuDTO = new ArrayList<>();
 
-                subMenuEntity.forEach((list) -> {
-                    submenuList.forEach((submenu) -> {
-                        if(list.getSubMenuId() == submenu.getSubMenuId()){
-                            SubMenuDTO subMenuDTO = new SubMenuDTO();
-                            subMenuDTO.setSubMenuId(submenu.getSubMenuId());
-                            subMenuDTO.setNombre(submenu.getNombre());
-                            subMenuDTO.setRuta(submenu.getRuta());
-                            subMenuDTO.setDropdown(submenu.getDropdown());
-                            subMenuDTO.setIcono(submenu.getIcono());
-
-                            listSubMenuDTO.add(subMenuDTO);
-                        }
+                    subMenuEntity.forEach((list) -> {
+                        submenuList.forEach((submenu) -> {
+                            if (list.getSubMenuId() == submenu.getSubMenuId()) {
+                                SubMenuDTO subMenuDTO = new SubMenuDTO();
+                                subMenuDTO.setSubMenuId(submenu.getSubMenuId());
+                                subMenuDTO.setNombre(submenu.getNombre());
+                                subMenuDTO.setRuta(submenu.getRuta());
+                                subMenuDTO.setDropdown(submenu.getDropdown());
+                                subMenuDTO.setIcono(submenu.getIcono());
+                                subMenuDTO.setEstado(submenu.getEstado());
+                                listSubMenuDTO.add(subMenuDTO);
+                            }
+                        });
+                        menuDTO.setSubmenu(listSubMenuDTO);
                     });
-                    menuDTO.setSubmenu(listSubMenuDTO);
-                });
+                }
             }
             lisMenuDTO.add(menuDTO);
         });

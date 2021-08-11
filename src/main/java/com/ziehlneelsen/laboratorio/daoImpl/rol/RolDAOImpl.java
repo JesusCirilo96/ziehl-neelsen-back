@@ -48,8 +48,11 @@ public class RolDAOImpl implements RolDAO {
                 listMenu.add(menu.getMenu());
             });
 
-            rolMenu.setRol(listRolMenu.get(0).getRol());
-            rolMenu.setMenu(listMenu);
+            if(!listRolMenu.isEmpty()){
+                rolMenu.setRol(listRolMenu.get(0).getRol());
+                rolMenu.setMenu(listMenu);
+            }
+
 
         }catch (DataAccessException e){
             e.printStackTrace();

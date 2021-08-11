@@ -153,7 +153,7 @@ public class ReferenciaDAOImpl implements ReferenciaDAO {
     @Modifying
     public ResponseDTO actualizaNombreEstudio(Integer idEstudio, String nombre) {
         ResponseDTO response = new ResponseDTO();
-        em = emf.createEntityManager();
+        EntityManager emg = emf.createEntityManager();
         try {
             CriteriaBuilder cb = emf.getCriteriaBuilder();
 
@@ -168,9 +168,10 @@ public class ReferenciaDAOImpl implements ReferenciaDAO {
 
             update.where(examenId);
 
-            em.getTransaction().begin();
-            int result = em.createQuery(update).executeUpdate();
-            em.getTransaction().commit();
+            emg.getTransaction().begin();
+            int result = emg.createQuery(update).executeUpdate();
+
+            emg.getTransaction().commit();
 
             if(result == 0){
                 response.setErrorCode(Messages.ERROR);
@@ -184,7 +185,7 @@ public class ReferenciaDAOImpl implements ReferenciaDAO {
             response.setErrorInfo(Messages.UPDATE_ERROR);
             throw e;
         }finally {
-            em.close();
+            emg.close();
         }
 
         return response;
