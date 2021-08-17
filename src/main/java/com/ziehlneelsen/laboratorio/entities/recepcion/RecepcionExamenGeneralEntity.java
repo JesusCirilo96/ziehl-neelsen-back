@@ -27,15 +27,6 @@ public class RecepcionExamenGeneralEntity implements Serializable {
     @Column(name = "USUARIO_ID")
     private Integer usuarioId;
 
-    @Column(name = "REALIZADO")
-    private Boolean realizado;
-
-    @Column(name = "IMPRESO")
-    private Boolean impreso;
-
-    @Column(name = "ENTREGADO")
-    private Boolean entregado;
-
     @Column(name = "RESULTADO")
     private String resultado;
 
@@ -69,30 +60,6 @@ public class RecepcionExamenGeneralEntity implements Serializable {
 
     public void setUsuarioId(Integer usuarioId) {
         this.usuarioId = usuarioId;
-    }
-
-    public Boolean getRealizado() {
-        return realizado;
-    }
-
-    public void setRealizado(Boolean realizado) {
-        this.realizado = realizado;
-    }
-
-    public Boolean getImpreso() {
-        return impreso;
-    }
-
-    public void setImpreso(Boolean impreso) {
-        this.impreso = impreso;
-    }
-
-    public Boolean getEntregado() {
-        return entregado;
-    }
-
-    public void setEntregado(Boolean entregado) {
-        this.entregado = entregado;
     }
 
     public String getResultado() {

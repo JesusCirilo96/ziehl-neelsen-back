@@ -3,6 +3,8 @@
 -- Model: New Model    Version: 1.0
 -- MySQL Workbench Forward Engineering
 
+DROP SCHEMA laboratorio;
+
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -89,6 +91,10 @@ CREATE TABLE IF NOT EXISTS `laboratorio`.`cat_usuario` (
   `APELLIDO_MATERNO` VARCHAR(65) NULL,
   `NOMBRE_USUARIO` VARCHAR(45) NOT NULL,
   `CEDULA` VARCHAR(8) NULL,
+  `EMAIL` VARCHAR(100) NULL,
+  `MOVIL` VARCHAR(20) NULL,
+  `DIRECCION` VARCHAR(250) NULL,
+  `FOTO_PERFIL` VARCHAR(100) NULL,
   `PASSWORD` VARCHAR(45) NOT NULL,
   `ESTADO` TINYINT NOT NULL DEFAULT 1,
   `FECHA_CREACION` DATETIME NOT NULL,
@@ -187,6 +193,11 @@ CREATE TABLE IF NOT EXISTS `laboratorio`.`recepcion` (
   `DESCUENTO` DECIMAL(10,2) NULL DEFAULT 0,
   `ANTICIPO` DECIMAL(10,2) NULL DEFAULT 0,
   `RESTANTE` DECIMAL(10,2) NULL DEFAULT 0,
+  `IMPORTE` DECIMAL(10,2) NULL DEFAULT 0,
+  `PAGADO` TINYINT(1) NULL DEFAULT false,
+  `FINALIZADO` TINYINT(1) NULL DEFAULT false,
+  `IMPRESO` TINYINT(1) NULL DEFAULT false,
+  `ENTREGADO` TINYINT(1) NULL DEFAULT false,
   `MUESTRAS` VARCHAR(250),
   `NOTAS` VARCHAR(250),
   `USUARIO_ID` INT NOT NULL,
@@ -270,10 +281,17 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `laboratorio`.`cat_descuento` (
   `DESCUENTO_ID` INT NOT NULL AUTO_INCREMENT,
-  `NOMBRE` VARCHAR(45) NOT NULL,
-  `PORCENTAJE_DESCUENTO` INT NOT NULL,
+  `NOMBRE` VARCHAR(50) NOT NULL,
+  `DESCRIPCION` VARCHAR(100) NULL,
+  `FECHA_INICIO` DATETIME NOT NULL,
+  `FECHA_FIN` DATETIME NOT NULL,
+  `DIAS` VARCHAR(45) NOT NULL,
+  `PORCENTAJE_DESCUENTO` INT NULL,
+  `PORCENTAJE_DESCUENTO_TEXTO` VARCHAR(50) NULL,
   `DESCUENTO` DECIMAL(10,2) NOT NULL,
   `ESTADO` TINYINT(1) NOT NULL DEFAULT 1,
+  `FECHA_CREACION` DATETIME NOT NULL,
+  `FECHA_ACTUALIZACION` DATETIME NOT NULL,
   PRIMARY KEY (`DESCUENTO_ID`))
 ENGINE = InnoDB;
 
@@ -562,9 +580,6 @@ CREATE TABLE IF NOT EXISTS `laboratorio`.`examen_general_recepcion` (
   `EXAMEN_ID` INT NOT NULL,
   `RECEPCION_ID` CHAR(12) NOT NULL,
   `USUARIO_ID` INT NOT NULL,
-  `REALIZADO` TINYINT(1) NOT NULL DEFAULT 0,
-  `IMPRESO` TINYINT(1) NOT NULL DEFAULT 0,
-  `ENTREGADO` TINYINT(1) NULL DEFAULT 0,
   `RESULTADO` LONGTEXT NULL,
   -- PRIMARY KEY (`EXAMEN_ID`, `RECEPCION_ID`, `USUARIO_ID`),
   INDEX `fk_examen_general_has_recepcion_recepcion1_idx` (`RECEPCION_ID` ASC, `USUARIO_ID` ASC) VISIBLE,
@@ -603,43 +618,6 @@ CREATE TABLE IF NOT EXISTS `laboratorio`.`examen_general_cotizacion` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `laboratorio`.`cat_dias`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `laboratorio`.`cat_dias` (
-  `DIA_ID` INT NOT NULL AUTO_INCREMENT,
-  `NUMERO_DIA` CHAR(1) NOT NULL,
-  `NOMBRE` VARCHAR(15) NOT NULL,
-  PRIMARY KEY (`DIA_ID`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `laboratorio`.`dia_descuento`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `laboratorio`.`dia_descuento` (
-  `DIA_DESCUENTO_ID` BINARY(16) NOT NULL PRIMARY KEY,
-  `DIA_ID` INT NOT NULL,
-  `DESCUENTO_ID` INT NOT NULL,
-  `INICIO` DATETIME NOT NULL,
-  `FIN` DATETIME NOT NULL,
-  -- PRIMARY KEY (`DIA_ID`, `DESCUENTO_ID`),
-  INDEX `fk_cat_dias_has_cat_descuento_cat_descuento1_idx` (`DESCUENTO_ID` ASC) VISIBLE,
-  INDEX `fk_cat_dias_has_cat_descuento_cat_dias1_idx` (`DIA_ID` ASC) VISIBLE,
-  CONSTRAINT `fk_cat_dias_has_cat_descuento_cat_dias1`
-    FOREIGN KEY (`DIA_ID`)
-    REFERENCES `laboratorio`.`cat_dias` (`DIA_ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_cat_dias_has_cat_descuento_cat_descuento1`
-    FOREIGN KEY (`DESCUENTO_ID`)
-    REFERENCES `laboratorio`.`cat_descuento` (`DESCUENTO_ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `laboratorio`.`cat_paquete`

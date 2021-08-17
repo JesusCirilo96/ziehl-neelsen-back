@@ -58,4 +58,13 @@ public interface RecepcionService {
      * @return objeto con los datos del historial
      */
     HistorialDTO obtenerHistorial(Integer pacienteId);
+
+    /**
+     * Actualizamos bandera de la recepcion
+     * @param recepcionId El id de la recepcion
+     * @param opcion Bandera a actualizar
+     * @param valor El valor a colocar
+     * @return Respuesta del servicio
+     */
+    ResponseDTO actualizaBanderas(String recepcionId, String opcion, Boolean valor);
 }

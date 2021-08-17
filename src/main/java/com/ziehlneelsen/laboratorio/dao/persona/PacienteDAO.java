@@ -8,4 +8,11 @@ public interface PacienteDAO {
      * @return El nombre del paciente
      */
     String obtenerNombrePaciente(Integer pacienteid);
+
+    /**
+     * Obtenemos el nombre del paciente dado el ID
+     * @param usuarioId El ID del usuario
+     * @return El nombre del paciente
+     */
+    String obtenerNombreUsuario(Integer usuarioId);
 }

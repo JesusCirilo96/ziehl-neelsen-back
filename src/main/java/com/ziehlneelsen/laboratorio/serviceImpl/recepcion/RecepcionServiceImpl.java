@@ -12,6 +12,7 @@ import com.ziehlneelsen.laboratorio.entities.recepcion.RecepcionEntity;
 import com.ziehlneelsen.laboratorio.entities.recepcion.RecepcionExamenGeneralEntity;
 import com.ziehlneelsen.laboratorio.repository.persona.MedicoRepository;
 import com.ziehlneelsen.laboratorio.repository.persona.PacienteRepository;
+import com.ziehlneelsen.laboratorio.repository.persona.UsuarioRepository;
 import com.ziehlneelsen.laboratorio.repository.recepcion.RecepcionExamenGeneralRepository;
 import com.ziehlneelsen.laboratorio.repository.recepcion.RecepcionRepository;
 import com.ziehlneelsen.laboratorio.service.recepcion.RecepcionService;
@@ -42,6 +43,9 @@ public class RecepcionServiceImpl implements RecepcionService {
 
     @Autowired
     MedicoRepository medicoRepository;
+
+    @Autowired
+    UsuarioRepository usuarioRepository;
 
     @Override
     public Integer obtenerFicha() {
@@ -91,6 +95,11 @@ public class RecepcionServiceImpl implements RecepcionService {
                 recepcionDTO.setPaciente(pacienteDAO.obtenerNombrePaciente(recepcionFetch.getPacienteId()));
                 recepcionDTO.setHoraIngreso(recepcionFetch.getHoraIngreso());
                 recepcionDTO.setPacienteId(recepcionFetch.getPacienteId());
+                recepcionDTO.setFinalizado(recepcionFetch.getFinalizado());
+                recepcionDTO.setImpreso(recepcionFetch.getImpreso());
+                recepcionDTO.setEntregado(recepcionFetch.getEntregado());
+                recepcionDTO.setTotal(recepcionFetch.getTotal());
+                recepcionDTO.setRestante(recepcionFetch.getRestante());
 
                 recepcionDTOList.add(recepcionDTO);
             });
@@ -110,6 +119,7 @@ public class RecepcionServiceImpl implements RecepcionService {
         recepcionResultadoDTO.setRecepcion(recepcionEntity);
         recepcionResultadoDTO.setPaciente(pacienteRepository.findById(recepcionEntity.getPacienteId()));
         recepcionResultadoDTO.setMedico(medicoRepository.findById(recepcionEntity.getMedicoId()));
+        recepcionResultadoDTO.setNombreUsuario(pacienteDAO.obtenerNombreUsuario(recepcionEntity.getUsuarioId()));
 
         return recepcionResultadoDTO;
     }
@@ -122,5 +132,10 @@ public class RecepcionServiceImpl implements RecepcionService {
     @Override
     public HistorialDTO obtenerHistorial(Integer pacienteId) {
         return recepcionDAO.obtenerHistorial(pacienteId);
+    }
+
+    @Override
+    public ResponseDTO actualizaBanderas(String recepcionId, String opcion, Boolean valor){
+       return recepcionDAO.updateBanderas(recepcionId, opcion, valor);
     }
 }

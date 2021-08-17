@@ -2,6 +2,7 @@ package com.ziehlneelsen.laboratorio.daoImpl.persona;
 
 import com.ziehlneelsen.laboratorio.dao.persona.PacienteDAO;
 import com.ziehlneelsen.laboratorio.entities.persona.PacienteEntity;
+import com.ziehlneelsen.laboratorio.entities.persona.UsuarioEntity;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -46,5 +47,35 @@ public class PacienteDAOImpl implements PacienteDAO {
         }
 
         return nombrePaciente;
+    }
+
+    @Override
+    public String obtenerNombreUsuario(Integer usuarioId) {
+        EntityManager em = emf.createEntityManager();
+        UsuarioEntity pacienteEntity;
+        String nombreUsuario = null;
+        try {
+            CriteriaBuilder cb = emf.getCriteriaBuilder();
+
+            CriteriaQuery<UsuarioEntity> consulta = cb.createQuery(UsuarioEntity.class);
+            Root<UsuarioEntity> paciente = consulta.from(UsuarioEntity.class);
+
+            Predicate usuario = cb.equal(paciente.get("usuarioId"),usuarioId);
+
+            consulta.select(paciente).where(usuario);
+
+            pacienteEntity = em.createQuery(consulta).getSingleResult();
+
+            if(pacienteEntity != null){
+                nombreUsuario = (pacienteEntity.getNombre() + " " + pacienteEntity.getApellidoPaterno() + " " +  pacienteEntity.getApellidoMaterno());
+            }
+
+        }catch (DataAccessException e){
+            throw e;
+        }finally {
+            em.close();
+        }
+
+        return nombreUsuario;
     }
 }

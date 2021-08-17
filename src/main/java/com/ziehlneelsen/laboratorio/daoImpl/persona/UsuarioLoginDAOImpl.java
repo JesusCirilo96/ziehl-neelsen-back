@@ -1,25 +1,29 @@
 package com.ziehlneelsen.laboratorio.daoImpl.persona;
 
+import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.beans.persona.UserAuthDTO;
+import com.ziehlneelsen.laboratorio.beans.persona.UsuarioDTO;
+import com.ziehlneelsen.laboratorio.constant.Messages;
 import com.ziehlneelsen.laboratorio.dao.persona.UsuarioLoginDAO;
+import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.persona.UsuarioEntity;
+import com.ziehlneelsen.laboratorio.util.Utileria;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.List;
 
 @Service
 public class UsuarioLoginDAOImpl implements UsuarioLoginDAO {
 
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("laboratorio");
+
     @Override
     public UserAuthDTO login(String user, String password) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("laboratorio");
         EntityManager em = emf.createEntityManager();
 
         UserAuthDTO usuarioAuth = new UserAuthDTO();
@@ -54,5 +58,53 @@ public class UsuarioLoginDAOImpl implements UsuarioLoginDAO {
         }
 
         return usuarioAuth;
+    }
+
+    @Override
+    public ResponseDTO updateData(UsuarioDTO usuarioDTO) {
+        ResponseDTO response = new ResponseDTO();
+        EntityManager emg = emf.createEntityManager();
+        try {
+            CriteriaBuilder cb = emf.getCriteriaBuilder();
+
+            CriteriaUpdate<UsuarioEntity> update = cb.createCriteriaUpdate(UsuarioEntity.class);
+
+            Root updateUsuario = update.from(UsuarioEntity.class);
+
+            Predicate usuarioId = cb.equal(updateUsuario.get("usuarioId"),usuarioDTO.getUsuarioId());
+
+            update.set("nombre", usuarioDTO.getNombre());
+            update.set("apellidoPaterno", usuarioDTO.getApellidoPaterno());
+            update.set("apellidoMaterno", usuarioDTO.getApellidoMaterno());
+            update.set("nombreUsuario", usuarioDTO.getNombreUsuario());
+            update.set("cedula",usuarioDTO.getCedula());
+            update.set("email",usuarioDTO.getEmail());
+            update.set("movil",usuarioDTO.getMovil());
+            update.set("direccion", usuarioDTO.getDireccion());
+
+            update.set("fechaActualizacion", Utileria.fechaHoraActual());
+
+            update.where(usuarioId);
+
+            emg.getTransaction().begin();
+            int result = emg.createQuery(update).executeUpdate();
+            emg.getTransaction().commit();
+
+            if(result == 0){
+                response.setErrorCode(Messages.ERROR);
+                response.setErrorInfo(Messages.UPDATE_ERROR);
+            }
+            response.setErrorCode(Messages.OK);
+            response.setErrorInfo(Messages.UPDATE_OK);
+
+        }catch (DataAccessException e){
+            response.setErrorCode(Messages.ERROR);
+            response.setErrorInfo(Messages.UPDATE_ERROR);
+            throw e;
+        }finally {
+            emg.close();
+        }
+
+        return response;
     }
 }

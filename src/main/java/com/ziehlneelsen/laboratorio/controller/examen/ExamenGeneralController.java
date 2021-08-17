@@ -1,5 +1,6 @@
 package com.ziehlneelsen.laboratorio.controller.examen;
 
+import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.beans.estudio.EstudioDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenEstudioDTO;
@@ -120,5 +121,10 @@ public class ExamenGeneralController {
         }
         response = examenGeneralService.updateMetodo(examen);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = Url.EXAMEN_DESCUENTO, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
+    public ExamenDescuentoDTO descuentoPorExamen(@PathVariable Integer id){
+        return examenGeneralService.findDescuentoByExamen(id);
     }
 }

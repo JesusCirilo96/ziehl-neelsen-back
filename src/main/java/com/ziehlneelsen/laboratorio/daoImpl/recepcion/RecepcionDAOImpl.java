@@ -212,4 +212,54 @@ public class RecepcionDAOImpl implements RecepcionDAO {
         return historial;
 
     }
+
+    @Override
+    @Transactional
+    @Modifying
+    public ResponseDTO updateBanderas(String recepcionId, String opcion, Boolean valor) {
+        ResponseDTO response = new ResponseDTO();
+
+        em = emf.createEntityManager();
+        try {
+            CriteriaBuilder cb = emf.getCriteriaBuilder();
+
+            CriteriaUpdate<RecepcionEntity> update = cb.createCriteriaUpdate(RecepcionEntity.class);
+
+            Root saveResult = update.from(RecepcionEntity.class);
+
+            Predicate idRecepcion = cb.equal(saveResult.get("recepcionId"),recepcionId);
+
+            switch (opcion) {
+                case "finalizado":
+                    update.set("finalizado", valor);
+                    break;
+                case "impreso":
+                    update.set("impreso", valor);
+                    break;
+                case "entregado":
+                    update.set("entregado", valor);
+                    break;
+                default:
+                    System.out.println("Opcion invalida");
+            }
+
+            update.where(idRecepcion);
+
+            em.getTransaction().begin();
+            em.createQuery(update).executeUpdate();
+            em.getTransaction().commit();
+
+            response.setErrorCode(Messages.OK);
+            response.setErrorInfo(Messages.UPDATE_OK);
+
+        }catch (DataAccessException e){
+            response.setErrorCode(Messages.ERROR);
+            response.setErrorInfo(Messages.UPDATE_ERROR);
+            throw e;
+        }finally {
+            em.close();
+        }
+
+        return response;
+    }
 }

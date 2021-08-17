@@ -78,4 +78,9 @@ public class RecepcionController {
         return recepcionService.obtenerHistorial(pacienteId);
     }
 
+    @RequestMapping(value = Url.RECEPCION_UPDATE_BANDERAS, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
+    public ResponseDTO actualizaBanderas(@PathVariable String recepcionId, @PathVariable String opcion, @PathVariable Boolean valor){
+        return recepcionService.actualizaBanderas(recepcionId,opcion,valor);
+    }
+
 }

@@ -2,6 +2,7 @@ package com.ziehlneelsen.laboratorio.serviceImpl.persona;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.beans.persona.UserAuthDTO;
+import com.ziehlneelsen.laboratorio.beans.persona.UsuarioDTO;
 import com.ziehlneelsen.laboratorio.beans.persona.UsuarioRolDTO;
 import com.ziehlneelsen.laboratorio.constant.Messages;
 import com.ziehlneelsen.laboratorio.dao.persona.UsuarioLoginDAO;
@@ -85,5 +86,10 @@ public class UsuarioServiceImpl implements UsuarioService {
               e.printStackTrace();
           }
           return usuarioLogeado;
+    }
+
+    @Override
+    public ResponseDTO actualizaDatos(UsuarioDTO usuarioDTO){
+        return usuarioLoginDAO.updateData(usuarioDTO);
     }
 }

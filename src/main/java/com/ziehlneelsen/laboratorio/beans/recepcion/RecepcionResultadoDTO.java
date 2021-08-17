@@ -2,6 +2,7 @@ package com.ziehlneelsen.laboratorio.beans.recepcion;
 
 import com.ziehlneelsen.laboratorio.entities.persona.MedicoEntity;
 import com.ziehlneelsen.laboratorio.entities.persona.PacienteEntity;
+import com.ziehlneelsen.laboratorio.entities.persona.UsuarioEntity;
 import com.ziehlneelsen.laboratorio.entities.recepcion.RecepcionEntity;
 import com.ziehlneelsen.laboratorio.entities.recepcion.RecepcionExamenGeneralEntity;
 
@@ -10,13 +11,15 @@ import java.util.Optional;
 
 public class RecepcionResultadoDTO {
 
-    Optional<PacienteEntity> paciente;
+    private Optional<PacienteEntity> paciente;
 
-    Optional<MedicoEntity> medico;
+    private Optional<MedicoEntity> medico;
 
-    RecepcionEntity recepcion;
+    private String nombreUsuario;
 
-    List<RecepcionExamenGeneralEntity> recepcionExamen;
+    private RecepcionEntity recepcion;
+
+    private List<RecepcionExamenGeneralEntity> recepcionExamen;
 
     public Optional<PacienteEntity> getPaciente() {
         return paciente;
@@ -48,5 +51,13 @@ public class RecepcionResultadoDTO {
 
     public void setRecepcionExamen(List<RecepcionExamenGeneralEntity> recepcionExamen) {
         this.recepcionExamen = recepcionExamen;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 }

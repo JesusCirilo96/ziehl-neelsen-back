@@ -2,6 +2,7 @@ package com.ziehlneelsen.laboratorio.controller.persona;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.beans.persona.UserAuthDTO;
+import com.ziehlneelsen.laboratorio.beans.persona.UsuarioDTO;
 import com.ziehlneelsen.laboratorio.beans.persona.UsuarioRolDTO;
 import com.ziehlneelsen.laboratorio.constant.Url;
 import com.ziehlneelsen.laboratorio.entities.persona.UsuarioEntity;
@@ -19,7 +20,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = Url.USUARIO)
-@CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET})
+@CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT})
 public class UsuarioController {
 
     @Autowired
@@ -54,6 +55,14 @@ public class UsuarioController {
     @RequestMapping(value = Url.AUTH, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
     public UserAuthDTO  authenticate(@PathVariable String user, @PathVariable String password){
         return usuarioService.authenticate(user,password);
+    }
+
+    @RequestMapping(value = Url.UPDATE_DATOS, method = RequestMethod.PUT, produces = Url.APLICATION_JSON)
+    public ResponseEntity updateDatos(@RequestBody UsuarioDTO usuario) {
+
+        ResponseDTO response;
+        response = usuarioService.actualizaDatos(usuario);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }

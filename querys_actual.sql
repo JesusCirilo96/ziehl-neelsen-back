@@ -1,8 +1,15 @@
 INSERT INTO cat_usuario VALUES
-('1', 'Jesus Alberto', 'Martinez', 'Cirilo', 'jesuscirilo', '1234567', '12345', '1', '2019-07-19 00:00:00', '2019-07-19 00:00:00'),
-('2', 'Jaime', 'Cirilo', 'Jimenez', 'jaimecirilo', '01', '54321', '1', '2019-07-19 00:00:00', '2019-07-19 00:00:00'),
-('3', 'Ziehl', 'Neelsen', '', 'ziehneelsen', '01', 'ziehlneelse2021_', '1', '2019-07-19 00:00:00', '2019-07-19 00:00:00'),
-('4', 'Karen Dennis', 'Martinez', 'Cirilo', 'karen2021', '01', 'karen2021', '1', '2019-07-19 00:00:00', '2019-07-19 00:00:00');
+('1', 
+'Jesus Alberto', 
+'Martinez', 
+'Cirilo', 
+'jesuscirilo', 
+'12345678',
+'cirlo21@outlook.es',
+'9711056913',
+'Rio tehuantepes SN, Tehuantepec, Oaxaca',
+'assets/img/user.png',
+'12345', '1', '2019-07-19 00:00:00', '2019-07-19 00:00:00');
 
 INSERT INTO rol VALUES
 ('1','Super Administrador','1'),
@@ -12,11 +19,7 @@ INSERT INTO rol VALUES
 
 
 INSERT INTO usuario_rol VALUES
-(UUID_TO_BIN(UUID()),1,1),
-(UUID_TO_BIN(UUID()),2,2),
-(UUID_TO_BIN(UUID()),2,4),
-(UUID_TO_BIN(UUID()),3,3),
-(UUID_TO_BIN(UUID()),4,4);
+(UUID_TO_BIN(UUID()),1,1);
 
 
 INSERT INTO menu VALUES
@@ -24,11 +27,13 @@ INSERT INTO menu VALUES
 ('2', 'Panel de control', '/dashboard',0,'dashboard',1),
 ('3', 'Recepcion', '/recepcion',0,'meeting_room',1),
 ('4', 'Resultados', '/resultado',0,'note_add',1),
-('5', 'Cotización', '/cotizar',0,'monetization_on',1),
-('6', 'Examenes', '/examen',1,'library_books',1),
-('7', 'Personas', '/personas',1,'group',1),
-('8', 'Configuración', '/configuracion', 0, 'settings',1),
-('9', 'Administración', '/administracion',0,'settings_applications',1);
+('5', 'Ordenes', '/ordenes',0,'book',1),
+('6', 'Cotización', '/cotizar',0,'monetization_on',1),
+('7', 'Descuentos y promociones', '/descuentos',0,'money_off',1),
+('8', 'Personas', '/personas',1,'group',1),
+('9', 'Examenes', '/examen',1,'library_books',1),
+('10', 'Configuración', '/configuracion', 0, 'settings',1),
+('11', 'Administración', '/administracion',0,'settings_applications',1);
 -- catalogos
 
 INSERT INTO sub_menu VALUES
@@ -43,15 +48,15 @@ INSERT INTO sub_menu VALUES
 (9,'Clasificacion pacientes','/clasificacion/paciente',0,'',1);
 
 INSERT INTO menu_sub_menu VALUES
-(UUID_TO_BIN(UUID()),5,5),
-(UUID_TO_BIN(UUID()),5,6),
-(UUID_TO_BIN(UUID()),5,7),
-(UUID_TO_BIN(UUID()),5,8),
-(UUID_TO_BIN(UUID()),5,9),
-(UUID_TO_BIN(UUID()),6,1),
-(UUID_TO_BIN(UUID()),6,2),
-(UUID_TO_BIN(UUID()),6,3),
-(UUID_TO_BIN(UUID()),6,4);
+(UUID_TO_BIN(UUID()),9,5),
+(UUID_TO_BIN(UUID()),9,6),
+(UUID_TO_BIN(UUID()),9,7),
+(UUID_TO_BIN(UUID()),9,8),
+(UUID_TO_BIN(UUID()),9,9),
+(UUID_TO_BIN(UUID()),8,1),
+(UUID_TO_BIN(UUID()),8,2),
+(UUID_TO_BIN(UUID()),8,3),
+(UUID_TO_BIN(UUID()),8,4);
 
 INSERT INTO rol_menu VALUES
 (UUID_TO_BIN(UUID()),1,1,1,1,1,1),
@@ -59,11 +64,12 @@ INSERT INTO rol_menu VALUES
 (UUID_TO_BIN(UUID()),1,3,1,1,1,1),
 (UUID_TO_BIN(UUID()),1,4,1,1,1,1),
 (UUID_TO_BIN(UUID()),1,5,1,1,1,1),
-(UUID_TO_BIN(UUID()),1,7,1,1,1,1),
 (UUID_TO_BIN(UUID()),1,6,1,1,1,1),
-(UUID_TO_BIN(UUID()),3,2,1,1,1,1),
-(UUID_TO_BIN(UUID()),3,3,1,1,1,1),
-(UUID_TO_BIN(UUID()),4,3,1,1,1,1);
+(UUID_TO_BIN(UUID()),1,7,1,1,1,1),
+(UUID_TO_BIN(UUID()),1,8,1,1,1,1),
+(UUID_TO_BIN(UUID()),1,9,1,1,1,1),
+(UUID_TO_BIN(UUID()),1,10,1,1,1,1),
+(UUID_TO_BIN(UUID()),1,11,1,1,1,1);
 
 INSERT INTO rol_sub_menu VALUES
 (UUID_TO_BIN(UUID()),1,1,1,1,1,1),
@@ -77,15 +83,6 @@ INSERT INTO rol_sub_menu VALUES
 (UUID_TO_BIN(UUID()),1,9,1,1,1,1);
 
 SELECT * FROM cat_usuario;
-
-INSERT INTO cat_dias VALUES
-(1,"1","Domingo"),
-(2,"2","Lunes"),
-(3,"3","Martes"),
-(4,"4","Miercoles"),
-(5,"5","Jueves"),
-(6,"6","Viernes"),
-(7,"7","Sabado");
 
 INSERT INTO cat_medico VALUES
 ('1','A','Q','C','1',NOW(),NOW());
@@ -139,6 +136,7 @@ INSERT INTO cat_seccion (NOMBRE,TITULO,TEXTO_CENTRO,TEXTO_DERECHO,ESTADO,FECHA_C
 	 ('MICROSCOPIA DEL SEDIMENTO URINARIO CENTRIFUGADO (400x)',NULL,NULL,NULL,1,'2021-08-02 23:20:12.0','2021-08-02 23:20:12.0'),
 	 ('Formula roja','FORMULA ROJA','','VALORES DE REFERENCIA<br/><div><span class="titleSubexamen">Masculino</span>&nbsp;<span class="titleSubexamen">Femenino</span></div>',1,'2021-08-02 23:44:33.0','2021-08-03 12:41:35.0'),
 	 ('Formula blanca','FORMULA BLANCA',NULL,NULL,1,'2021-08-02 23:55:11.0','2021-08-02 23:55:11.0');
+     
 INSERT INTO cat_estudio (NOMBRE,RESULTADO,RESULTADO_SELECT,MOSTRAR_INPUT,COMODIN,ESTADO,FECHA_CREACION,FECHA_ACTUALIZACION) VALUES
 	 ('Volumen',NULL,NULL,0,0,1,'2021-08-02 23:02:36.0','2021-08-02 23:02:36.0'),
 	 ('Olor',NULL,'[{"value": "Caracteristico", "viewValue": "Caracteristico"}]',0,0,1,'2021-08-02 23:02:58.0','2021-08-02 23:02:58.0'),
@@ -150,6 +148,7 @@ INSERT INTO cat_estudio (NOMBRE,RESULTADO,RESULTADO_SELECT,MOSTRAR_INPUT,COMODIN
 	 ('Glucosa',NULL,'[{"value": "Positivo", "viewValue": "Positivo"}, {"value": "Negativo", "viewValue": "Negativo"}]',0,0,1,'2021-08-02 23:14:09.0','2021-08-02 23:14:09.0'),
 	 ('Bilirrubina',NULL,'[{"value": "Positivo", "viewValue": "Positivo"}, {"value": "Negativo", "viewValue": "Negativo"}]',0,0,1,'2021-08-02 23:14:28.0','2021-08-02 23:14:28.0'),
 	 ('C. cetonicos',NULL,'[{"value": "Positivo", "viewValue": "Positivo"}, {"value": "Negativo", "viewValue": "Negativo"}]',0,0,1,'2021-08-02 23:14:51.0','2021-08-02 23:14:51.0');
+     
 INSERT INTO cat_estudio (NOMBRE,RESULTADO,RESULTADO_SELECT,MOSTRAR_INPUT,COMODIN,ESTADO,FECHA_CREACION,FECHA_ACTUALIZACION) VALUES
 	 ('Hemoglobina',NULL,'[{"value": "Positivo", "viewValue": "Positivo"}, {"value": "Negativo", "viewValue": "Negativo"}]',0,0,1,'2021-08-02 23:15:06.0','2021-08-02 23:15:06.0'),
 	 ('Proteínas',NULL,'[{"value": "Negativo", "viewValue": "Negativo"}, {"value": "Positivo", "viewValue": "Positivo"}]',0,0,1,'2021-08-02 23:15:21.0','2021-08-02 23:15:21.0'),
@@ -161,6 +160,7 @@ INSERT INTO cat_estudio (NOMBRE,RESULTADO,RESULTADO_SELECT,MOSTRAR_INPUT,COMODIN
 	 ('Bacterias',NULL,NULL,0,0,1,'2021-08-02 23:21:28.0','2021-08-02 23:21:28.0'),
 	 ('Eritrocitos, millones',NULL,NULL,0,0,1,'2021-08-02 23:44:56.0','2021-08-02 23:44:56.0'),
 	 ('Hb, g/dl',NULL,NULL,0,0,1,'2021-08-02 23:48:52.0','2021-08-02 23:48:52.0');
+     
 INSERT INTO cat_estudio (NOMBRE,RESULTADO,RESULTADO_SELECT,MOSTRAR_INPUT,COMODIN,ESTADO,FECHA_CREACION,FECHA_ACTUALIZACION) VALUES
 	 ('Hto, %',NULL,NULL,0,0,1,'2021-08-02 23:50:12.0','2021-08-02 23:50:12.0'),
 	 ('V.G.M.fl',NULL,NULL,0,0,1,'2021-08-02 23:51:04.0','2021-08-02 23:51:04.0'),
@@ -172,6 +172,7 @@ INSERT INTO cat_estudio (NOMBRE,RESULTADO,RESULTADO_SELECT,MOSTRAR_INPUT,COMODIN
 	 ('Eosinofilos, %',NULL,NULL,0,0,1,'2021-08-02 23:56:21.0','2021-08-02 23:56:21.0'),
 	 ('Basofilos, %',NULL,NULL,0,0,1,'2021-08-02 23:56:49.0','2021-08-02 23:56:49.0'),
 	 ('Neutrofilos Totales, %',NULL,NULL,0,0,1,'2021-08-02 23:57:37.0','2021-08-02 23:57:37.0');
+     
 INSERT INTO cat_estudio (NOMBRE,RESULTADO,RESULTADO_SELECT,MOSTRAR_INPUT,COMODIN,ESTADO,FECHA_CREACION,FECHA_ACTUALIZACION) VALUES
 	 ('Segmentados, %',NULL,NULL,0,0,1,'2021-08-02 23:58:03.0','2021-08-02 23:58:03.0'),
 	 ('En Banda, %',NULL,NULL,0,0,1,'2021-08-02 23:58:32.0','2021-08-02 23:58:32.0'),
@@ -191,6 +192,7 @@ INSERT INTO referencia (REFERENCIA_ID,CLASIFICACION_ID,ESTUDIO_ID,MASCULINO,FEME
 	 (0x4C88AEF3F32F403A9B762EDC21832A6C,1,19,'5,0 - 6,0','4,5 - 5,5','',0,'','2021-08-02 23:45:44.0','2021-08-02 23:45:44.0'),
 	 (0x58FB3FFC9254457DB29554188014D418,1,27,'','','3 - 10',0,'','2021-08-03 00:01:28.0','2021-08-03 00:01:28.0'),
 	 (0x64ADC37BF97A4355A1080C0C2D935147,1,23,'32 - 34,5','32 - 34,5','',0,'','2021-08-02 23:53:34.0','2021-08-02 23:53:34.0');
+     
 INSERT INTO referencia (REFERENCIA_ID,CLASIFICACION_ID,ESTUDIO_ID,MASCULINO,FEMENINO,`GENERAL`,ORDEN,NOTA,FECHA_CREACION,FECHA_ACTUALIZACION) VALUES
 	 (0x7F65F08BA2B148589796FBEE73E1AA7C,1,20,'13,0 - 17,0','12,0 - 15,0','',0,'','2021-08-02 23:49:41.0','2021-08-02 23:49:41.0'),
 	 (0x85FC272919404F41AEFBFDA2279A5BE4,1,33,'','','0',0,'','2021-08-03 00:03:02.0','2021-08-03 00:03:02.0'),
@@ -198,9 +200,9 @@ INSERT INTO referencia (REFERENCIA_ID,CLASIFICACION_ID,ESTUDIO_ID,MASCULINO,FEME
 	 (0xA878CEFADFF2413E852FAA0A0D5F5760,1,22,'83 - 100','83 - 100','',0,'','2021-08-02 23:52:21.0','2021-08-02 23:52:21.0'),
 	 (0xB066A63A8B4B4BD084FBA02A18AE5D69,1,21,'41 - 52','37 - 47','',0,'','2021-08-02 23:50:40.0','2021-08-02 23:50:40.0'),
 	 (0xB774EF9DE4E644599560E8AC2FA3E971,1,37,'','','15,0 - 17,0',0,'','2021-08-03 00:04:50.0','2021-08-03 00:04:50.0'),
-	 (0xBFC46BED126F4CDBA2767555EDD922A3,1,38,'','','Normal Menor a 30,00 mg /g de creatinina',0,'','2021-08-03 17:49:11.0','2021-08-03 17:49:11.0'),
 	 (0xC14968AB30484C28AC8E7435F159F747,1,36,'','','7,0 - 11,0',0,'','2021-08-03 00:04:13.0','2021-08-03 00:04:13.0'),
 	 (0xC5A2A8FA0CA84C3BA961C9E3592F0D48,1,29,'','','0 - 1',0,'','2021-08-03 00:01:51.0','2021-08-03 00:01:51.0');
+     
 INSERT INTO referencia (REFERENCIA_ID,CLASIFICACION_ID,ESTUDIO_ID,MASCULINO,FEMENINO,`GENERAL`,ORDEN,NOTA,FECHA_CREACION,FECHA_ACTUALIZACION) VALUES
 	 (0xE34C3C332847480F94D1E945267D989F,1,35,'','','140,000 - 450,000',0,'','2021-08-03 00:03:39.0','2021-08-03 00:03:39.0'),
 	 (0xE87B45F025AE40D1A914F2EF7461B344,1,24,'28 - 32','28 - 32','',0,'','2021-08-02 23:54:26.0','2021-08-02 23:54:26.0');
@@ -271,11 +273,6 @@ INSERT INTO cat_paquete VALUES
 (6,"Paquete 6","Descripcion paquete 5","2020-09-07 23:59:00","2020-12-30 23:59:00","1234567",'350',50,150.00,1,now(),now()),
 (7,"Paquete 7","Descripcion paquete 5","2020-09-07 23:59:00","2020-12-30 23:59:00","1234567",'350',50,150.00,1,now(),now());
 
-
-
-
-USE laboratorio;
-SELECT * FROM cotizacion;
 INSERT INTO cotizacion VALUES("020820200004","2020-09-03","22:34:24");
 SELECT * FROM examen_general_cotizacion;
 INSERT INTO examen_general_cotizacion VALUES(1,"020820200004");

@@ -39,4 +39,14 @@ public interface RecepcionDAO {
      * @return Objeto con el historial del paciente
      */
     HistorialDTO obtenerHistorial(Integer pacienteId);
+
+    /**
+     * Actualizamos las banderas de la recepcion ya se si
+     * fue finalizado, impreso o entregado
+     * @param recepcionId El id de la recepcion
+     * @param opcion La opcion, que bandera se va a actualizar
+     * @param valor El valor a colocar
+     * @return Respuesta del servicio
+     */
+    ResponseDTO updateBanderas(String recepcionId, String opcion, Boolean valor);
 }

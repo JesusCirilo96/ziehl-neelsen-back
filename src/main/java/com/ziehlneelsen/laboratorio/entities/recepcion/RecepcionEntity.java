@@ -42,6 +42,21 @@ public class RecepcionEntity implements Serializable {
     @Column(name = "RESTANTE")
     private Float restante;
 
+    @Column(name = "IMPORTE")
+    private Float importe;
+
+    @Column(name = "PAGADO", columnDefinition = "boolean default false")
+    private Boolean pagado;
+
+    @Column(name = "FINALIZADO", columnDefinition = "boolean default false")
+    private Boolean finalizado;
+
+    @Column(name = "IMPRESO", columnDefinition = "boolean default false")
+    private Boolean impreso;
+
+    @Column(name = "ENTREGADO", columnDefinition = "boolean default false")
+    private Boolean entregado;
+
     @Column(name = "MUESTRAS")
     private String muestras;
 
@@ -121,6 +136,46 @@ public class RecepcionEntity implements Serializable {
         this.restante = restante;
     }
 
+    public Float getImporte() {
+        return importe;
+    }
+
+    public void setImporte(Float importe) {
+        this.importe = importe;
+    }
+
+    public Boolean getPagado() {
+        return pagado;
+    }
+
+    public void setPagado(Boolean pagado) {
+        this.pagado = pagado;
+    }
+
+    public Boolean getFinalizado() {
+        return finalizado;
+    }
+
+    public void setFinalizado(Boolean finalizado) {
+        this.finalizado = finalizado;
+    }
+
+    public Boolean getImpreso() {
+        return impreso;
+    }
+
+    public void setImpreso(Boolean impreso) {
+        this.impreso = impreso;
+    }
+
+    public Boolean getEntregado() {
+        return entregado;
+    }
+
+    public void setEntregado(Boolean entregado) {
+        this.entregado = entregado;
+    }
+
     public Integer getUsuarioId() {
         return usuarioId;
     }
@@ -174,11 +229,11 @@ public class RecepcionEntity implements Serializable {
         if (this == o) return true;
         if (!(o instanceof RecepcionEntity)) return false;
         RecepcionEntity that = (RecepcionEntity) o;
-        return Objects.equals(getRecepcionId(), that.getRecepcionId()) && Objects.equals(getFechaIngreso(), that.getFechaIngreso()) && Objects.equals(getHoraIngreso(), that.getHoraIngreso()) && Objects.equals(getFicha(), that.getFicha()) && Objects.equals(getTotal(), that.getTotal()) && Objects.equals(getSubTotal(), that.getSubTotal()) && Objects.equals(getDescuento(), that.getDescuento()) && Objects.equals(getAnticipo(), that.getAnticipo()) && Objects.equals(getRestante(), that.getRestante()) && Objects.equals(getMuestras(), that.getMuestras()) && Objects.equals(getNotas(), that.getNotas()) && Objects.equals(getUsuarioId(), that.getUsuarioId()) && Objects.equals(getMedicoId(), that.getMedicoId()) && Objects.equals(getPacienteId(), that.getPacienteId());
+        return Objects.equals(getRecepcionId(), that.getRecepcionId()) && Objects.equals(getFechaIngreso(), that.getFechaIngreso()) && Objects.equals(getHoraIngreso(), that.getHoraIngreso()) && Objects.equals(getFicha(), that.getFicha()) && Objects.equals(getTotal(), that.getTotal()) && Objects.equals(getSubTotal(), that.getSubTotal()) && Objects.equals(getDescuento(), that.getDescuento()) && Objects.equals(getAnticipo(), that.getAnticipo()) && Objects.equals(getRestante(), that.getRestante()) && Objects.equals(getImporte(), that.getImporte()) && Objects.equals(getPagado(), that.getPagado()) && Objects.equals(getFinalizado(), that.getFinalizado()) && Objects.equals(getImpreso(), that.getImpreso()) && Objects.equals(getEntregado(), that.getEntregado()) && Objects.equals(getMuestras(), that.getMuestras()) && Objects.equals(getNotas(), that.getNotas()) && Objects.equals(getUsuarioId(), that.getUsuarioId()) && Objects.equals(getMedicoId(), that.getMedicoId()) && Objects.equals(getPacienteId(), that.getPacienteId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getRecepcionId(), getFechaIngreso(), getHoraIngreso(), getFicha(), getTotal(), getSubTotal(), getDescuento(), getAnticipo(), getRestante(), getMuestras(), getNotas(), getUsuarioId(), getMedicoId(), getPacienteId());
+        return Objects.hash(getRecepcionId(), getFechaIngreso(), getHoraIngreso(), getFicha(), getTotal(), getSubTotal(), getDescuento(), getAnticipo(), getRestante(), getImporte(), getPagado(), getFinalizado(), getImpreso(), getEntregado(), getMuestras(), getNotas(), getUsuarioId(), getMedicoId(), getPacienteId());
     }
 }

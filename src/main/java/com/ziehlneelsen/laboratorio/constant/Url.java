@@ -1,7 +1,5 @@
 package com.ziehlneelsen.laboratorio.constant;
 
-import java.awt.*;
-
 public class Url {
 
     //constante para application/json
@@ -78,6 +76,7 @@ public class Url {
     public static final String FIND_ROL = "/get/rol/{id}";
     public static final String PACIENTE = "/paciente";
     public static final String MEDICO = "/medico";
+    public static final String UPDATE_DATOS = "/update/datos";
 
     //Rol
     public static final String ROL = "/rol";
@@ -98,6 +97,8 @@ public class Url {
     public static final String SAVE_RECEPCION_EXAMEN = "/examen/save";
     public static final String SAVE_RESULTADO = "/resultado/save";
     public static final String RECEPCION_HISTORIAL = "/historial/{pacienteId}";
+    public static final String RECEPCION_UPDATE_BANDERAS = "/update/bandera/{recepcionId}/{opcion}/{valor}";
+
 
     /**
      * Construtor de la clase
