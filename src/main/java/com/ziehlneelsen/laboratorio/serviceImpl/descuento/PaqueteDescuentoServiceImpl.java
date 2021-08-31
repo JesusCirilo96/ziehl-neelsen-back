@@ -4,7 +4,6 @@ import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.beans.descuento.PaqueteDescuentoDTO;
 import com.ziehlneelsen.laboratorio.constant.Messages;
 import com.ziehlneelsen.laboratorio.dao.descuento.PaqueteDescuentoDAO;
-import com.ziehlneelsen.laboratorio.entities.descuento.DiaDescuento;
 import com.ziehlneelsen.laboratorio.entities.descuento.PaqueteDescuentoEntity;
 import com.ziehlneelsen.laboratorio.repository.descuento.PaqueteDescuentoRepository;
 import com.ziehlneelsen.laboratorio.service.descuento.PaqueteDescuentoService;

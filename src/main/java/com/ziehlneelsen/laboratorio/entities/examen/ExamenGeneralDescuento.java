@@ -24,6 +24,15 @@ public class ExamenGeneralDescuento implements Serializable {
     @JoinColumn(name = "EXAMEN_ID")
     ExamenGeneralEntity examen;
 
+    @Column(name="PORCENTAJE_DESCUENTO")
+    private String porcentaje;
+
+    @Column(name = "PORCENTAJE_DESCUENTO_TEXTO")
+    private String porcentajeText;
+
+    @Column(name = "DESCUENTO")
+    private Float descuentoMonto;
+
     public UUID getExamenDescuentoId() {
         return examenDescuentoId;
     }
@@ -48,16 +57,40 @@ public class ExamenGeneralDescuento implements Serializable {
         this.examen = examen;
     }
 
+    public String getPorcentaje() {
+        return porcentaje;
+    }
+
+    public void setPorcentaje(String porcentaje) {
+        this.porcentaje = porcentaje;
+    }
+
+    public String getPorcentajeText() {
+        return porcentajeText;
+    }
+
+    public void setPorcentajeText(String porcentajeText) {
+        this.porcentajeText = porcentajeText;
+    }
+
+    public Float getDescuentoMonto() {
+        return descuentoMonto;
+    }
+
+    public void setDescuentoMonto(Float descuentoMonto) {
+        this.descuentoMonto = descuentoMonto;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof ExamenGeneralDescuento)) return false;
         ExamenGeneralDescuento that = (ExamenGeneralDescuento) o;
-        return Objects.equals(getExamenDescuentoId(), that.getExamenDescuentoId()) && Objects.equals(getDescuento(), that.getDescuento()) && Objects.equals(getExamen(), that.getExamen());
+        return Objects.equals(getExamenDescuentoId(), that.getExamenDescuentoId()) && Objects.equals(getDescuento(), that.getDescuento()) && Objects.equals(getExamen(), that.getExamen()) && Objects.equals(getPorcentaje(), that.getPorcentaje()) && Objects.equals(getPorcentajeText(), that.getPorcentajeText()) && Objects.equals(getDescuentoMonto(), that.getDescuentoMonto());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getExamenDescuentoId(), getDescuento(), getExamen());
+        return Objects.hash(getExamenDescuentoId(), getDescuento(), getExamen(), getPorcentaje(), getPorcentajeText(), getDescuentoMonto());
     }
 }

@@ -1,10 +1,9 @@
 package com.ziehlneelsen.laboratorio.controller.descuento;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.descuento.DescuentoSaveDTO;
 import com.ziehlneelsen.laboratorio.constant.Url;
 import com.ziehlneelsen.laboratorio.entities.descuento.DescuentoEntity;
-import com.ziehlneelsen.laboratorio.entities.descuento.DiaDescuento;
-import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.service.descuento.DescuentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,11 +34,6 @@ public class DescuentoController {
         return descuentoService.findById(id);
     }
 
-    @RequestMapping(value = Url.DIA_DESCUENTO, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
-    public List<DiaDescuento> findDiaDescuento(@PathVariable Integer id) throws ParseException {
-        return descuentoService.findByDescuento(id);
-    }
-
     @RequestMapping(value = Url.SAVE, method = RequestMethod.POST, produces = Url.APLICATION_JSON)
     public ResponseEntity saveDescuento(@Valid @RequestBody DescuentoEntity descuento, BindingResult bindingResult) {
 
@@ -48,6 +42,14 @@ public class DescuentoController {
             return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.OK);
         }
         response = descuentoService.save(descuento);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = Url.SAVE_DESCUENTO_EXAMEN, method = RequestMethod.POST, produces = Url.APLICATION_JSON)
+    public ResponseEntity saveDescuentoExamen(@Valid @RequestBody DescuentoSaveDTO descuento) {
+
+        ResponseDTO response;
+        response = descuentoService.saveExamenDescuento(descuento);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

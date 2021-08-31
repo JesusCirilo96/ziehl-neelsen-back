@@ -19,7 +19,7 @@ public class Url {
 
     //Descuento
     public static final String DESCUENTO = "/descuento";
-    public static final String DIA_DESCUENTO = "/dia/{id}";
+    public static final String SAVE_DESCUENTO_EXAMEN = "/examen/save";
 
     public static final String PAQUETE_DESCUENTO = "/paquete/descuento";
     public static final String FIND_BY_PAQUETE = "/examen/{id}";

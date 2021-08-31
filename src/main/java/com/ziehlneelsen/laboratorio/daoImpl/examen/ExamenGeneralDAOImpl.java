@@ -2,6 +2,7 @@ package com.ziehlneelsen.laboratorio.daoImpl.examen;
 
 import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.descuento.DescuentoDTO;
 import com.ziehlneelsen.laboratorio.beans.estudio.EstudioDTO;
 import com.ziehlneelsen.laboratorio.beans.estudio.EstudioSelectAuxDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenMetodoAux;
@@ -9,9 +10,11 @@ import com.ziehlneelsen.laboratorio.constant.Messages;
 import com.ziehlneelsen.laboratorio.dao.estudio.ReferenciaDAO;
 import com.ziehlneelsen.laboratorio.dao.examen.ExamenGeneralDAO;
 import com.ziehlneelsen.laboratorio.dao.metodo.SeccionMetodoDAO;
-import com.ziehlneelsen.laboratorio.entities.descuento.DescuentoEntity;
 import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
-import com.ziehlneelsen.laboratorio.entities.examen.*;
+import com.ziehlneelsen.laboratorio.entities.examen.ExamenEstudio;
+import com.ziehlneelsen.laboratorio.entities.examen.ExamenEstudioEntity;
+import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralDescuento;
+import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
 import com.ziehlneelsen.laboratorio.service.descuento.DescuentoService;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -180,7 +183,7 @@ public class ExamenGeneralDAOImpl implements ExamenGeneralDAO {
     public ExamenDescuentoDTO findDescuentoByExamen(Integer examenId) {
         EntityManager em = emf.createEntityManager();
         List<ExamenGeneralDescuento> listDescuento;
-        List<DescuentoEntity> descuentos = new ArrayList<>();
+        List<DescuentoDTO> descuentos = new ArrayList<>();
 
         ExamenDescuentoDTO examenDescuento = new ExamenDescuentoDTO();
 
@@ -199,8 +202,19 @@ public class ExamenGeneralDAOImpl implements ExamenGeneralDAO {
 
             listDescuento.forEach((descuento) -> {
                 try {
-                    if(descuentoService.aplicaDescuento(descuento.getDescuento().getDescuentoId())){
-                        descuentos.add(descuento.getDescuento());
+                    if(descuentoService.aplicaDescuento(descuento.getDescuento().getFechaInicio(),descuento.getDescuento().getFechaFin(),descuento.getDescuento().getDias())){
+                        DescuentoDTO descuentoDTO = new DescuentoDTO();
+                        descuentoDTO.setDescuentoId(descuento.getDescuento().getDescuentoId());
+                        descuentoDTO.setNombre(descuento.getDescuento().getNombre());
+                        descuentoDTO.setDescripcion((descuento.getDescuento().getDescripcion()));
+                        descuentoDTO.setFechaInicio(descuento.getDescuento().getFechaInicio());
+                        descuentoDTO.setFechaFin(descuento.getDescuento().getFechaFin());
+                        descuentoDTO.setDias(descuento.getDescuento().getDias());
+                        descuentoDTO.setPorcentaje(descuento.getPorcentaje());
+                        descuentoDTO.setPorcentajeText(descuento.getPorcentajeText());
+                        descuentoDTO.setDescuentoMonto(descuento.getDescuentoMonto());
+
+                        descuentos.add(descuentoDTO);
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();

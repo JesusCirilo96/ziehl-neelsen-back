@@ -1,47 +1,19 @@
-package com.ziehlneelsen.laboratorio.entities.descuento;
+package com.ziehlneelsen.laboratorio.beans.descuento;
 
-import org.hibernate.annotations.DynamicUpdate;
+import java.util.List;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import java.io.Serializable;
-
-@Entity
-@DynamicUpdate
-@Table(name = "cat_descuento")
-public class DescuentoEntity implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "DESCUENTO_ID")
+public class DescuentoSaveDTO {
     private Integer descuentoId;
-
-    @NotBlank(message = "El nombre del descuento es obligatorio")
-    @Column(name = "NOMBRE")
     private String nombre;
-
-    @Column(name = "DESCRIPCION")
     private String descripcion;
-
-    @NotBlank(message = "La fecha de inicio es obligatoria")
-    @Column(name = "FECHA_INICIO")
     private String fechaInicio;
-
-    @NotBlank(message = "La fecha de finalizacion es obligatoria")
-    @Column(name = "FECHA_FIN")
     private String fechaFin;
-
-    @Column(name = "DIAS")
-    private String dias;
-
-    @Column(name = "ESTADO", columnDefinition = "boolean default true")
     private Boolean estado;
-
-    @Column(name = "FECHA_CREACION")
+    private String operacion;
     private String fechaCreacion;
+    private List<Integer> dias;
+    private List<ExamenDescuentoAuxDTO> examen;
 
-    @Column(name = "FECHA_ACTUALIZACION")
-    private String fechaActualizacion;
 
     public Integer getDescuentoId() {
         return descuentoId;
@@ -83,11 +55,11 @@ public class DescuentoEntity implements Serializable {
         this.fechaFin = fechaFin;
     }
 
-    public String getDias() {
+    public List<Integer> getDias() {
         return dias;
     }
 
-    public void setDias(String dias) {
+    public void setDias(List<Integer> dias) {
         this.dias = dias;
     }
 
@@ -99,6 +71,14 @@ public class DescuentoEntity implements Serializable {
         this.estado = estado;
     }
 
+    public List<ExamenDescuentoAuxDTO> getExamen() {
+        return examen;
+    }
+
+    public void setExamen(List<ExamenDescuentoAuxDTO> examen) {
+        this.examen = examen;
+    }
+
     public String getFechaCreacion() {
         return fechaCreacion;
     }
@@ -107,11 +87,11 @@ public class DescuentoEntity implements Serializable {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public String getFechaActualizacion() {
-        return fechaActualizacion;
+    public String getOperacion() {
+        return operacion;
     }
 
-    public void setFechaActualizacion(String fechaActualizacion) {
-        this.fechaActualizacion = fechaActualizacion;
+    public void setOperacion(String operacion) {
+        this.operacion = operacion;
     }
 }
