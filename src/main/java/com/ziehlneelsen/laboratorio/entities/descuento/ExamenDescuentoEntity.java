@@ -2,6 +2,7 @@ package com.ziehlneelsen.laboratorio.entities.descuento;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -74,5 +75,18 @@ public class ExamenDescuentoEntity implements Serializable {
 
     public void setDescuento(Float descuento) {
         this.descuento = descuento;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ExamenDescuentoEntity)) return false;
+        ExamenDescuentoEntity that = (ExamenDescuentoEntity) o;
+        return Objects.equals(getExamenDescuentoId(), that.getExamenDescuentoId()) && Objects.equals(getDescuentoId(), that.getDescuentoId()) && Objects.equals(getExamenId(), that.getExamenId()) && Objects.equals(getPorcentajeDescuento(), that.getPorcentajeDescuento()) && Objects.equals(getPorcentajeText(), that.getPorcentajeText()) && Objects.equals(getDescuento(), that.getDescuento());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getExamenDescuentoId(), getDescuentoId(), getExamenId(), getPorcentajeDescuento(), getPorcentajeText(), getDescuento());
     }
 }

@@ -7,7 +7,7 @@ public class DescuentoDTO {
     private String fechaInicio;
     private String fechaFin;
     private String dias;
-    private String porcentaje;
+    private Integer porcentaje;
     private String porcentajeText;
     private Float descuentoMonto;
     private Boolean estado;
@@ -60,11 +60,11 @@ public class DescuentoDTO {
         this.dias = dias;
     }
 
-    public String getPorcentaje() {
+    public Integer getPorcentaje() {
         return porcentaje;
     }
 
-    public void setPorcentaje(String porcentaje) {
+    public void setPorcentaje(Integer porcentaje) {
         this.porcentaje = porcentaje;
     }
 

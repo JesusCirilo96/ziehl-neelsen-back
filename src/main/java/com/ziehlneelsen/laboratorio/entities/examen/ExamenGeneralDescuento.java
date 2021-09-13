@@ -25,7 +25,7 @@ public class ExamenGeneralDescuento implements Serializable {
     ExamenGeneralEntity examen;
 
     @Column(name="PORCENTAJE_DESCUENTO")
-    private String porcentaje;
+    private Integer porcentaje;
 
     @Column(name = "PORCENTAJE_DESCUENTO_TEXTO")
     private String porcentajeText;
@@ -57,11 +57,11 @@ public class ExamenGeneralDescuento implements Serializable {
         this.examen = examen;
     }
 
-    public String getPorcentaje() {
+    public Integer getPorcentaje() {
         return porcentaje;
     }
 
-    public void setPorcentaje(String porcentaje) {
+    public void setPorcentaje(Integer porcentaje) {
         this.porcentaje = porcentaje;
     }
 

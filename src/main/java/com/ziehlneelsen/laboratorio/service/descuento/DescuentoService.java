@@ -1,6 +1,7 @@
 package com.ziehlneelsen.laboratorio.service.descuento;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.descuento.DescuentoExamenDTO;
 import com.ziehlneelsen.laboratorio.beans.descuento.DescuentoSaveDTO;
 import com.ziehlneelsen.laboratorio.entities.descuento.DescuentoEntity;
 
@@ -45,4 +46,11 @@ public interface DescuentoService {
      * @return Respuesta del servicio
      */
     ResponseDTO saveExamenDescuento(DescuentoSaveDTO descuento);
+
+    /**
+     * Obtenemos lo examenes del descuento
+     * @param descuentoId El id del descuento
+     * @return objeto con el descuento y los examenes
+     */
+    DescuentoExamenDTO getDescuentoExamen(Integer descuentoId);
 }

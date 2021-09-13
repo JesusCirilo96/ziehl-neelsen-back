@@ -1,10 +1,11 @@
 package com.ziehlneelsen.laboratorio.serviceImpl.descuento;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.descuento.DescuentoExamenDTO;
 import com.ziehlneelsen.laboratorio.beans.descuento.DescuentoSaveDTO;
 import com.ziehlneelsen.laboratorio.beans.descuento.ExamenDescuentoAuxDTO;
 import com.ziehlneelsen.laboratorio.constant.Messages;
-import com.ziehlneelsen.laboratorio.dao.descuento.DiaDescuentoDAO;
+import com.ziehlneelsen.laboratorio.dao.descuento.DescuentoExamenDAO;
 import com.ziehlneelsen.laboratorio.entities.descuento.DescuentoEntity;
 import com.ziehlneelsen.laboratorio.entities.descuento.ExamenDescuentoEntity;
 import com.ziehlneelsen.laboratorio.repository.descuento.DescuentoRepository;
@@ -16,7 +17,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -28,10 +28,10 @@ public class DescuentoServiceImpl implements DescuentoService {
     DescuentoRepository descuentoRepository;
 
     @Autowired
-    DiaDescuentoDAO diaDescuentoDAO;
+    ExamenDescuentoRepository examenDescuentoRepository;
 
     @Autowired
-    ExamenDescuentoRepository examenDescuentoRepository;
+    DescuentoExamenDAO descuentoExamenDAO;
 
     @Override
     public List<DescuentoEntity> findAll() {
@@ -138,5 +138,10 @@ public class DescuentoServiceImpl implements DescuentoService {
     private Integer saveDescuento(DescuentoEntity descuento){
         save(descuento);
         return descuento.getDescuentoId();
+    }
+
+    @Override
+    public DescuentoExamenDTO getDescuentoExamen(Integer descuentoId){
+        return descuentoExamenDAO.getDescuentoExamen(descuentoId);
     }
 }

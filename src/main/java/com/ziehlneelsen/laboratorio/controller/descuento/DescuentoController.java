@@ -1,6 +1,8 @@
 package com.ziehlneelsen.laboratorio.controller.descuento;
 
+import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.descuento.DescuentoExamenDTO;
 import com.ziehlneelsen.laboratorio.beans.descuento.DescuentoSaveDTO;
 import com.ziehlneelsen.laboratorio.constant.Url;
 import com.ziehlneelsen.laboratorio.entities.descuento.DescuentoEntity;
@@ -51,6 +53,11 @@ public class DescuentoController {
         ResponseDTO response;
         response = descuentoService.saveExamenDescuento(descuento);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = Url.FIND_DESCUENTO_EXAMEN, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
+    public DescuentoExamenDTO descuentoPorExamen(@PathVariable Integer id){
+        return descuentoService.getDescuentoExamen(id);
     }
 
 }
