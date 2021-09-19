@@ -53,4 +53,11 @@ public interface DescuentoService {
      * @return objeto con el descuento y los examenes
      */
     DescuentoExamenDTO getDescuentoExamen(Integer descuentoId);
+
+    /**
+     * Elimina el descuento asi como sus relaciones con los examnes
+     * @param descuentoId El id del descuento a eliminar
+     * @return Respuesta del servicio
+     */
+    ResponseDTO deleteDescuento(Integer descuentoId);
 }

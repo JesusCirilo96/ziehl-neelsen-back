@@ -106,8 +106,7 @@ public class DescuentoServiceImpl implements DescuentoService {
         Integer descuentoId;
         if(descuento.getOperacion().equals("editar")){
             descuentoId = descuento.getDescuentoId();
-            descuentoEntity.setFechaCreacion(descuento.getFechaCreacion());
-            saveDescuento(descuentoEntity);
+            descuentoExamenDAO.updateDescuento(descuentoEntity, descuentoId);
         }else{
             descuentoId = saveDescuento(descuentoEntity);
         }
@@ -116,17 +115,23 @@ public class DescuentoServiceImpl implements DescuentoService {
         for (ExamenDescuentoAuxDTO exDescuento : descuento.getExamen()) {
             ExamenDescuentoEntity examenDescuentoEntity = new ExamenDescuentoEntity();
 
-            if(exDescuento.getAccion().equals("editar")){
-                examenDescuentoEntity.setExamenDescuentoId(exDescuento.getExamenDescuentoId());
+            if(exDescuento.getAccion() != null){
+                examenDescuentoEntity.setDescuentoId(descuentoId);
+                examenDescuentoEntity.setExamenId(exDescuento.getExamenId());
+                examenDescuentoEntity.setPorcentajeDescuento(exDescuento.getPorcentajeDescuento());
+                examenDescuentoEntity.setPorcentajeText(exDescuento.getPorcentajeDescuentoText());
+                examenDescuentoEntity.setDescuento(exDescuento.getDescuento());
+
+                if(exDescuento.getAccion().equals("editar")){
+                    examenDescuentoEntity.setExamenDescuentoId(exDescuento.getExamenDescuentoId());
+                    descuentoExamenDAO.updateExamenDescuento(examenDescuentoEntity);
+                }else if(exDescuento.getAccion().equals("agregar")){
+                    examenDescuentoRepository.save(examenDescuentoEntity);
+                }else if(exDescuento.getAccion().equals("eliminar")){
+                    descuentoExamenDAO.deleteExamenDescuento(examenDescuentoEntity.getExamenId(),examenDescuentoEntity.getDescuentoId());
+                }
             }
 
-            examenDescuentoEntity.setDescuentoId(descuentoId);
-            examenDescuentoEntity.setExamenId(exDescuento.getExamenId());
-            examenDescuentoEntity.setPorcentajeDescuento(exDescuento.getPorcentajeDescuento());
-            examenDescuentoEntity.setPorcentajeText(exDescuento.getPorcentajeDescuentoText());
-            examenDescuentoEntity.setDescuento(exDescuento.getDescuento());
-
-            examenDescuentoRepository.save(examenDescuentoEntity);
         }
 
         response.setErrorCode(Messages.OK);
@@ -143,5 +148,16 @@ public class DescuentoServiceImpl implements DescuentoService {
     @Override
     public DescuentoExamenDTO getDescuentoExamen(Integer descuentoId){
         return descuentoExamenDAO.getDescuentoExamen(descuentoId);
+    }
+
+    @Override
+    public ResponseDTO deleteDescuento(Integer descuentoId) {
+
+        ResponseDTO respuesta = descuentoExamenDAO.deleteExamenDescuento(0,descuentoId);
+        if(respuesta.getErrorCode().equals(Messages.OK)){
+            respuesta = descuentoExamenDAO.deleteDescuento(descuentoId);
+        }
+
+        return respuesta;
     }
 }

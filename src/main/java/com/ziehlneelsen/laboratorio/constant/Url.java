@@ -26,6 +26,7 @@ public class Url {
     public static final String FIND_ALL_PAQUETE = "/all";
 
     public static final String FIND_DESCUENTO_EXAMEN ="/examen/get/{id}";
+    public static final String DELETE_DESCUENTO="/delete/{id}";
 
     //Categoria
     public static final String CATEGORIA = "/categoria";

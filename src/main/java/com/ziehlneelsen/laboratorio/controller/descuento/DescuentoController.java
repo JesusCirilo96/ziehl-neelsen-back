@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = Url.DESCUENTO)
-@CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET})
+@CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET, RequestMethod.DELETE})
 public class DescuentoController {
 
     @Autowired
@@ -58,6 +58,11 @@ public class DescuentoController {
     @RequestMapping(value = Url.FIND_DESCUENTO_EXAMEN, method = RequestMethod.GET, produces = Url.APLICATION_JSON)
     public DescuentoExamenDTO descuentoPorExamen(@PathVariable Integer id){
         return descuentoService.getDescuentoExamen(id);
+    }
+
+    @RequestMapping(value = Url.DELETE_DESCUENTO, method = RequestMethod.DELETE, produces = Url.APLICATION_JSON)
+    public ResponseDTO eliminaDescuento(@PathVariable Integer id){
+        return descuentoService.deleteDescuento(id);
     }
 
 }
