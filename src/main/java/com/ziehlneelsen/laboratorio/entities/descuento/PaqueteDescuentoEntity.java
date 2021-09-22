@@ -41,7 +41,10 @@ public class PaqueteDescuentoEntity implements Serializable {
 
     @NotBlank(message = "El porcentaje de descuento es obligatorio")
     @Column(name = "PORCENTAJE_DESCUENTO")
-    String porcentaje;
+    Integer porcentaje;
+
+    @Column(name = "PORCENTAJE_DESCUENTO_TEXTO")
+    String porcentajeDescuentoTexto;
 
     @NotBlank(message = "La cantidad de descuento es obligatorio")
     @Column(name = "DESCUENTO")
@@ -49,6 +52,12 @@ public class PaqueteDescuentoEntity implements Serializable {
 
     @Column(name = "ESTADO", columnDefinition = "boolean default true")
     Boolean estado;
+
+    @Column(name = "FECHA_CREACION")
+    String fechaCreacion;
+
+    @Column(name = "FECHA_ACTUALIZACION")
+    String fechaActualizacion;
 
     public Integer getPaqueteId() {
         return paqueteId;
@@ -106,11 +115,11 @@ public class PaqueteDescuentoEntity implements Serializable {
         this.precio = precio;
     }
 
-    public String getPorcentaje() {
+    public Integer getPorcentaje() {
         return porcentaje;
     }
 
-    public void setPorcentaje(String porcentaje) {
+    public void setPorcentaje(Integer porcentaje) {
         this.porcentaje = porcentaje;
     }
 
@@ -128,5 +137,29 @@ public class PaqueteDescuentoEntity implements Serializable {
 
     public void setEstado(Boolean estado) {
         this.estado = estado;
+    }
+
+    public String getPorcentajeDescuentoTexto() {
+        return porcentajeDescuentoTexto;
+    }
+
+    public void setPorcentajeDescuentoTexto(String porcentajeDescuentoTexto) {
+        this.porcentajeDescuentoTexto = porcentajeDescuentoTexto;
+    }
+
+    public String getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(String fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public String getFechaActualizacion() {
+        return fechaActualizacion;
+    }
+
+    public void setFechaActualizacion(String fechaActualizacion) {
+        this.fechaActualizacion = fechaActualizacion;
     }
 }

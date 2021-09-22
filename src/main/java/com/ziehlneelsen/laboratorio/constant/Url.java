@@ -21,9 +21,10 @@ public class Url {
     public static final String DESCUENTO = "/descuento";
     public static final String SAVE_DESCUENTO_EXAMEN = "/examen/save";
 
-    public static final String PAQUETE_DESCUENTO = "/paquete/descuento";
+    public static final String PAQUETE_DESCUENTO = "/paquete";
     public static final String FIND_BY_PAQUETE = "/examen/{id}";
     public static final String FIND_ALL_PAQUETE = "/all";
+    public static final String SAVE_PAQUETE_EXAMEN = "/examen/save";
 
     public static final String FIND_DESCUENTO_EXAMEN ="/examen/get/{id}";
     public static final String DELETE_DESCUENTO="/delete/{id}";

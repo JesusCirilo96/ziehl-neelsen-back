@@ -5,7 +5,7 @@ import java.util.UUID;
 public class ExamenDescuentoAuxDTO {
     private UUID examenDescuentoId;
     private Integer examenId;
-    private String nombreEstudio;
+    private String nombre;
     private Integer porcentajeDescuento;
     private String porcentajeDescuentoText;
     private Float descuento;
@@ -28,11 +28,11 @@ public class ExamenDescuentoAuxDTO {
     }
 
     public String getNombreEstudio() {
-        return nombreEstudio;
+        return nombre;
     }
 
     public void setNombreEstudio(String nombreEstudio) {
-        this.nombreEstudio = nombreEstudio;
+        this.nombre = nombreEstudio;
     }
 
     public Integer getPorcentajeDescuento() {

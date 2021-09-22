@@ -12,7 +12,7 @@
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
-            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.show_sql" value="false"/>
             <property name="hibernate.connection.username" value="root"/>
             <property name="hibernate.connection.password" value="martinez96"/>
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/laboratorio?serverTimezone=UTC"/>

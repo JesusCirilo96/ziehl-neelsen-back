@@ -10,6 +10,7 @@ import com.ziehlneelsen.laboratorio.entities.descuento.DescuentoEntity;
 import com.ziehlneelsen.laboratorio.entities.descuento.ExamenDescuentoEntity;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralDescuento;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
+import com.ziehlneelsen.laboratorio.util.Utileria;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -103,6 +104,7 @@ public class DescuentoExamenDAOImpl implements DescuentoExamenDAO {
             update.set("fechaFin", descuento.getFechaFin());
             update.set("dias", descuento.getDias());
             update.set("estado", descuento.getEstado());
+            update.set("fechaActualizacion", Utileria.fechaHoraActual());
 
             update.where(descuentoId);
 

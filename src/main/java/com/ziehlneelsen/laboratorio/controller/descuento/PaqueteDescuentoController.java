@@ -1,7 +1,9 @@
 package com.ziehlneelsen.laboratorio.controller.descuento;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.descuento.DescuentoSaveDTO;
 import com.ziehlneelsen.laboratorio.beans.descuento.PaqueteDescuentoDTO;
+import com.ziehlneelsen.laboratorio.beans.descuento.PaqueteSaveDTO;
 import com.ziehlneelsen.laboratorio.constant.Url;
 import com.ziehlneelsen.laboratorio.entities.descuento.PaqueteDescuentoEntity;
 import com.ziehlneelsen.laboratorio.service.descuento.PaqueteDescuentoService;
@@ -18,7 +20,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = Url.PAQUETE_DESCUENTO)
-@CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET})
+@CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET, RequestMethod.DELETE})
 public class PaqueteDescuentoController {
 
     @Autowired
@@ -54,4 +56,18 @@ public class PaqueteDescuentoController {
         response = paqueteDescuentoService.save(paquete);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @RequestMapping(value = Url.SAVE_PAQUETE_EXAMEN, method = RequestMethod.POST, produces = Url.APLICATION_JSON)
+    public ResponseEntity savePaqueteExamen(@Valid @RequestBody PaqueteSaveDTO descuento) {
+
+        ResponseDTO response;
+        response = paqueteDescuentoService.savePaqueteExamen(descuento);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = Url.DELETE_DESCUENTO, method = RequestMethod.DELETE, produces = Url.APLICATION_JSON)
+    public ResponseDTO eliminaPaquete(@PathVariable Integer id){
+        return paqueteDescuentoService.deletePaquete(id);
+    }
+
 }

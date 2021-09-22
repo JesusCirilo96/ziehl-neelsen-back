@@ -1,11 +1,18 @@
 package com.ziehlneelsen.laboratorio.serviceImpl.descuento;
 
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.descuento.ExamenDescuentoAuxDTO;
+import com.ziehlneelsen.laboratorio.beans.descuento.ExamenPaqueteAuxDTO;
 import com.ziehlneelsen.laboratorio.beans.descuento.PaqueteDescuentoDTO;
+import com.ziehlneelsen.laboratorio.beans.descuento.PaqueteSaveDTO;
 import com.ziehlneelsen.laboratorio.constant.Messages;
 import com.ziehlneelsen.laboratorio.dao.descuento.PaqueteDescuentoDAO;
+import com.ziehlneelsen.laboratorio.entities.descuento.DescuentoEntity;
+import com.ziehlneelsen.laboratorio.entities.descuento.ExamenDescuentoEntity;
 import com.ziehlneelsen.laboratorio.entities.descuento.PaqueteDescuentoEntity;
+import com.ziehlneelsen.laboratorio.entities.descuento.PaqueteExamenEntity;
 import com.ziehlneelsen.laboratorio.repository.descuento.PaqueteDescuentoRepository;
+import com.ziehlneelsen.laboratorio.repository.descuento.PaqueteExamenRepository;
 import com.ziehlneelsen.laboratorio.service.descuento.PaqueteDescuentoService;
 import com.ziehlneelsen.laboratorio.util.Utileria;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +30,9 @@ public class PaqueteDescuentoServiceImpl implements PaqueteDescuentoService {
 
     @Autowired
     PaqueteDescuentoRepository paqueteDescuentoRepository;
+
+    @Autowired
+    PaqueteExamenRepository paqueteExamenRepository;
 
     @Autowired
     PaqueteDescuentoDAO paqueteDescuentoDAO;
@@ -88,5 +98,72 @@ public class PaqueteDescuentoServiceImpl implements PaqueteDescuentoService {
         }
 
         return descuentos;
+    }
+
+    @Override
+    public ResponseDTO savePaqueteExamen(PaqueteSaveDTO paquete) {
+        ResponseDTO response = new ResponseDTO();
+
+        PaqueteDescuentoEntity paqueteEntity = new PaqueteDescuentoEntity();
+        paqueteEntity.setNombre(paquete.getNombre());
+        paqueteEntity.setDescripcion(paquete.getDescripcion());
+        paqueteEntity.setFechaInicio(paquete.getFechaInicio());
+        paqueteEntity.setFechaFin(paquete.getFechaFin());
+        paqueteEntity.setPorcentaje(paquete.getPorcentaje());
+        paqueteEntity.setPorcentajeDescuentoTexto(paquete.getPorcentajeDescuentoTexto());
+        paqueteEntity.setDescuento(paquete.getDescuento());
+        paqueteEntity.setPrecio(paquete.getPrecio());
+
+        String dias = "";
+        for(Integer dia : paquete.getDias()){
+            dias += dia.toString();
+        }
+        paqueteEntity.setDias(dias);
+        paqueteEntity.setEstado(paquete.getEstado());
+        Integer paqueteId;
+        if(paquete.getOperacion().equals("editar")){
+            paqueteId = paquete.getPaqueteId();
+            paqueteDescuentoDAO.updatePaquete(paqueteEntity, paqueteId);
+        }else{
+            paqueteId = savePaquete(paqueteEntity);
+        }
+
+
+        for (ExamenPaqueteAuxDTO exPaquete : paquete.getExamen()) {
+            PaqueteExamenEntity paqueteExamenEntity = new PaqueteExamenEntity();
+
+            if(exPaquete.getAccion() != null){
+                paqueteExamenEntity.setPaqueteId(paqueteId);
+                paqueteExamenEntity.setExamenId(exPaquete.getExamenId());
+
+                if(exPaquete.getAccion().equals("agregar")){
+                    paqueteExamenRepository.save(paqueteExamenEntity);
+                }else if(exPaquete.getAccion().equals("eliminar")){
+                    paqueteDescuentoDAO.deleteExamenPaquete(paqueteExamenEntity.getExamenId(),paqueteExamenEntity.getPaqueteId());
+                }
+            }
+
+        }
+
+        response.setErrorCode(Messages.OK);
+        response.setErrorInfo(Messages.REGISTER_OK);
+
+        return response;
+    }
+
+    private Integer savePaquete(PaqueteDescuentoEntity descuento){
+        save(descuento);
+        return descuento.getPaqueteId();
+    }
+
+    @Override
+    public ResponseDTO deletePaquete(Integer paqueteId) {
+
+        ResponseDTO respuesta = paqueteDescuentoDAO.deleteExamenPaquete(0,paqueteId);
+        if(respuesta.getErrorCode().equals(Messages.OK)){
+            respuesta = paqueteDescuentoDAO.deletePaquete(paqueteId);
+        }
+
+        return respuesta;
     }
 }
