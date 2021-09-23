@@ -11,8 +11,8 @@ import java.util.UUID;
 public class PaqueteExamenEntity implements Serializable {
 
     @Id
-    @Column(name = "EXAMEN_DESCUENTO_ID", unique = true, nullable = false)
-    private UUID examenDescuentoId = UUID.randomUUID();
+    @Column(name = "PAQUETE_EXAMEN_ID", unique = true, nullable = false)
+    private UUID examenPaqueteId = UUID.randomUUID();
 
     @Column(name = "PAQUETE_ID")
     private Integer paqueteId;
@@ -21,11 +21,11 @@ public class PaqueteExamenEntity implements Serializable {
     private Integer examenId;
 
     public UUID getExamenDescuentoId() {
-        return examenDescuentoId;
+        return examenPaqueteId;
     }
 
     public void setExamenDescuentoId(UUID examenDescuentoId) {
-        this.examenDescuentoId = examenDescuentoId;
+        this.examenPaqueteId = examenDescuentoId;
     }
 
     public Integer getPaqueteId() {
@@ -49,11 +49,11 @@ public class PaqueteExamenEntity implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PaqueteExamenEntity that = (PaqueteExamenEntity) o;
-        return Objects.equals(examenDescuentoId, that.examenDescuentoId) && Objects.equals(paqueteId, that.paqueteId) && Objects.equals(examenId, that.examenId);
+        return Objects.equals(examenPaqueteId, that.examenPaqueteId) && Objects.equals(paqueteId, that.paqueteId) && Objects.equals(examenId, that.examenId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(examenDescuentoId, paqueteId, examenId);
+        return Objects.hash(examenPaqueteId, paqueteId, examenId);
     }
 }

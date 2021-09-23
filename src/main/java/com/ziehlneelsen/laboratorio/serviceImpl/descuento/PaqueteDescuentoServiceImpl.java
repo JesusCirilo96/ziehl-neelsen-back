@@ -56,6 +56,8 @@ public class PaqueteDescuentoServiceImpl implements PaqueteDescuentoService {
             response.setErrorInfo(Messages.UPDATE_OK);
         } else if(null != paquete){
             try{
+                paquete.setFechaActualizacion(Utileria.fechaHoraActual());
+                paquete.setFechaCreacion(Utileria.fechaHoraActual());
                 paqueteDescuentoRepository.save(paquete);
                 response.setErrorCode(Messages.OK);
                 response.setErrorInfo(Messages.REGISTER_OK);
@@ -137,7 +139,7 @@ public class PaqueteDescuentoServiceImpl implements PaqueteDescuentoService {
                 paqueteExamenEntity.setExamenId(exPaquete.getExamenId());
 
                 if(exPaquete.getAccion().equals("agregar")){
-                    paqueteExamenRepository.save(paqueteExamenEntity);
+                    paqueteExamenRepository.save( paqueteExamenEntity);
                 }else if(exPaquete.getAccion().equals("eliminar")){
                     paqueteDescuentoDAO.deleteExamenPaquete(paqueteExamenEntity.getExamenId(),paqueteExamenEntity.getPaqueteId());
                 }

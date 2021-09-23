@@ -35,18 +35,15 @@ public class PaqueteDescuentoEntity implements Serializable {
     @Column(name = "DIAS")
     String dias;
 
-    @NotBlank(message = "El precio es obligatorio")
     @Column(name = "PRECIO")
     Float precio;
 
-    @NotBlank(message = "El porcentaje de descuento es obligatorio")
     @Column(name = "PORCENTAJE_DESCUENTO")
     Integer porcentaje;
 
     @Column(name = "PORCENTAJE_DESCUENTO_TEXTO")
     String porcentajeDescuentoTexto;
 
-    @NotBlank(message = "La cantidad de descuento es obligatorio")
     @Column(name = "DESCUENTO")
     Float descuento;
 
