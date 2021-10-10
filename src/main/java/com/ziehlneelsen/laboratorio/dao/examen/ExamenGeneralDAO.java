@@ -2,12 +2,11 @@ package com.ziehlneelsen.laboratorio.dao.examen;
 
 import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
+import com.ziehlneelsen.laboratorio.beans.descuento.PaqueteDescuentoDTO;
 import com.ziehlneelsen.laboratorio.beans.estudio.EstudioDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenMetodoAux;
-import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
 
-import java.text.ParseException;
 import java.util.List;
 
 public interface ExamenGeneralDAO {
@@ -54,4 +53,11 @@ public interface ExamenGeneralDAO {
      * @return Respuesta del servicio
      */
     ResponseDTO updateMetodo(ExamenMetodoAux examen);
+
+    /**
+     * Buscamos si el examen pertenece a algun paquete de descuentos
+     * @param examenId El ID del examen
+     * @return Lista con los paquetes de descuento
+     */
+    PaqueteDescuentoDTO findPaqueteByExamen(Integer examenId);
 }

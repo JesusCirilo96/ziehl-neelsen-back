@@ -58,6 +58,7 @@ public class PaqueteDescuentoServiceImpl implements PaqueteDescuentoService {
             try{
                 paquete.setFechaActualizacion(Utileria.fechaHoraActual());
                 paquete.setFechaCreacion(Utileria.fechaHoraActual());
+                paquete.setEstado(true);
                 paqueteDescuentoRepository.save(paquete);
                 response.setErrorCode(Messages.OK);
                 response.setErrorInfo(Messages.REGISTER_OK);

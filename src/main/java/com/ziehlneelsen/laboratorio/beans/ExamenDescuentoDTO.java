@@ -1,10 +1,9 @@
 package com.ziehlneelsen.laboratorio.beans;
 
 import com.ziehlneelsen.laboratorio.beans.descuento.DescuentoDTO;
-import com.ziehlneelsen.laboratorio.entities.descuento.DescuentoEntity;
+import com.ziehlneelsen.laboratorio.beans.descuento.PaqueteDescuentoDTO;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenGeneralEntity;
 
-import javax.persistence.Column;
 import java.util.List;
 
 public class ExamenDescuentoDTO {
@@ -13,11 +12,7 @@ public class ExamenDescuentoDTO {
 
     private List<DescuentoDTO> descuento;
 
-    private String porcentaje;
-
-    private String porcentajeText;
-
-    private Float descuentoMonto;
+    private PaqueteDescuentoDTO paquete;
 
     public ExamenGeneralEntity getExamen() {
         return examen;
@@ -35,27 +30,11 @@ public class ExamenDescuentoDTO {
         this.descuento = descuento;
     }
 
-    public String getPorcentaje() {
-        return porcentaje;
+    public PaqueteDescuentoDTO getPaquete() {
+        return paquete;
     }
 
-    public void setPorcentaje(String porcentaje) {
-        this.porcentaje = porcentaje;
-    }
-
-    public String getPorcentajeText() {
-        return porcentajeText;
-    }
-
-    public void setPorcentajeText(String porcentajeText) {
-        this.porcentajeText = porcentajeText;
-    }
-
-    public Float getDescuentoMonto() {
-        return descuentoMonto;
-    }
-
-    public void setDescuentoMonto(Float descuentoMonto) {
-        this.descuentoMonto = descuentoMonto;
+    public void setPaquete(PaqueteDescuentoDTO paquete) {
+        this.paquete = paquete;
     }
 }

@@ -100,7 +100,10 @@ public class ExamenGeneralServiceImpl implements ExamenGeneralService {
 
     @Override
     public ExamenDescuentoDTO findDescuentoByExamen(Integer examenId) {
-        return examenGeneralDAO.findDescuentoByExamen(examenId);
+        ExamenDescuentoDTO response = new ExamenDescuentoDTO();
+        response = examenGeneralDAO.findDescuentoByExamen(examenId);
+        response.setPaquete(examenGeneralDAO.findPaqueteByExamen(examenId));
+        return response;
     }
 
     @Override

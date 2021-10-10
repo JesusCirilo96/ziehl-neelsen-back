@@ -3,6 +3,7 @@ package com.ziehlneelsen.laboratorio.daoImpl.examen;
 import com.ziehlneelsen.laboratorio.beans.ExamenDescuentoDTO;
 import com.ziehlneelsen.laboratorio.beans.ResponseDTO;
 import com.ziehlneelsen.laboratorio.beans.descuento.DescuentoDTO;
+import com.ziehlneelsen.laboratorio.beans.descuento.PaqueteDescuentoDTO;
 import com.ziehlneelsen.laboratorio.beans.estudio.EstudioDTO;
 import com.ziehlneelsen.laboratorio.beans.estudio.EstudioSelectAuxDTO;
 import com.ziehlneelsen.laboratorio.beans.examen.ExamenMetodoAux;
@@ -10,6 +11,8 @@ import com.ziehlneelsen.laboratorio.constant.Messages;
 import com.ziehlneelsen.laboratorio.dao.estudio.ReferenciaDAO;
 import com.ziehlneelsen.laboratorio.dao.examen.ExamenGeneralDAO;
 import com.ziehlneelsen.laboratorio.dao.metodo.SeccionMetodoDAO;
+import com.ziehlneelsen.laboratorio.entities.descuento.PaqueteDescuentoExamen;
+import com.ziehlneelsen.laboratorio.entities.descuento.PaqueteExamenEntity;
 import com.ziehlneelsen.laboratorio.entities.estudio.EstudioEntity;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenEstudio;
 import com.ziehlneelsen.laboratorio.entities.examen.ExamenEstudioEntity;
@@ -234,6 +237,54 @@ public class ExamenGeneralDAOImpl implements ExamenGeneralDAO {
         }
 
         return examenDescuento;
+    }
+
+    @Override
+    public PaqueteDescuentoDTO findPaqueteByExamen(Integer examenId) {
+        EntityManager em = emf.createEntityManager();
+        List<PaqueteDescuentoExamen> listDescuento;
+        List<ExamenGeneralEntity> examenes = new ArrayList<>();
+
+        PaqueteDescuentoDTO paqueteDescuento = new PaqueteDescuentoDTO();
+
+        try{
+            CriteriaBuilder cb = emf.getCriteriaBuilder();
+            CriteriaQuery<PaqueteDescuentoExamen> query = cb.createQuery(PaqueteDescuentoExamen.class);
+
+            Root<PaqueteDescuentoExamen> c = query.from(PaqueteDescuentoExamen.class);
+            Fetch<PaqueteDescuentoExamen, ExamenGeneralEntity> p = c.fetch("examen");
+
+            Predicate idExamen = cb.equal(c.get("examen").get("examenGeneralId"), examenId);
+
+            query.select(c).where(idExamen);
+
+            listDescuento = em.createQuery(query).getResultList();
+
+            if(!listDescuento.isEmpty()){
+
+            listDescuento.forEach((descuento) -> {
+                try {
+                    if(descuentoService.aplicaDescuento(descuento.getPaquete().getFechaInicio(),descuento.getPaquete().getFechaFin(),descuento.getPaquete().getDias())){
+                        examenes.add(descuento.getExamen());
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            });
+
+            paqueteDescuento.setPaquete(listDescuento.get(0).getPaquete());
+            paqueteDescuento.setExamen(examenes);
+
+            }
+
+
+        }catch (DataAccessException e){
+            e.printStackTrace();
+        }finally {
+            em.close();
+        }
+
+        return paqueteDescuento;
     }
 
     @Override
